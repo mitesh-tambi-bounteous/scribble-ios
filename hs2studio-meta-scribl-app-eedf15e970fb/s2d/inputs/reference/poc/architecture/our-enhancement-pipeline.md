@@ -1,0 +1,162 @@
+# Our AI-Enhancement Pipeline
+
+What **we** actually implemented and shipped on MobileApp `main`, framed as a
+comparison to the vendor design. Read
+[Mission Cloud AI-Enhancement Pipeline](./mission-cloud-enhancement-pipeline)
+first: this page adopts its North Star, simplifies its six stages for a
+single-drawing POC, and defers the expensive parts.
+
+Source of truth: the shipped code in the `rforsh/MobileApp` repo (branch
+`main`, vendored here as `vendor/mobileapp`). Primary files are
+`backend/lambda/enhance/`, `backend/lambda/handlers/submit.ts`,
+`backend/lambda/data/postgres-client.ts` and `dynamodb-client.ts`,
+`src/stores/useResponseDetailStore.ts`, and `components/EnhancedToggleImage.tsx`.
+Design lineage is documented in the research note
+`knowledge/research/scribl-ai-enhance-drawing-plan.md` (Part 2). For deployment
+cost, see [`cost-model.md`](./cost-model); the enhancement feature is not yet in
+those numbers.
+
+## North Star, preserved
+
+Same rule as the vendor: the user's drawing bytes are **never** sent to an
+image model and are **never** regenerated. Only the Claude-produced text caption
+crosses the seam into the background image provider. The original drawing is
+composited, unchanged, over a generated background. The data boundary is
+enforced in code: `GenerateBackgroundRequest`
+(`backend/lambda/enhance/image/types.ts`) accepts a text prompt only, documented
+as "text prompt in, image out, never the reverse."
+
+## Where it runs
+
+Enhancement is **async, fire-and-forget, off the submit critical path** (per
+ADR 0010: provider adapters are server-side only and must stay off the hot
+path).
+
+- `triggerEnhancement` (`backend/lambda/enhance/trigger.ts`) is called from
+  `handlers/submit.ts` immediately after `putSubmission` succeeds, once per
+  created response id, and is **never awaited**. Submit returns its unchanged
+  `{ submission }` body with unchanged latency regardless of whether or how long
+  enhancement takes.
+- It no-ops unless `ENHANCE_ENABLED` is truthy **and** an `imageDataUri` is
+  present (text-only submissions have nothing to enhance).
+- Any error inside the async body is caught and recorded as `"failed"`; nothing
+  ever throws back to `submit.ts`.
+
+## The service
+
+`backend/lambda/enhance/service.ts` orchestrates a reduced version of the
+vendor's six stages:
+
+1. **Describe** -- `deps.claude.describeImage` (Claude vision, Sonnet) reads the
+   drawing and returns a one-sentence caption.
+2. **Build prompt** -- `buildBackgroundPrompt(caption)` combines the caption
+   with the style directive and hard negatives.
+3. **Generate background** -- `deps.image.generateBackground` produces a
+   background from that **text prompt only**.
+4. **Compose** -- `composeOnBackground` uses `sharp` to fit the original drawing
+   to ~80% of the canvas and center it over the resized background, with an
+   optional soft drop shadow. The original bytes are untouched.
+
+The result is a single enhanced PNG returned as a `data:image/png;base64,...`
+URI plus the caption. `enhanceDrawing` is pure orchestration; `createEnhanceDeps`
+is the only place that reads env.
+
+## The image seam
+
+`backend/lambda/enhance/image/` is a seam separate from the Claude
+provider-adapter and the transcription seam.
+
+- `IMAGE_PROVIDER=openai` -> `gpt-image-1` via the OpenAI images/generations
+  endpoint (`image/adapters/openai.ts`). Text-only prompt; returns `b64_json`.
+  It deliberately omits the `response_format` param -- `gpt-image-1` always
+  returns base64 and passing that param is a hard 400.
+- `IMAGE_PROVIDER=stub` (default) -> a deterministic 1x1 PNG
+  (`image/adapters/stub.ts`), so CI/e2e stay green with no API key.
+- `image/factory.ts` is the only place that branches on provider kind: if
+  `openai` is requested but no key is present, it warns once and falls back to
+  the stub.
+
+Env: `IMAGE_PROVIDER`, `IMAGE_API_KEY` or `OPENAI_API_KEY`, `IMAGE_MODEL`
+(read in `imageConfigFromEnv`). Tuning knobs live in
+`backend/lambda/enhance/config.ts` (`ENHANCE_CONFIG`): `describePromptContext`,
+`backgroundStylePrompt`, `backgroundNegatives` (no photorealism, people-free, no
+text, not busy, muted, hand-drawn only), a 1024x1024 canvas, and a `shadow`
+toggle. This mirrors the vendor's config.json intent: re-tuning never touches
+handler logic.
+
+## Status lifecycle
+
+`enhancement_status` moves `null -> pending -> ready | failed`, paired with
+`enhanced_image_ref` (Postgres columns; DynamoDB fields in mock mode).
+
+- Seeded to `"pending"` in `putSubmission` **only** when an image exists **and**
+  `ENHANCE_ENABLED` is set. This is the BF-6 guard: without an enabled trigger
+  nothing would ever resolve the status, so the client would spin forever.
+  Otherwise the status is `null`.
+- `setEnhancementResult` (in `postgres-client.ts` and `dynamodb-client.ts`)
+  resolves it to `"ready"` with the enhanced data URI, or `"failed"` with the
+  ref set back to null.
+- The field surfaces on `ChannelResponse` as `enhancementStatus` and
+  `enhancedImageRef` (`packages/shared-types/domain.ts`).
+
+## Client polling
+
+`src/stores/useResponseDetailStore.ts` bounds the wait for the async result:
+
+- `ENHANCEMENT_POLL_MS = 3000`, `ENHANCEMENT_POLL_MAX_ATTEMPTS = 10`.
+- `shouldContinuePolling(status, attempts)` is a pure, exported helper: keep
+  polling only while `status === "pending"` and under the attempt cap.
+- Polls are **silent reloads** (`load(..., { silent: true })`) that skip the
+  global `loading` flag so the mounted screen and comment composer do not
+  remount and lose focus each cycle (BF-7).
+- **Poll-exhaustion fallback:** if the cap is hit while still `"pending"`, the
+  store flips the local status `pending -> failed` so the UI stops spinning
+  (the BF-6 forever-spinner guard on the client side).
+
+## UI
+
+`components/EnhancedToggleImage.tsx` wraps `DrawingImage` with a presentational
+original/enhanced swap, wired into `app/response/[id].tsx`.
+
+- Toggle is available only when `enhancementStatus === "ready"` and an
+  `enhancedImageRef` is present; a `Sparkles` button swaps original and
+  enhanced.
+- `pending` (detail variant) shows a spinner and "Creating your enhanced
+  version...".
+- `failed` shows "Enhancement unavailable".
+- The component never polls or gates itself; the screen starts
+  `startEnhancementPolling` from the store while status is `pending`.
+
+## Comparison to Mission Cloud
+
+| Aspect | Mission Cloud (proposed) | Ours (shipped) |
+| --- | --- | --- |
+| Mask stage | OpenCV on flat card photos | **Eliminated** -- we own vector strokes, so the export is already transparent; no masking needed |
+| Enhancement unit | Multi-drawing session composite | Single drawing per response |
+| Describe | Claude (Sonnet 4.6) on Bedrock | Claude vision (Sonnet) via provider-adapter |
+| Background model | Bedrock Stability AI (Stable Image Inpaint) | OpenAI `gpt-image-1` (stub default) |
+| Runtime | Python pipeline on Bedrock, `us-east-1` | TypeScript Lambda / Node, async off submit |
+| Plan Composition | Claude arranges many cards | Trivial: center and scale one drawing |
+| Refine loop | Claude review loop (`--refine-iterations`) | **Deferred** |
+| Cost reporting | Per-stage `pipeline_report.md` | **Deferred** |
+| North Star | Art never regenerated | **Identical** -- only the caption text crosses to the image model |
+
+## Deferred / future work
+
+- **Refine loop** -- a Claude vision review pass to nudge composition, capped at
+  one iteration.
+- **Per-enhanced-image cost tracking** -- the vendor's per-stage report has no
+  equivalent yet; the productionized cost picture lives in the D2C backlog and
+  [`cost-model.md`](./cost-model).
+- **Move images to S3** -- enhanced (and ideally original) images are stored as
+  base64 in Postgres `text` columns today; a full-resolution enhanced PNG
+  roughly doubles per-row size, so a key/URL in S3 is the recommended upgrade.
+
+## See also
+
+- [Mission Cloud AI-Enhancement Pipeline](./mission-cloud-enhancement-pipeline)
+  -- the vendor design this build adapts.
+- [Scribl POC Handover V2](/context/documents/scribl-poc-handover-v2) -- the
+  source handover document.
+- [`cost-model.md`](./cost-model) -- the productionized D2C infrastructure cost
+  model.

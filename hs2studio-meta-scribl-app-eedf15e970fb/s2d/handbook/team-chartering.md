@@ -1,0 +1,56 @@
+# Team Chartering and Ways of Working
+
+A team charter is the team's own agreement on how it will work together:
+process, communication, expectations, and roles. Agreeing it early gets a team
+from forming to performing while it matters most -- at the start. On a small POC
+this is lightweight, but writing it down still beats leaving it implicit.
+
+## Why bother
+
+- It gets the team talking early about how they work, not just what they build.
+- Everyone gets an equal say in the ways of working, drawing on their own
+  experience.
+- It clarifies roles and responsibilities up front (see `roles-and-raci.md`).
+- It sets what the team does immediately to hit the ground running.
+- It brings new people up to speed fast when staffing changes.
+
+## What a charter covers
+
+Adapt the depth to the team, but a useful scribl charter names:
+
+- **Cadence.** When standup, refinement, planning, review, and retro happen, and
+  how long each runs. See `ceremonies.md`.
+- **Communication.** Where day-to-day conversation lives, expected response
+  times, and how blockers get raised (fast, not saved for standup).
+- **Definition of Ready and Definition of Done.** Agreed jointly here; they live
+  as their own handbook pages.
+- **Board and workflow.** How the Now / Next / Blocked / Done board is used and
+  the story-sync rule (see `backlog-and-workflow.md`).
+- **Decision-making.** Who owns priority calls, how architecture decisions get
+  recorded (ADRs under `s2d/decisions/`), and the escalation path.
+- **Working norms.** Working hours and overlap, review expectations, and how the
+  team holds itself accountable.
+
+## Keeping it alive
+
+The charter is not a launch-day artifact to file away. Update it as norms
+evolve -- most often from retrospective actions. Durable changes to how the team
+works belong here; one-off learnings go to `reviews/`.
+
+## Scrum values
+
+The charter rests on five values. They are the disposition that makes the
+process work, not decoration:
+
+- **Focus.** Concentrate on the committed work and the goal.
+- **Openness.** Be open about the work, the progress, and the problems. Trust is
+  built through openness.
+- **Commitment.** Make realistic commitments and deliver on them.
+- **Courage.** Raise hard truths, challenge scope, and do the right thing.
+- **Respect.** Treat each other as capable, independent people. Assume positive
+  intent.
+
+In practice that means: people first, aim to serve, help others learn, and hold
+each other accountable when the team drifts from what it agreed.
+
+_Source: Bounteous Agile Delivery Confluence (space PD). Distilled from: Team Chartering / Ways of Working (id 264465942085768), Scrum Values (id 264465983898416). Recreated 2026-07-10._

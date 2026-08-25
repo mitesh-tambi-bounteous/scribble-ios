@@ -1,0 +1,20 @@
+{
+  "language": "typescript",
+  "command": "typescript-language-server",
+  "args": [
+    "--stdio"
+  ],
+  "rootPatterns": [
+    "package.json",
+    "tsconfig.json",
+    "jsconfig.json"
+  ],
+  "fileExtensions": [
+    ".ts",
+    ".tsx",
+    ".js",
+    ".jsx",
+    ".mjs",
+    ".cjs"
+  ]
+}

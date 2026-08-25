@@ -1,0 +1,27 @@
+image: node:22
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: typecheck · lint · test · web build
+          script:
+            - npm ci
+            - (cd backend && npm ci)
+            - npx setup-skia-web public
+            - npm run typecheck
+            - npm run lint
+            - npm run test:ci
+            - npx expo export -p web
+  branches:
+    main:
+      - step:
+          name: typecheck · lint · test · web build
+          script:
+            - npm ci
+            - (cd backend && npm ci)
+            - npx setup-skia-web public
+            - npm run typecheck
+            - npm run lint
+            - npm run test:ci
+            - npx expo export -p web

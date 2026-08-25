@@ -1,0 +1,872 @@
+<!doctype html>
+<!--
+  arc-help branded shell template.
+  Placeholders substituted by the Python renderer (src/cheatsheet/shell.py) — see that file's
+  docstring for the token list. NOTE: do not write literal double-brace tokens in this comment;
+  the renderer does a global string replace and will substitute matches found here too.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MobileApp Harness</title>
+<style></style>
+<link rel="stylesheet" href="assets/brand/tokens.css">
+<link rel="stylesheet" href="assets/brand/theme.css">
+<style></style>
+</head>
+<body data-theme="dark">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-row">
+        <span class="brand">Bounteous · <strong>MobileApp Harness</strong></span>
+        <span class="meta">Re-open any time with <code>/arc-help</code></span>
+        <button type="button" data-theme-toggle title="Toggle light/dark theme">Theme</button>
+      </div>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="tabs"><button data-tab="quickref" class="active">Quick ref</button><button data-tab="plan-mode">Plan mode</button><button data-tab="brainstorm">Brainstorm</button><button data-tab="setup">Setup & Config</button><button data-tab="concepts">Concepts</button><button data-tab="terminal">Terminal</button></nav>
+    <main><div class="page active" id="tab-quickref"><h1>MobileApp · Quick reference</h1>
+<div class="block-head">
+  <div class="kicker">The one-pager</div>
+  <h1>Quick reference</h1>
+  <p class="lede">The cheat sheet inside the cheat sheet. Print this page or keep the tab open —
+  everything else in this sheet is one click away, but this is the version you skim.</p>
+</div>
+
+<div class="qr-grid">
+  <div class="qr">
+    <h3>About MobileApp</h3>
+    <ul>
+      <li>MobileApp (a.k.a. Scribl) — a mobile drawing/social app</li>
+      <li>Expo ~56, React Native 0.85, React 19, expo-router, NativeWind, RN Reusables, Zustand, <code>@shopify/react-native-skia</code>, AWS CDK backend</li>
+    </ul>
+    <p><a href="https://github.com/rforsh/MobileApp">https://github.com/rforsh/MobileApp</a></p>
+  </div>
+  <div class="qr">
+    <h3>This repo's commands, skills &amp; hooks</h3>
+    <ul>
+      <li><code>/arc-help</code> — this cheat sheet</li>
+      <li><code>submit-to-unlock-invariant</code>, <code>channel-isolation-testing</code> — launch-blocking skills</li>
+      <li>5 all-5-plugin-enabled: superpowers, code-review, commit-commands, pr-review-toolkit, claude-md-management</li>
+      <li>See the <strong>Concepts</strong> tab for the full per-layer inventory</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Built-in slash commands</h3>
+    <ul>
+      <li><code>/init</code> — bootstrap CLAUDE.md</li>
+      <li><code>/context</code> — see everything loaded</li>
+      <li><code>/agents</code> — list/dispatch subagents</li>
+      <li><code>/skills</code> · <code>/hooks</code> · <code>/mcp</code> — introspect</li>
+      <li><code>/plugin</code> — browse / install plugins</li>
+      <li><code>/doctor</code> — diagnose drift</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Plan-mode walkthrough</h3>
+    <ul>
+      <li><strong>1</strong> Enter plan mode (Shift+Tab)</li>
+      <li><strong>2</strong> State the goal; ask for a worktree</li>
+      <li><strong>3</strong> Review the plan (<code>/code-review</code>)</li>
+      <li><strong>4</strong> Approve → Claude creates the worktree → implements</li>
+      <li><strong>5</strong> Review the diff</li>
+      <li><strong>6</strong> Commit</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Brainstorm walkthrough</h3>
+    <ul>
+      <li><strong>1</strong> Brainstorm in a worktree → design file</li>
+      <li><strong>2</strong> Writing-plans → implementation file</li>
+      <li><strong>3</strong> Review the plan</li>
+      <li><strong>4</strong> Execute (agent teams, dispatched in parallel)</li>
+      <li><strong>5</strong> Verify</li>
+      <li><strong>6</strong> Commit + PR</li>
+      <li><strong>7</strong> PR review</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Worktrees &amp; setup</h3>
+    <ul>
+      <li>Never edit code directly on <code>main</code>/the primary checkout</li>
+      <li>Ask Claude for a worktree in your prompt — it runs <code>git worktree add</code> for
+      you; you just see a new branch</li>
+      <li>One session per worktree</li>
+      <li><code>git worktree list</code> to see what's active</li>
+      <li><code>git worktree remove &lt;path&gt;</code> once merged</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>MCP servers</h3>
+    <ul>
+      <li>Not yet wired — needed: <code>github</code> (stdio, <code>GITHUB_PERSONAL_ACCESS_TOKEN</code>)</li>
+      <li>Not yet wired — needed: <code>atlassian</code> (http, interactive OAuth)</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Auto vs Ask</h3>
+    <ul>
+      <li><strong>Auto:</strong> boilerplate, tests, generated code, reversible edits</li>
+      <li><strong>Ask:</strong> auth, billing, schema changes, infra, deploys</li>
+      <li>Irreversible → Ask</li>
+      <li>Touching <code>.claude/</code> config → Ask</li>
+      <li>In doubt → Ask</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>5-layer Agent Development Kit</h3>
+    <ul>
+      <li><strong>1</strong> Memory — CLAUDE.md</li>
+      <li><strong>2</strong> Knowledge — Skills</li>
+      <li><strong>3</strong> Guardrails — Hooks</li>
+      <li><strong>4</strong> Delegation — Subagents</li>
+      <li><strong>5</strong> Distribution — Plugins</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Key files</h3>
+    <ul>
+      <li><code>.claude/CLAUDE.md</code> — harness index</li>
+      <li><code>.claude/settings.json</code> — hooks, plugins, permissions</li>
+      <li><code>.claude/hooks/</code> — guardrail scripts</li>
+      <li><code>.claude/help/</code> — this generated cheat sheet</li>
+      <li><code>.claude/agents/</code> — 6 custom subagents</li>
+      <li><code>.claude/skills/</code> — 6 skills, incl. 2 launch-blocking invariants</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Planning-prompt checklist</h3>
+    <ul>
+      <li><strong>Goal + context</strong> — state the outcome; link the ticket/issue if there is one</li>
+      <li><strong>Worktree</strong> — ask Claude to work in one; you just see a branch</li>
+      <li><strong>Agent teams</strong> — task list + dependencies, dispatched in parallel</li>
+      <li><strong>Right-size models</strong> — cheaper/faster models for validation-only agents</li>
+      <li><strong>"Be brief"</strong> — keep output concise when you don't need the narration</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>What makes a good prompt</h3>
+    <ul>
+      <li><strong>Output contract first</strong> — say what "done" looks like</li>
+      <li><strong>Structure it</strong> — goal / context+files / constraints</li>
+      <li><strong>Examples</strong> — show the format (few-shot); show reasoning for tricky logic</li>
+      <li><strong>Make it verifiable</strong> — explicit success criteria</li>
+      <li><strong>Measure, then compress</strong> — check the result; keep context tight</li>
+    </ul>
+  </div>
+  <div class="qr">
+    <h3>Tips from the field</h3>
+    <ul>
+      <li><strong>Prompt the goal, not the implementation</strong> — keep it short; let Claude find the files</li>
+      <li><strong>Read what Claude says</strong> — not just the diff; if tone/format is off, say so ("be brief")</li>
+      <li><strong>Roast the plan</strong> — ask Claude to grill its own plan, then respond section-by-section</li>
+      <li><strong>Give a reference codebase</strong> — clone a relevant repo, point Claude at the path</li>
+      <li><strong>Use screenshots</strong> — paste an image of the error/log/UI instead of describing it</li>
+      <li><strong>Let the agent verify its own work</strong> — tests / CLI / computer-use; loop a review tool until clean</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Official docs · open in browser</h2>
+<p><a class="doc-link" href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">Memory · CLAUDE.md</a>
+<a class="doc-link" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Skills</a>
+<a class="doc-link" href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">Hooks</a>
+<a class="doc-link" href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Subagents</a>
+<a class="doc-link" href="https://code.claude.com/docs/en/plugins" target="_blank" rel="noopener">Plugins</a>
+<a class="doc-link" href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">MCP</a></p></div><div class="page" id="tab-plan-mode"><h1>MobileApp · Plan mode</h1>
+<div class="block-head">
+  <div class="kicker">Walkthrough · built-in plan mode</div>
+  <h1>Ship a change with plan mode</h1>
+  <p class="lede">
+    Plan mode is the entry path for well-scoped work: you already know roughly what needs to
+    change. Claude explores <strong>read-only</strong> until you approve a plan, then executes it.
+    Use this path when the shape of the change is clear; use brainstorming instead when it isn't.
+  </p>
+  <span class="timing">plan mode → review → approve → implement → review diff → commit</span>
+  <div class="legend">
+    <span><span class="badge repo">repo</span> shipped in this repo's <code>.claude/</code></span>
+    <span><span class="badge plugin">plugin</span> auto-enabled via <code>settings.json</code></span>
+    <span><span class="badge builtin">built-in</span> native Claude Code</span>
+  </div>
+</div>
+
+<div class="steps">
+
+<div class="step plain">
+<div>
+<h3>Enter plan mode</h3>
+<p>Press <code>Shift+Tab</code> to cycle the mode indicator to <strong>plan mode</strong>, or just
+describe the task and let Claude propose a plan on its own. In plan mode Claude can read and
+explore the codebase but cannot edit files or run state-changing commands until you approve.</p>
+<div class="cmds"><code>Shift+Tab → plan mode</code> <span class="badge builtin">built-in</span></div>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Describe the task, and ask for a worktree if the repo uses them</h3>
+<p>State the goal and any constraints in the plan-mode prompt.
+MobileApp uses the standard worktree convention: <code>git worktree add ~/src/MobileApp-wt/&lt;slug&gt;/ -b &lt;slug&gt;</code>.
+If MobileApp uses git worktrees to isolate work from the primary checkout, tell Claude
+to work in one — it creates the worktree as its first action once the plan is approved, so you
+just see a new branch appear. If the repo doesn't use worktrees, this step doesn't apply and
+Claude edits in place.</p>
+<h4>What to put in your prompt</h4>
+<ul>
+<li><strong>Goal + ticket</strong> — state the outcome; reference your tracked work item if you use one</li>
+<li><strong>Worktree</strong> — tell Claude to work in one; it creates one, you just see a branch</li>
+<li><strong>Agent teams</strong> — ask for a task list with dependencies + dispatched agent teams so independent tasks run in parallel</li>
+<li><strong>Right-size models</strong> — set each agent's model to its job; use Haiku for validation/check agents (faster, cheaper, more parallel headroom)</li>
+<li><strong>"Be brief"</strong> — add the words "be brief" to keep output concise</li>
+</ul>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Review the plan before you approve it</h3>
+<p>Read what Claude proposes before exiting plan mode.
+<code>/code-review</code> <span class="badge plugin">plugin</span> is available in this repo (from the
+enabled <code>code-review</code> plugin) — point it at the plan before approving.
+A good plan names the specific files/modules that will change, calls out the sequencing and
+dependencies between edits, and states how the result will be verified (tests, manual check, a
+specific command). A plan that just restates the request back to you isn't a plan yet — ask for
+more specificity before moving on.</p>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Approve the plan → Claude starts editing</h3>
+<p>Approving exits plan mode. Claude leaves read-only mode and begins making the changes it
+described. Watch the diff as it goes; interrupt if it drifts off the approved scope.</p>
+<div class="cmds"><code>ExitPlanMode</code> <span class="badge builtin">built-in</span></div>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Review the diff before committing</h3>
+<p>Once edits are done, review the working-tree diff for anything that doesn't trace back to
+the approved plan — drive-by cleanup, scope creep into unrelated files, or missed pieces. A
+manual read of <code>git diff</code> before staging is enough for smaller changes.</p>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Commit with a clear message</h3>
+<p>Write a commit message that explains <em>why</em> the change was made, not just what
+changed — the diff already shows what. Keep one conceptual change per commit where practical.
+The safety hooks configured under <code>.claude/</code>, if any, run automatically on the
+commit — you don't have to invoke them, just don't bypass them.</p>
+<div class="cmds"><code>git commit -m "..."</code> <span class="badge builtin">built-in</span></div>
+</div>
+</div>
+
+</div>
+
+<div class="pitfall"><strong>Pitfall:</strong> approving a vague plan just to get to the "fun
+part" of watching code get written. If you can't point to the specific files that will change,
+the plan isn't ready — push back before you approve, and don't skip the diff review before
+committing just because the plan looked solid.</div>
+
+<div class="insight"><strong>Insight:</strong> plan mode assumes you already know roughly what
+needs to change and just want the approach checked before it happens. When the task is a goal
+rather than a spec, or there are real design tradeoffs to weigh first, start with brainstorming
+instead — it's meant to converge on a plan, which you then run through this same review and
+execute path.</div></div><div class="page" id="tab-brainstorm"><h1>MobileApp · Brainstorm</h1>
+<div class="block-head">
+  <div class="kicker">Walkthrough · the superpowers-style workflow</div>
+  <h1>Ship the same change with brainstorming</h1>
+  <p class="lede">
+    Brainstorming is the entry path for open-ended or underspecified work: the requirements
+    aren't fully known yet, or there are real design tradeoffs worth talking through before any
+    code gets written. It converges on a written plan, which then flows into the same review
+    and execute path as plan mode.
+  </p>
+  <span class="timing">brainstorm → design → writing-plans → review → execute → verify → commit/PR → PR review</span>
+  <div class="legend">
+    <span><span class="badge repo">repo</span> shipped in this repo's <code>.claude/</code></span>
+    <span><span class="badge plugin">plugin</span> auto-enabled via <code>settings.json</code></span>
+    <span><span class="badge builtin">built-in</span> native Claude Code</span>
+  </div>
+</div>
+
+<div class="steps">
+
+<div class="step plain">
+<div>
+<h3>Brainstorm — state the goal, converge on a design</h3>
+<p>Launch brainstorming and give it your goal plus any relevant context (the problem,
+constraints, prior attempts). It surfaces assumptions and narrows scope, then produces a
+written design.</p>
+<h4>What to put in your prompt</h4>
+<ul>
+<li><strong>Goal + ticket</strong> — state the outcome; reference your tracked work item if you use one</li>
+<li><strong>Worktree</strong> — tell Claude to work in one; it creates one, you just see a branch</li>
+<li><strong>Agent teams</strong> — ask for a task list with dependencies + dispatched agent teams so independent tasks run in parallel</li>
+<li><strong>Right-size models</strong> — set each agent's model to its job; use Haiku for validation/check agents (faster, cheaper, more parallel headroom)</li>
+<li><strong>"Be brief"</strong> — add the words "be brief" to keep output concise</li>
+</ul>
+<div class="cmds"><code>/superpowers:brainstorming</code> <span class="badge plugin">plugin</span></div>
+<p>The <code>superpowers</code>, <code>code-review</code>, <code>commit-commands</code>, and
+<code>pr-review-toolkit</code> plugins are all enabled in this repo's <code>.claude/settings.json</code>
+<code>enabledPlugins</code>.</p>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Convert the design into an implementation plan</h3>
+<p>Run writing-plans against the design produced above — it converts the design into a
+concrete implementation plan file, the artifact the next steps review and execute against.</p>
+<div class="cmds"><code>/superpowers:writing-plans</code> <span class="badge plugin">plugin</span></div>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Review the plan file</h3>
+<p>Point a code review at the plan file before building anything against it. Iterate until
+there are no blocking findings — a bad plan caught here costs minutes, not hours.</p>
+<div class="cmds"><code>/code-review [plan-file]</code> <span class="badge plugin">plugin</span></div>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Execute the plan</h3>
+<p>The execution skill enforces TaskCreate-first orchestration: break the plan into tasks with
+real dependencies, dispatch independent tasks in one message with multiple agent calls, and
+keep the main agent as orchestrator while builder agents do the editing.</p>
+<div class="cmds"><code>/superpowers:executing-plans</code> <span class="badge plugin">plugin</span></div>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Verify — run tests, read the output</h3>
+<p>Run the validators and read the output before claiming done. "Should pass" is not
+"passed" — capture the actual test run, lint output, and diff stat.</p>
+<div class="cmds"><code>/superpowers:verification-before-completion</code> <span class="badge plugin">plugin</span></div>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>Commit, push, open a PR</h3>
+<p>A single command handles a "what and why" commit, pushes the branch, and opens a PR with a
+summary and test plan.</p>
+<div class="cmds"><code>/commit-commands:commit-push-pr</code> <span class="badge plugin">plugin</span></div>
+</div>
+</div>
+
+<div class="step plain">
+<div>
+<h3>PR review against the opened PR</h3>
+<p>Run the review toolkit against the opened PR for a consolidated review pass. When green and
+reviewed, merge.</p>
+<div class="cmds"><code>/pr-review-toolkit:review-pr</code> <span class="badge plugin">plugin</span></div>
+</div>
+</div>
+
+</div>
+
+<div class="pitfall"><strong>Pitfall:</strong> starting to write code before the approach is
+settled. If a brainstorm starts producing edits before the plan is written down, that's a
+signal to pause and finish the conversation first — code written mid-brainstorm tends to encode
+the first idea discussed, not the best one.</div>
+
+<div class="insight"><strong>Insight:</strong> reach for brainstorming when the request is a
+goal rather than a spec, when there are multiple viable approaches worth weighing, or when the
+work touches feature surface that's unfamiliar in MobileApp. When you already know
+roughly what needs to change, skip straight to plan mode instead — brainstorming's whole job is
+to get you to that starting point.</div></div><div class="page" id="tab-setup"><h1>MobileApp · Setup &amp; config</h1>
+<div class="block-head">
+  <div class="kicker">Before your first task</div>
+  <h1>Setup &amp; configuration</h1>
+  <p class="lede">Get the harness, wire the hooks, confirm the MCP servers and plugins load,
+  and learn the one tool that fixes the harness when it misbehaves.</p>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">a · Claude access</span>
+  <h2>Confirm Claude Code is installed</h2>
+  <p>You need the Claude Code CLI installed and able to launch. From any directory, run
+  <code>claude --version</code>, then <code>claude</code> to start a session.</p>
+  <div class="step plain"><div><h3>Claude Code installed &amp; launches</h3><p><code>claude --version</code>
+  prints a version and <code>claude</code> opens a session.</p></div></div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">b · Get the harness</span>
+  <h2>Pull MobileApp and its <code>.claude/</code> harness</h2>
+  <p>The harness (CLAUDE.md, skills, agents, hooks) ships committed in <code>.claude/</code> —
+  no separate install step once you have the repo checked out.</p>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">c · One-time hooks</span>
+  <h2>What's already wired</h2>
+  <p>Hooks run automatically once you have the repo checked out — no separate install step
+  unless noted below.</p>
+  <div class="steps">
+    <div class="step plain"><div><h3>worktree-guard <span class="badge repo">REPO</span></h3><p>PreToolUse · Bash — blocks edits outside a worktree.</p></div></div>
+    <div class="step plain"><div><h3>secrets-scan <span class="badge repo">REPO</span></h3><p>PreToolUse · Edit|Write|Bash — blocks writes/commands that would leak secrets.</p></div></div>
+    <div class="step plain"><div><h3>invariant-guard <span class="badge repo">REPO</span></h3><p>PreToolUse · Bash — blocks bash commands that would violate a launch-blocking invariant (submit-to-unlock / channel-isolation).</p></div></div>
+    <div class="step plain"><div><h3>advisory-checks <span class="badge repo">REPO</span></h3><p>PostToolUse · Edit|Write — runs non-blocking advisory checks after edits.</p></div></div>
+    <div class="step plain"><div><h3>verify-reminder <span class="badge repo">REPO</span></h3><p>Stop — reminds to verify before stopping.</p></div></div>
+  </div>
+  <div class="step plain"><div><h3>Ran <code>/arc-setup-hooks</code> <span class="badge repo">REPO</span></h3>
+  <p>One-time per clone. Wires git-level hooks if this repo tracks any under
+  <code>.githooks/</code>; a no-op otherwise (this repo's hooks may already be fully
+  enforced via <code>.claude/settings.json</code> alone).
+  This repo has no <code>.githooks/</code> directory, so this command is a no-op here.</p></div></div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">d · MCP setup</span>
+  <h2>Configure &amp; verify this repo's MCP servers</h2>
+  <p>MCP servers extend Claude Code with tools for external systems (tickets, docs, internal
+  APIs, databases). Verify what's loaded with <code>claude mcp list</code>.</p>
+  <div class="code-block"><pre>claude mcp list</pre></div>
+  <div class="steps" style="margin-top:14px;">
+    <div class="step plain">
+      <div><h3>Not yet wired: <code>github</code></h3><p>stdio transport — needs <code>GITHUB_PERSONAL_ACCESS_TOKEN</code>.</p></div>
+    </div>
+    <div class="step plain">
+      <div><h3>Not yet wired: <code>atlassian</code></h3><p>http transport — interactive OAuth.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">e · Plugins</span>
+  <h2>The recommended plugin bundle</h2>
+  <p>These five cover the full brainstorm-to-PR-review loop (see the Brainstorm tab). Browse or
+  install via <code>/plugin</code>.</p>
+  <div class="steps">
+    <div class="step plain"><div><h3><code>superpowers</code> <span class="badge plugin">PLUGIN</span></h3><p>Brainstorm / plan / execute / verify skills — the core SDLC loop.</p></div></div>
+    <div class="step plain"><div><h3><code>code-review</code> <span class="badge plugin">PLUGIN</span></h3><p>Plan + diff review.</p></div></div>
+    <div class="step plain"><div><h3><code>commit-commands</code> <span class="badge plugin">PLUGIN</span></h3><p>Commit / push / PR in one command.</p></div></div>
+    <div class="step plain"><div><h3><code>pr-review-toolkit</code> <span class="badge plugin">PLUGIN</span></h3><p>Comprehensive PR review.</p></div></div>
+    <div class="step plain"><div><h3><code>claude-md-management</code> <span class="badge plugin">PLUGIN</span></h3><p>Audits and improves CLAUDE.md files — see the topic below.</p></div></div>
+  </div>
+  <div class="code-block"><pre># Browse / install
+/plugin
+
+# Or add the official marketplace and install by name
+/plugin marketplace add anthropics/claude-plugins-official
+/plugin install superpowers@claude-plugins-official</pre></div>
+  <p>All five are enabled in this repo's <code>.claude/settings.json</code>
+       <code>enabledPlugins</code>: <code>superpowers</code>, <code>code-review</code>,
+       <code>commit-commands</code>, <code>pr-review-toolkit</code>, and
+       <code>claude-md-management</code>.</p>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">f · claude-md-management</span>
+  <h2>The tool you reach for when CLAUDE.md drifts</h2>
+  <p><code>claude-md-management</code> <span class="badge plugin">PLUGIN</span> audits and
+  improves CLAUDE.md files — the harness's memory layer. Run the
+  <code>claude-md-management:revise-claude-md</code> command, or invoke the
+  <code>claude-md-improver</code> skill directly.</p>
+  <div class="insight"><strong>When to use it:</strong> if the harness misbehaves — Claude
+  forgets a rule, a CLAUDE.md is stale or wrong, or something doesn't work the way you want —
+  run <code>claude-md-management</code> to audit and fix the relevant CLAUDE.md, then note what
+  you changed. It's also useful for improving other instruction files (commands, skills) that
+  follow the same "durable written instructions" pattern.</div>
+  <p><strong>Mini-exercise:</strong> pick a CLAUDE.md (the repo root, <code>.claude/CLAUDE.md</code>,
+  or your own global one), run the tool, let it propose improvements, apply one, and note the
+  before/after.</p>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">g · The tool you reach for when the harness misbehaves</span>
+  <h2>Run <code>/context</code> first, always</h2>
+  <p><code>/context</code> shows everything actually loaded right now: every CLAUDE.md (and
+  which one), every <code>@import</code>, active skills, hooks, plugins, and MCP servers. When
+  Claude forgets a rule, a CLAUDE.md is stale, or something doesn't behave the way you expect —
+  this is the fastest way to tell "not installed" from "installed but not doing what I
+  expect."</p>
+  <p>This repo has <code>claude-md-management</code> <span class="badge plugin">PLUGIN</span>
+  enabled — run <code>claude-md-management:revise-claude-md</code> to audit/improve a
+  CLAUDE.md.</p>
+</div>
+
+<div class="insight"><strong>Keep this current:</strong> re-run the <code>/arc-help</code>
+builder command whenever plugins or MCP servers change — this tab reflects this repo's actual
+footprint, not a shared template.</div></div><div class="page" id="tab-concepts"><h1>MobileApp · Concepts</h1>
+<div class="block-head">
+  <div class="kicker">Mental model</div>
+  <h1>The 5-Layer Agent Development Kit</h1>
+  <p class="lede">Claude Code isn't just AI in your terminal — it's a layered runtime. Each
+  layer solves a problem prompting alone can't. The model is fixed; the harness is the durable
+  lever. Adopt load-bearing layers first, and add the next one only once the previous one is
+  actually working.</p>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">One line each · adoption order top→down</span>
+  <h2>The five layers</h2>
+  <div class="two-col">
+    <div class="cheat">
+      <h3>What each layer is</h3>
+      <dl>
+        <dt>1 · Memory</dt><dd><strong>CLAUDE.md</strong> — durable rules, loaded every session</dd>
+        <dt>2 · Knowledge</dt><dd><strong>Skills</strong> — procedural expertise, loaded on demand</dd>
+        <dt>3 · Guardrails</dt><dd><strong>Hooks</strong> — deterministic, runtime-enforced, not advisory</dd>
+        <dt>4 · Delegation</dt><dd><strong>Subagents</strong> — isolated specialists, own context window</dd>
+        <dt>5 · Distribution</dt><dd><strong>Plugins</strong> — package once, the team inherits</dd>
+      </dl>
+    </div>
+    <div class="cheat">
+      <h3>Most agent failures = a missing layer</h3>
+      <ul>
+        <li>Forgets conventions? → <strong>Memory</strong> missing.</li>
+        <li>Repeats setup every time? → <strong>Knowledge</strong> missing.</li>
+        <li>Inconsistent on risky actions? → <strong>Guardrails</strong> missing.</li>
+        <li>Context is a swamp? → <strong>Delegation</strong> missing.</li>
+        <li>Everyone reinvents the wheel? → <strong>Distribution</strong> missing.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Layer 1 · Memory</span>
+  <h2>CLAUDE.md — durable rules</h2>
+  <p>Loaded at the start of <strong>every session</strong>. Claude walks up the directory tree
+  and concatenates every <code>CLAUDE.md</code> it finds; imports via <code>@path/to/file</code>
+  chain up to 5 hops. <strong>Goes here:</strong> architecture rules, conventions, repo map,
+  invariants. <strong>Not here:</strong> step-by-step procedures (those are Skills).</p>
+  <p><strong>When to add it:</strong> first, before anything else — it's the one file every
+  session reads whether or not the task needs it.</p>
+  <table class="plain">
+    <tr><th>File</th><th>Length / structure</th><th>Notes</th></tr>
+    <tr><td><code>.claude/CLAUDE.md</code></td><td>Single, short file</td><td>The only CLAUDE.md in this repo — harness index</td></tr>
+  </table>
+  <div class="pitfall"><strong>Pitfall:</strong> longer ≠ better. Past ~200 lines, adherence
+  drops fast. Lift long sections into <code>@import</code>ed sub-files or move procedures into
+  Skills instead of growing the root file indefinitely.</div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Layer 2 · Knowledge</span>
+  <h2>Skills — procedural knowledge on demand</h2>
+  <p>Reusable playbooks loaded only when relevant — triggered by a slash command or
+  auto-invoked when Claude matches the skill's <em>description</em> to the task at hand. Live
+  in <code>.claude/skills/&lt;name&gt;/SKILL.md</code>.</p>
+  <p><strong>When to add it:</strong> the moment you've pasted the same playbook into a prompt
+  twice. If a teammate asks "how do we do X here" and the answer is more than a sentence,
+  that's a Skill.</p>
+  <table class="plain">
+    <tr><th>Skill</th><th>What it does</th><th>Notes</th></tr>
+    <tr><td>app-store-compliance</td><td>Checks changes against App Store / Play Store submission rules</td><td></td></tr>
+    <tr><td>async-ai-pipeline</td><td>Guides work on the SQS-based async AI pipeline</td><td></td></tr>
+    <tr><td>channel-isolation-testing</td><td>Tests the channel-isolation invariant</td><td><span class="badge">launch-blocking</span></td></tr>
+    <tr><td>claude-provider-adapter</td><td>Guides changes to the Claude provider adapter</td><td></td></tr>
+    <tr><td>skia-native-module</td><td>Guides work on the <code>@shopify/react-native-skia</code> native module</td><td></td></tr>
+    <tr><td>submit-to-unlock-invariant</td><td>Tests the submit-to-unlock invariant</td><td><span class="badge">launch-blocking</span></td></tr>
+  </table>
+  <div class="pitfall"><strong>Pitfall:</strong> vague descriptions never auto-fire. Write the
+  description like a search query — include the actual phrases people will type, not a
+  generic summary of the skill's purpose.</div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Layer 3 · Guardrails</span>
+  <h2>Hooks — deterministic guardrails</h2>
+  <p>Shell commands wired to lifecycle events (<code>PreToolUse</code>, <code>PostToolUse</code>,
+  <code>SessionStart</code>, <code>Stop</code>, <code>SubagentStop</code>). The
+  <strong>runtime</strong> decides if they run, not the model. Hooks read JSON on stdin
+  describing the proposed tool call; exit code <code>2</code> with a <code>"reason"</code>
+  field blocks the action and tells Claude why, so it can course-correct instead of failing
+  silently.</p>
+  <p><strong>When to add it:</strong> when "please don't do X" in CLAUDE.md isn't enough and X
+  must be <em>impossible</em> — secrets in commits, force-push to main, writes to
+  <code>.env</code> files, malformed branch names. Advisory instructions get forgotten under
+  pressure; a hook cannot be talked out of firing.</p>
+  <table class="plain">
+    <tr><th>Hook</th><th>Fires on</th><th>What it does</th></tr>
+    <tr><td>worktree-guard</td><td>PreToolUse · Bash</td><td>Blocks edits outside a worktree.</td></tr>
+    <tr><td>secrets-scan</td><td>PreToolUse · Edit|Write|Bash</td><td>Blocks writes/commands that would leak secrets.</td></tr>
+    <tr><td>invariant-guard</td><td>PreToolUse · Bash</td><td>Blocks bash commands that would violate a launch-blocking invariant (submit-to-unlock / channel-isolation).</td></tr>
+    <tr><td>advisory-checks</td><td>PostToolUse · Edit|Write</td><td>Runs non-blocking advisory checks after edits.</td></tr>
+    <tr><td>verify-reminder</td><td>Stop</td><td>Reminds to verify before stopping.</td></tr>
+  </table>
+  <div class="pitfall"><strong>Pitfall:</strong> hooks fail silently if the command isn't
+  resolvable on PATH from wherever the hook actually runs. Test the hook standalone (pipe it a
+  sample JSON payload, check the exit code) before trusting it in production, then run
+  <code>/doctor</code> to confirm the harness sees it.</div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Layer 4 · Delegation</span>
+  <h2>Subagents — isolated specialists</h2>
+  <p>Workers the main agent dispatches to. Each runs in its <strong>own context window</strong>,
+  own tool permissions, optionally a cheaper or faster model. The main agent gets a summary
+  back, not the noise. Built-ins include <code>Explore</code>, <code>Plan</code>, and
+  <code>general-purpose</code>; a repo can also define its own in <code>.claude/agents/</code>.
+  <strong>Subagents can't spawn subagents</strong> — no infinite nesting.</p>
+  <p><strong>When to add it:</strong> when a side task is more than roughly five tool calls, or
+  produces logs and exploratory output you don't want cluttering the main thread. Fan out
+  independent subtasks in parallel; keep the main agent as orchestrator, not implementer, once
+  the work crosses that threshold.</p>
+  <table class="plain">
+    <tr><th>Subagent</th><th>What it does</th></tr>
+    <tr><td>adr-author</td><td>Writes architecture decision records</td></tr>
+    <tr><td>ai-service-builder</td><td>Builds AI-service integration code</td></tr>
+    <tr><td>backend-builder</td><td>Builds AWS CDK backend code</td></tr>
+    <tr><td>code-reviewer</td><td>Reviews code changes</td></tr>
+    <tr><td>rn-builder</td><td>Builds React Native / Expo UI code</td></tr>
+    <tr><td>test-author</td><td>Writes tests</td></tr>
+  </table>
+  <div class="pitfall"><strong>Pitfall:</strong> don't dispatch a subagent for one trivial
+  action — the context-switch and summarization cost beats whatever context it would have
+  saved.</div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Layer 5 · Distribution</span>
+  <h2>Plugins — package once, team inherits</h2>
+  <p>Versioned bundles of skills + subagents + hooks + commands. One person enables a plugin,
+  the whole team gets the same behavior — no copy-pasting a <code>.claude/</code> directory
+  between repos and letting the copies drift apart.</p>
+  <p><strong>When to add it:</strong> when more than one person needs the same skill/hook set
+  and you want versioned, reviewable distribution instead of tribal-knowledge copy-paste. A
+  plugin is also the right home for anything you want to reuse across multiple repos, not just
+  this one.</p>
+  <table class="plain">
+    <tr><th>Plugin</th><th>What it provides</th></tr>
+    <tr><td>superpowers</td><td>Brainstorm / plan / execute / verify skills</td></tr>
+    <tr><td>code-review</td><td>Plan + diff review</td></tr>
+    <tr><td>commit-commands</td><td>Commit / push / PR in one command</td></tr>
+    <tr><td>pr-review-toolkit</td><td>Comprehensive PR review</td></tr>
+    <tr><td>claude-md-management</td><td>Audits/improves CLAUDE.md files</td></tr>
+  </table>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Diagnostic lookup</span>
+  <h2>Failure-mode → layer table</h2>
+  <table class="plain">
+    <tr><th>Symptom</th><th>Missing layer</th><th>Fix</th></tr>
+    <tr><td>Re-explains the codebase / breaks conventions</td><td>1 · Memory</td><td>Add or tighten <code>CLAUDE.md</code></td></tr>
+    <tr><td>Asks you to re-describe a multi-step procedure</td><td>2 · Knowledge</td><td>Capture it as a Skill</td></tr>
+    <tr><td>Sometimes commits secrets / force-pushes</td><td>3 · Guardrails</td><td>Add a <code>PreToolUse</code> hook</td></tr>
+    <tr><td>Main thread drowns in test/log output</td><td>4 · Delegation</td><td>Dispatch a subagent</td></tr>
+    <tr><td>Each engineer rebuilds the same setup</td><td>5 · Distribution</td><td>Ship it as a plugin</td></tr>
+  </table>
+  <div class="insight"><strong>Rule of thumb:</strong> adopt top-down. Add the next layer only
+  when the previous one works — nothing downstream helps if Memory is wrong.</div>
+  <a class="doc-link" href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Anthropic · Claude Code best practices</a>
+</div></div><div class="page" id="tab-terminal"><h1>MobileApp · Terminal</h1>
+<div class="block-head">
+  <div class="kicker">Driving the CLI</div>
+  <h1>Working in the terminal</h1>
+  <p class="lede">Four input modes, the slash commands you'll reach for, plan mode, the
+  auto-vs-ask call, and the worktree pattern Claude runs for you under the hood.</p>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Input modes</span>
+  <h2>The four ways to talk to Claude Code</h2>
+  <ul>
+    <li><strong>Prose</strong> — natural language. The default. "Find every TODO, group by
+    file, change nothing."</li>
+    <li><strong>Slash commands</strong> — <code>/init</code>, <code>/context</code>,
+    <code>/arc-help</code>… Built-ins, repo commands, and plugin commands all surface here.</li>
+    <li><strong>Bash bang</strong> — <code>!npm test</code> runs a shell command inline
+    without leaving the session.</li>
+    <li><strong>File references</strong> — <code>@src/foo.ts</code> pulls a file's contents
+    inline; <code>@docs/</code> tab-completes paths.</li>
+  </ul>
+  <div class="insight"><strong>Keybindings:</strong> <code>?</code> opens the keybindings
+  menu · <code>Shift+Tab</code> toggles plan mode · <code>esc</code> interrupts mid-stream ·
+  <code>Ctrl-R</code> recent prompts · <code>Ctrl-C</code> cancel.</div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Introspection first</span>
+  <h2>Key slash commands</h2>
+  <h4>Built-in slash commands</h4>
+  <ul>
+    <li><code>/init</code> — bootstrap CLAUDE.md by walking the repo. <span class="badge builtin">BUILT-IN</span></li>
+    <li><code>/context</code> — see <strong>everything</strong> loaded right now: every
+    CLAUDE.md, skill, hook, plugin, MCP server. When Claude does something weird, run this
+    first. <span class="badge builtin">BUILT-IN</span></li>
+    <li><code>/skills</code> — list installed skills. <span class="badge builtin">BUILT-IN</span></li>
+    <li><code>/hooks</code> — list configured hooks. <span class="badge builtin">BUILT-IN</span></li>
+    <li><code>/mcp</code> — list MCP servers. <span class="badge builtin">BUILT-IN</span></li>
+    <li><code>/agents</code> — list/dispatch subagents. <span class="badge builtin">BUILT-IN</span></li>
+    <li><code>/plugin</code> — browse/install plugins. <span class="badge builtin">BUILT-IN</span></li>
+    <li><code>/doctor</code> — diagnose hooks/MCP/settings drift. <span class="badge builtin">BUILT-IN</span></li>
+  </ul>
+  <h4>This repo's commands</h4>
+  <ul>
+    <li><code>/arc-help</code> — this cheat sheet. <span class="badge repo">REPO</span></li>
+    <li><code>/arc-setup-hooks</code> — one-time per-clone hook setup (no-op here; no <code>.githooks/</code>). <span class="badge repo">REPO</span></li>
+  </ul>
+  <h4>Plugin commands</h4>
+  <ul>
+    <li><code>/superpowers:brainstorming</code> <span class="badge plugin">PLUGIN</span></li>
+    <li><code>/superpowers:writing-plans</code> <span class="badge plugin">PLUGIN</span></li>
+    <li><code>/superpowers:executing-plans</code> <span class="badge plugin">PLUGIN</span></li>
+    <li><code>/superpowers:verification-before-completion</code> <span class="badge plugin">PLUGIN</span></li>
+    <li><code>/code-review [file]</code> <span class="badge plugin">PLUGIN</span></li>
+    <li><code>/commit-commands:commit-push-pr</code> <span class="badge plugin">PLUGIN</span></li>
+    <li><code>/pr-review-toolkit:review-pr</code> <span class="badge plugin">PLUGIN</span></li>
+    <li><code>/claude-md-management:revise-claude-md</code> <span class="badge plugin">PLUGIN</span></li>
+  </ul>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">The safety net</span>
+  <h2>Plan mode</h2>
+  <p>Plan mode is read-only: Claude reads, searches, and explores but <strong>cannot edit,
+  write, or run state-changing commands</strong> until you approve the plan. Toggle with
+  <code>Shift+Tab</code>. Use it for any non-trivial change — new features, refactors,
+  anything touching more than one file.</p>
+  <div class="insight"><strong>Why it matters:</strong> plan mode turns "did Claude
+  understand the task?" into a checkpoint you can inspect <em>before</em> any file changes,
+  instead of discovering a misread requirement three edits in.</div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Permission discipline</span>
+  <h2>Auto vs Ask — the decision matrix</h2>
+  <table class="plain">
+    <tr><th>Situation</th><th>Mode</th><th>Why</th></tr>
+    <tr><td>Boilerplate, scaffolding, generated code</td><td><strong>Auto</strong></td><td>Reversible, low blast radius</td></tr>
+    <tr><td>Tests, formatting, local-only edits</td><td><strong>Auto</strong></td><td>Caught by CI / easy to revert</td></tr>
+    <tr><td>Auth, billing, schema, migrations, infra</td><td><strong>Ask</strong></td><td>High blast radius</td></tr>
+    <tr><td>Anything irreversible (deletes, force-push, prod)</td><td><strong>Ask</strong></td><td>No undo</td></tr>
+    <tr><td>Editing the <code>.claude/</code> harness itself</td><td><strong>Ask</strong></td><td>Changes behavior for everyone</td></tr>
+    <tr><td>When in doubt</td><td><strong>Ask</strong></td><td>Cheaper than cleanup</td></tr>
+  </table>
+  <div class="pitfall"><strong>Backstop:</strong> hooks can make the riskiest "Ask" cases
+  <em>impossible</em> regardless of mode — see the Concepts tab's Guardrails layer. Configure
+  them for anything a permission prompt alone isn't strict enough to catch (secret commits,
+  protected files, dangerous shell patterns).</div>
+</div>
+
+<div class="topic">
+  <span class="slide-tag">Under the hood</span>
+  <h2>The worktree pattern</h2>
+  <p><code>git worktree add</code> checks out a branch into its own directory, sibling to
+  the main checkout, with its own working tree but sharing the same <code>.git</code>
+  history. That gives every task an isolated workspace: no stashing, no branch-switching
+  churn, no risk of two sessions colliding on the same files.</p>
+  <div class="code-block">
+    <div class="ck-head"><span class="ck-label">Typical pattern</span><span class="ck-file">terminal</span></div>
+<pre><span class="c"># Claude runs this when you ask in your prompt — you don't type it yourself</span>
+git worktree add ../REPO-wt/&lt;slug&gt;/ -b &lt;slug&gt;
+cd ../REPO-wt/&lt;slug&gt;/
+
+<span class="c"># Verify before any edit</span>
+git worktree list
+
+<span class="c"># Cleanup when the task is done or abandoned</span>
+git worktree remove ../REPO-wt/&lt;slug&gt;/</pre>
+  </div>
+  <div class="insight"><strong>One session per worktree.</strong> Never edit <code>main</code>
+  (or your primary branch) directly in the main checkout for real work — stray edits there
+  are the most common way a session's changes get lost or tangled with another session's.</div>
+  <p>This repo uses the standard convention: <code>git worktree add ~/src/MobileApp-wt/&lt;slug&gt;/ -b &lt;slug&gt;</code>.</p>
+</div></div></main>
+  </div>
+  <script>/* Bounteous brand kit — theme toggle + tab/sub-nav switching for arc-help cheat-sheets.
+ * NASA Power-of-10 in spirit: small single-purpose functions, no unbounded loops
+ * (all loops are bounded by DOM NodeLists collected once).
+ */
+(function () {
+  'use strict';
+
+  var THEME_KEY = 'arc-help-theme';
+
+  function getStoredTheme() {
+    try {
+      return window.localStorage.getItem(THEME_KEY);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setStoredTheme(value) {
+    try {
+      window.localStorage.setItem(THEME_KEY, value);
+    } catch (e) {
+      /* storage unavailable — theme still applies for this session */
+    }
+  }
+
+  function applyTheme(value) {
+    document.documentElement.dataset.theme = value;
+  }
+
+  function initTheme() {
+    var stored = getStoredTheme();
+    applyTheme(stored === 'light' || stored === 'dark' ? stored : 'dark');
+  }
+
+  function toggleTheme() {
+    var current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+    var next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    setStoredTheme(next);
+  }
+
+  function wireThemeToggle() {
+    var btn = document.querySelector('[data-theme-toggle]');
+    if (btn) btn.addEventListener('click', toggleTheme);
+  }
+
+  function showTab(id) {
+    var tabs = document.querySelectorAll('nav.tabs button[data-tab]');
+    var pages = document.querySelectorAll('.page');
+    tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.tab === id); });
+    pages.forEach(function (p) { p.classList.toggle('active', p.id === 'tab-' + id); });
+  }
+
+  function showSubpage(tabId, subId) {
+    var buttons = document.querySelectorAll('.subnav[data-tab="' + tabId + '"] button[data-subpage]');
+    var subpages = document.querySelectorAll('.subpage[data-tab="' + tabId + '"]');
+    buttons.forEach(function (b) { b.classList.toggle('active', b.dataset.subpage === subId); });
+    subpages.forEach(function (p) { p.classList.toggle('active', p.id === 'sub-' + tabId + '-' + subId); });
+  }
+
+  function wireTabs() {
+    var tabs = document.querySelectorAll('nav.tabs button[data-tab]');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { showTab(t.dataset.tab); });
+    });
+  }
+
+  function wireSubnavs() {
+    var buttons = document.querySelectorAll('.subnav button[data-subpage]');
+    buttons.forEach(function (b) {
+      var tabId = b.closest('.subnav').dataset.tab;
+      b.addEventListener('click', function () { showSubpage(tabId, b.dataset.subpage); });
+    });
+  }
+
+  function init() {
+    initTheme();
+    wireThemeToggle();
+    wireTabs();
+    wireSubnavs();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{
+  "name": "scribl-app",
+  "main": "expo-router/entry",
+  "version": "1.0.0",
+  "dependencies": {
+    "@anthropic-ai/bedrock-sdk": "^0.32.0",
+    "@anthropic-ai/sdk": "^0.109.0",
+    "@expo-google-fonts/fredoka": "^0.4.1",
+    "@expo-google-fonts/manrope": "^0.4.2",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@rn-primitives/portal": "^1.4.0",
+    "@rn-primitives/slot": "^1.4.0",
+    "@shopify/react-native-skia": "2.6.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "expo": "~56.0.15",
+    "expo-constants": "~56.0.18",
+    "expo-font": "~56.0.7",
+    "expo-linear-gradient": "~56.0.4",
+    "expo-linking": "~56.0.15",
+    "expo-modules-core": "~56.0.20",
+    "expo-router": "~56.2.14",
+    "expo-splash-screen": "~56.0.12",
+    "expo-status-bar": "~56.0.4",
+    "expo-system-ui": "~56.0.5",
+    "lucide-react-native": "^1.23.0",
+    "nativewind": "^4.2.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.85.3",
+    "react-native-gesture-handler": "~2.31.1",
+    "react-native-reanimated": "4.3.1",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "4.25.2",
+    "react-native-svg": "15.15.4",
+    "react-native-web": "~0.21.0",
+    "react-native-worklets": "0.8.3",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1085.0",
+    "@aws-sdk/lib-dynamodb": "^3.1085.0",
+    "@playwright/test": "^1.61.1",
+    "@testing-library/react-native": "^14.0.1",
+    "@types/aws-lambda": "^8.10.162",
+    "@types/jest": "29.5.14",
+    "@types/react": "~19.2.2",
+    "concurrently": "^9.1.0",
+    "eslint": "^9.0.0",
+    "eslint-config-expo": "~56.0.4",
+    "jest": "^29.7.0",
+    "jest-expo": "~56.0.0",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "prestart": "npm run setup-skia-web",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "preweb": "npm run setup-skia-web",
+    "lint": "expo lint",
+    "test": "jest",
+    "test:ci": "jest --ci --forceExit",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "setup-skia-web": "setup-skia-web public",
+    "db:up": "docker compose up -d --wait",
+    "db:setup": "cd backend && npm run db:bootstrap && npm run db:prompts",
+    "dev": "npm run db:up && npm run db:setup && concurrently -n api,web -c blue,magenta --kill-others-on-fail \"cd backend && npm run api\" \"npm run web\""
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "testTimeout": 15000,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/e2e/"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|nativewind|react-native-css-interop|@shopify/react-native-skia|react-native-reanimated|react-native-worklets|@rn-primitives/.*)"
+    ],
+    "moduleNameMapper": {
+      "^@scribl/shared/(.*)$": "<rootDir>/packages/shared-types/$1",
+      "^@/(.*)$": "<rootDir>/$1",
+      "^expo-linear-gradient$": "<rootDir>/__mocks__/expo-linear-gradient.tsx"
+    },
+    "testEnvironmentOptions": {
+      "customExportConditions": [
+        "node",
+        "require"
+      ]
+    }
+  },
+  "private": true
+}

@@ -1,0 +1,102 @@
+# Meeting Digest: Scribl Approach Discussion
+
+**Date:** 2026-06-09  
+**Participants:** David Lawton, Rob Forshier II  
+**Source:** `Scribl approach.vtt`  
+**Duration:** ~26 minutes  
+**Speaker attribution:** Two distinct mics; `<v Speaker>` tags are reliable.
+
+---
+
+## What Was Discussed
+
+### Session goals (David framing)
+
+Three interrelated goals Marty has handed down:
+
+1. **Figure out the Anthropic funding channel.** Scribl is the vehicle. Marty wants a case for why Anthropic would fund this project, and what the Claude integration looks like deep enough to justify that.
+2. **Use Scribl to prove the ARC methodology end-to-end.** Structure the team, structure the phases, propose it in partnership with Anthropic and AWS. This is the live reference implementation.
+3. **Give Marty a methodology and team model, not a financial structure.** David and Rob own the approach; Marty sets the price point.
+
+Economic structure and AWS/Anthropic funding terms are explicitly deferred. The session focused on methodology, Claude integration, and team shape.
+
+### How Marty wants the team positioned
+
+David was direct: Marty wants them to be **aggressive** about team size. The pitch is "here is what we can deliver in a short time with a minimal team." This is the proof point for the methodology. The team model should lead with that lean configuration, not a fully-staffed build.
+
+Rob's initial read: "It's actually pretty small. I could just feel like, tell Claude to go knock one out real quick." Both agree the scope is doable and that the right posture is lean and fast.
+
+### Claude integration: honest assessment
+
+Rob's candid read of the wireframe: "Claude inside this app is pretty light outside of its usage." The standard LLM calls are there (prompt generation, analysis, content moderation), but there is no intrinsic Claude-specific differentiation in the product.
+
+The two areas where Claude adds real value:
+- **Vision model for drawings.** The app takes a picture of what you're scribbling. A vision model is needed to analyze and potentially respond to drawings. Ideally this is Claude (not another vision provider). This is the most compelling product-side Claude use case.
+- **LLM calls for prompts and moderation.** Standard, but real usage. These are API calls any LLM provider could serve; the pitch to Anthropic is that Scribl is using Claude, not that Claude is uniquely required.
+
+**Audio/voice processing:** Rob notes voice can be done on device (no cloud API required). This simplifies the AI integration surface.
+
+**The bigger Claude story is development-side:** Claude Code drives the entire build methodology. The development team itself is the high-volume Claude consumer. This counts in the Anthropic funding narrative.
+
+### How to frame the Anthropic pitch
+
+David's framing: it is like **AWS MAP funding**. You do not say "why Claude over OpenAI." You map the Claude services in use and the expected token spend, and Anthropic calculates the ROI on funding the project.
+
+The deliverable for Anthropic is: a list of all Claude touchpoints (product-side and dev-side) with projected usage volume at the target user scale. That document is the funding application.
+
+Do not add Claude features for the sake of Claude features. The product has to make sense first; the Claude integration justification follows from what is genuinely in there.
+
+### Bedrock question: open and urgent
+
+AWS will likely want Claude on Bedrock as a condition of AWS co-funding. This creates two concerns:
+
+- **David's worry:** Using Bedrock may lose Claude features. Heard from a separate team call that Claude Code features are pared down on Bedrock. Has not verified personally.
+- **Rob's counter:** Has used Claude Code with Bedrock on other projects without issues. Believes it is "just swapping the backend." Notes that prompt caching can behave differently (third-party tools that mutate prompt headers break cache, causing higher spend - this was the issue that got some tools removed from the Anthropic ecosystem).
+
+**Not resolved.** David needs to get a clear answer before the Friday AWS call (2026-06-13). Cannot go into that conversation with a false claim about Bedrock compatibility.
+
+### Claude Design as a tooling advantage
+
+David: Claude Design (claude.ai/design) is something Bounteous's design team is already using and loving. Rob was not aware it was available this way. Workflow proposal: use Claude Design to create screens, then generate an HTML prototype - faster than Figma for discovery, looks polished, serves the "prototype-as-discovery" pattern.
+
+### Prototype-as-discovery: fully aligned
+
+Both agree this engagement is a textbook case for prototype-as-discovery. Show Scribl a working interactive prototype early in Shape, let them react, convert reactions to requirements, build from there. Rob could build the HTML prototype; David could work the Anthropic/AWS approach documentation in parallel (divide and conquer).
+
+Not the right moment to prototype - current priority is getting the approach to Marty before the AWS call.
+
+### Slash command idea for engagement planning
+
+Rob suggested creating a slash command in the ARC ideation repo for this type of work: "a set of slash commands that do exactly what you're talking about." David agreed. The Scribl engagement is itself the test case for improving the harness so future engagements can be stood up faster.
+
+### Urgency: AWS three-way call
+
+David: "Marty wants it right away because he wants to key up a conversation. We have another conversation with AWS. It's like a three-way partner conversation." AWS is part of this engagement. The approach document and team model need to be ready before that call.
+
+Marty explicitly wants the collaborative perspective - both David and Rob - not David solo.
+
+---
+
+## Decisions Made
+
+| Decision | Owner |
+| --- | --- |
+| Lead with an aggressive/minimal team model, not a fully-staffed build | David |
+| Anthropic pitch framing: services used + expected spend (MAP model), not why-Claude-over-OpenAI | David + Rob |
+| Do not add Claude features that are not grounded in the product | David + Rob |
+| Prototype-as-discovery is the right approach for Shape | David + Rob |
+| Document the Bedrock question before the AWS call | David |
+
+---
+
+## Action Items
+
+| Item | Owner | Deadline |
+| --- | --- | --- |
+| Draft team model and methodology structure; send to Rob for review | David | 2026-06-09 (same day) |
+| Review engagement docs (clientsummary, engagement-approach, team model draft) and give feedback | Rob | 2026-06-09 (same day) |
+| Investigate Bedrock vs. direct Anthropic API feature parity; get a clear answer before the AWS call | David | 2026-06-12 (before Friday) |
+| Build a list of all Claude touchpoints in the product with projected token spend for the Anthropic funding narrative | David + Rob | Before AWS call |
+| Get Rob access to Claude Design if not already active | David | 2026-06-10 |
+| Draft the Anthropic funding case document (MAP-style: services, usage, spend) | David | Before AWS call |
+| Consider building a slash command in arc-ideation for client engagement setup (Scribl as the template) | Rob | Backlog |

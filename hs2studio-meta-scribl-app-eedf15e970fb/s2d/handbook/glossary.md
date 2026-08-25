@@ -1,0 +1,35 @@
+# Glossary
+
+Shared vocabulary for scribl. Where a term maps onto something concrete in this
+repo, the mapping is called out so the language stays grounded in how the team
+actually works.
+
+| Term | Definition |
+|---|---|
+| Acceptance criteria (AC) | The conditions a story must satisfy to be done. On scribl, the checkable `## AC` boxes in a story file. Often written Given / When / Then. |
+| Backlog | The prioritized list of everything needed to deliver the product. See `backlog-and-workflow.md`. |
+| Blocked | A work item that cannot progress until a dependency, decision, or external input clears. Its own column on the board; always noted on the card. |
+| Board | The Now / Next / Blocked / Done view of work in `tracking/board.md`. |
+| Burndown / trend | The trend of remaining work against time in an iteration. On a small POC, read informally off the board rather than a chart. |
+| Capacity | The hours a team actually has in an iteration, after time off. An input to how much to commit. |
+| Ceremony | A recurring team event: standup, refinement, planning, review, retrospective. See `ceremonies.md`. |
+| Code freeze | A point near a release where no new scope goes in, so the codebase can be stabilized and tested. See `release-management.md`. |
+| Definition of Done (DoD) | The shared bar every item must clear to be called done. Its own handbook page. |
+| Definition of Ready (DoR) | The shared bar an item must clear before it is pulled into work. Its own handbook page. |
+| Epic | A large goal that spans several stories, broken down during refinement until each piece fits one iteration. |
+| Estimate | The team's sizing of an item, in story points. See `estimation.md`. |
+| Gherkin | The Given / When / Then structure for writing acceptance criteria. |
+| Increment | The working, potentially shippable output of an iteration. |
+| Iteration / sprint | A fixed, short timebox in which the team delivers an increment. This handbook says "iteration" for scribl's lightweight cadence. |
+| Product owner | The person who owns and prioritizes the backlog and accepts or rejects work. See `roles-and-raci.md`. |
+| Refinement | The ongoing work of clarifying, splitting, and estimating upcoming items so they become ready. |
+| Reference story | A well-understood item of obvious size used as a benchmark when estimating others. |
+| Retrospective | The end-of-iteration look at how the team worked, producing one or two concrete improvements. |
+| Scrum master / delivery lead | The person who facilitates ceremonies, keeps the board honest, and clears blockers. |
+| Spike | A timeboxed investigation whose output makes a later story ready. |
+| Story | A unit of user-facing work, written "as a / I want / so that". Tracked as `tracking/stories/S-*.md`. See `story-and-ac-templates.md`. |
+| Story point | A unit of complexity and full effort, on a Fibonacci scale. Not hours. |
+| Velocity | The average points a team completes per iteration. A planning and forecasting aid, relative to this team only. |
+| Work in progress (WIP) limit | A cap on how many items are in flight at once. On scribl, "keep the Now column small". |
+
+_Source: Bounteous Agile Delivery Confluence (space PD). Distilled from: Scrum Cheat Sheet + Terminology (id 1746993745); that page's terminology was published as images, so the definitions here were reconstructed in house style from the standard Scrum vocabulary it covers and mapped to this repo. Recreated 2026-07-10._

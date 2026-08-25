@@ -1,0 +1,11 @@
+{
+  "name": "@scribl/provider",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude provider-abstraction seam (generate / describeImage / moderate) — ADR 0009, ADR 0011.",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

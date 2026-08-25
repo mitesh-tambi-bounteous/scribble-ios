@@ -1,0 +1,22 @@
+# Local Postgres for Scribl dev. Started by `npm run dev` / `npm run db:up`.
+# Matches the canonical local URL: postgres://scribl:scribl@localhost:5433/scribl
+services:
+  scribl-pg:
+    image: postgres:15
+    container_name: scribl-pg
+    environment:
+      POSTGRES_USER: scribl
+      POSTGRES_PASSWORD: scribl
+      POSTGRES_DB: scribl
+    ports:
+      - "5433:5432"
+    volumes:
+      - scribl-pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scribl -d scribl"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  scribl-pg-data:

@@ -1,0 +1,27 @@
+---
+id: S-009
+title: Splash / Start screen
+status: next
+owner: unassigned
+stage: B2
+phase: B
+project: scribl
+labels: [nav, onboarding, fidelity]
+---
+
+# S-009 -- Splash / Start screen
+
+The splash/start screen is the branded entry into the daily loop after
+onboarding. It is a hero screen: the scribl wordmark/logo sits centered on a
+dark screen with a single "Start" button that drops the user into the loop.
+
+## AC
+
+- [ ] A named "Start" button navigates to Today's Prompt (`app/index.tsx`).
+- [ ] This is a hero screen: the fidelity pass centers the scribl brand mark on
+  a dark theme matching the rest of the flow (centered wordmark/logo, dark
+  background).
+- [ ] The screen ships first as a skeleton with working navigation, then the
+  design fidelity follows in a later pass.
+- [ ] The screen renders and behaves identically on the web export and on an
+  iOS/Android device or simulator from the single Expo/React Native codebase.

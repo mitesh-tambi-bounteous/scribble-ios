@@ -1,0 +1,42 @@
+---
+stage: B2 poc-build (Increment 1 planning)
+date: 2026-07-01
+---
+
+# Review: B2 poc-build (Increment 1 planning)
+
+## What went well
+
+- Parallel exploration of the design inputs let us build a screen inventory
+  quickly rather than reading each input in sequence.
+- The design flow png gave a clean, unambiguous screen inventory to work from.
+- The S-001 story format was easy to replicate across screens once the first
+  one was in place.
+- The three-tier operating model read clearly: the methodology engine -> brain
+  -> MobileApp, with each tier owning a distinct concern.
+
+## What took too long
+
+- The primary friction: there is NO command that generates POC-BUILD screen
+  stories from design inputs. `/project-poc-backlog` is an H1 DELIVERY backlog
+  (it converts an accepted POC into a structured delivery backlog);
+  `/project-poc-build` builds code. Neither turns a design flow diagram plus
+  scope docs into per-screen B2 build stories, so this increment authored the
+  per-screen stories by hand.
+
+## What to change in the playbook
+
+- Propose a new command, for example `/project-poc-stories <project>`, OR a B2
+  extension, that reads the design inputs under `s2d/inputs/` and emits
+  per-screen build stories in the S-0XX format. Each emitted story should carry
+  the universal AC: nav wiring, web plus device parity, a design-fidelity note,
+  and skeleton-first sequencing.
+- This is the candidate FIRST back-flow to the methodology engine. (If this is
+  methodology friction, edit the methodology engine and flag a back-flow PR --
+  but not in this increment.)
+- See the sibling back-flow proposal: `reviews/backflow-multi-repo-model.md`.
+
+## Learnings captured
+
+- `patterns/multi-repo-roled-brain.md` -- one brain owning the contract while
+  driving N roled code repos.

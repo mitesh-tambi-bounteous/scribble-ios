@@ -1,0 +1,33 @@
+<!doctype html>
+<!--
+  arc-help branded shell template.
+  Placeholders substituted by the Python renderer (src/cheatsheet/shell.py) — see that file's
+  docstring for the token list. NOTE: do not write literal double-brace tokens in this comment;
+  the renderer does a global string replace and will substitute matches found here too.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{TITLE}}</title>
+<style>{{BRAND_FONT_FACES}}</style>
+{{BRAND_CSS_LINK}}
+<style>{{BRAND_CSS_INLINE}}</style>
+</head>
+<body data-theme="dark">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-row">
+        <span class="brand">Bounteous · <strong>{{TITLE}}</strong></span>
+        <span class="meta">Re-open any time with <code>/arc-help</code></span>
+        <button type="button" data-theme-toggle title="Toggle light/dark theme">Theme</button>
+      </div>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="tabs">{{NAV_HTML}}</nav>
+    <main>{{CONTENT_HTML}}</main>
+  </div>
+  <script>{{BRAND_JS}}</script>
+</body>
+</html>

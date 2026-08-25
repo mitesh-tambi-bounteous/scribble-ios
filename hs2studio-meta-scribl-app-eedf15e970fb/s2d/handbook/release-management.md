@@ -1,0 +1,91 @@
+# Release Management
+
+How scribl gets working software out the door, and how the team handles the
+pressure to change the plan mid-flight. The default is planned, predictable
+releases; everything else is an exception with an explicit process.
+
+## Scheduled releases
+
+A scheduled release follows the team's agreed release frequency. Releasing on a
+steady cadence builds a "release train" that leaves the station on a known
+rhythm, which is what makes delivery predictable and keeps trust with
+stakeholders.
+
+- Releases consist of planned, committed work agreed through normal ceremonies.
+- A release cycle is a few iterations of build and QA ending in a release.
+- The tail of the cycle is a hardening window: stabilize the codebase, run
+  regression, and do any user-acceptance testing before shipping.
+
+### Code freeze
+
+Near the end of a release cycle, stop taking new scope so the codebase can
+settle. A code freeze lets the team:
+
+- Prevent last-minute scope creep.
+- Stabilize the code -- little to no change going in.
+- Run regression and acceptance testing.
+- Prepare the release for production and make a go / no-go call.
+
+Anyone with no remaining work during a freeze helps others finish, reviews PRs,
+or pays down tech debt on the next cycle's branch rather than starting new
+in-cycle work.
+
+For scribl as a POC there is no production release train yet; treat the cadence
+and code-freeze discipline as the model to adopt when the app moves toward real
+releases. See `s2d/status.md` and the roadmap for current phase.
+
+## Exception management
+
+Plans meet pressure: priorities shift, bugs surface, new needs arrive. Handling
+these exceptions within explicit rules is what protects quality and
+predictability. There are three mechanisms, in rough order of disruption.
+
+### Mid-sprint scope swap
+
+The lightest option. Swap a new item for a planned item of equal size that has
+not been started yet.
+
+- Only "like for like": the new item must be estimated and match the size of
+  what comes out. In-progress items cannot be swapped.
+- The effort spent estimating the new item comes out of capacity.
+- No swaps after the release scope freeze (roughly the last quarter of the
+  cycle) -- push new scope to the next cycle instead.
+- Keep swaps small: as a guide, no more than about 15% of an iteration's
+  capacity. Larger changes belong in an unscheduled release.
+- A short re-planning conversation may be warranted.
+
+### Unscheduled release
+
+An off-cadence release, limited in scope, for critical changes that genuinely
+cannot wait for the next scheduled one. Scope must not exceed a normal release.
+
+- Can pull forward a subset of planned work, or add work that was not planned
+  (assess the impact first).
+- Usually client- or stakeholder-initiated, but the team can call one too -- for
+  example a dependency that would break production if left unaddressed.
+- Impacts are real and must be named before proceeding: an emergency refinement
+  session, possibly cancelling and re-planning the current iteration, re-planned
+  schedules, reduced capacity from context-switching, and consumed test and
+  staging environments.
+
+### Hotfix
+
+The heaviest: a "drop everything" fix for a severe production problem -- for
+example something blocking most users from a core action, or a legal or brand
+emergency.
+
+- Hotfixes are for emergencies, not a back door for high-priority features.
+  Escalating features this way breaks the integrity of the process and should
+  require leadership sign-off if attempted at all.
+- Hotfixes have impacts: reduced velocity on in-flight work, the overhead of an
+  extra release (analysis, branching, testing, deployment), items bumped from
+  the current iteration, and shorter testing windows that raise risk.
+
+## The common rule
+
+For every exception, the impacts are assessed and communicated before the team
+acts, and whoever owns the trade-off confirms the decision. Uncontrolled
+exceptions kill commitments. On scribl, record any such decision on the affected
+story and, where it changes direction, as an ADR under `s2d/decisions/`.
+
+_Source: Bounteous Agile Delivery Confluence (space PD). Distilled from: Scheduled Releases (id 264465982686724), Scrum Exception Management (id 264466041634912), Hot Fixes (id 264466041995395), Unscheduled Releases (id 264466042028158), Scope Changes Mid-Sprint (id 264466041897064). Recreated 2026-07-10._

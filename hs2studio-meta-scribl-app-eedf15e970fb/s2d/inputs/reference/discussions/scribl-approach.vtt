@@ -1,0 +1,2015 @@
+WEBVTT
+
+213beb1d-5593-46a0-ae13-526478c4344c/362-0
+00:00:03.651 --> 00:00:04.131
+<v Rob Forshier II>Yeah, yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/363-0
+00:00:04.131 --> 00:00:04.611
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/376-0
+00:00:06.691 --> 00:00:08.851
+<v Rob Forshier II>Yeah, resum just the last like minute.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/380-0
+00:00:08.771 --> 00:00:11.571
+<v David Lawton>Yeah, yeah, yeah, yeah, okay, yeah, so,
+so...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/388-0
+00:00:12.691 --> 00:00:15.971
+<v David Lawton>Couple of goals we have starting from the
+top.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/392-0
+00:00:17.251 --> 00:00:19.411
+<v David Lawton>Figure out the anthropic.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/444-0
+00:00:21.251 --> 00:00:26.372
+<v David Lawton>Funding channel that works through a
+client. So Scribble is an opportunity,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/444-1
+00:00:26.372 --> 00:00:30.954
+<v David Lawton>is a mobile app opportunity.
+Marty wants us to look at how we could</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/444-2
+00:00:30.954 --> 00:00:36.142
+<v David Lawton>deepen the Claude feature set or how
+Claude is potentially used with this or</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/444-3
+00:00:36.142 --> 00:00:41.331
+<v David Lawton>come up with ideas for justification for
+why this is a good project and why.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/481-0
+00:00:41.571 --> 00:00:45.927
+<v David Lawton>Anthropic would want to fund it.
+So that's one topic.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/481-1
+00:00:45.927 --> 00:00:52.542
+<v David Lawton>Another topic is use this as a catalyst
+to try our new methodology we created for</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/481-2
+00:00:52.542 --> 00:00:56.333
+<v David Lawton>ARC, structure the team,
+structure the phases,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/481-3
+00:00:56.333 --> 00:01:00.851
+<v David Lawton>and propose that in partnership with
+Anthropic and AWS.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/488-0
+00:01:01.571 --> 00:01:05.251
+<v David Lawton>just to basically launch that process and
+go through it. So we need to...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/505-0
+00:01:06.451 --> 00:01:10.616
+<v David Lawton>Look at the documentation we already put
+together and try to come up with a</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/505-1
+00:01:10.616 --> 00:01:13.411
+<v David Lawton>structure.
+There's a there's another piece around.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/553-0
+00:01:14.731 --> 00:01:17.722
+<v David Lawton>what this,
+how this is financially structured,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/553-1
+00:01:17.722 --> 00:01:22.750
+<v David Lawton>I don't think that is up for us to decide.
+I think we're going to give Marty a</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/553-2
+00:01:22.750 --> 00:01:25.742
+<v David Lawton>perspective on methodology and team
+structure,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/553-3
+00:01:25.742 --> 00:01:30.452
+<v David Lawton>and then he is going to come up with what
+the actual price point is here.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/553-4
+00:01:30.452 --> 00:01:33.571
+<v David Lawton>But you see there's, in this document,
+there's a</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/563-0
+00:01:33.691 --> 00:01:38.144
+<v David Lawton>bunch of information sort of sprinkled
+about that. So I think for our discussion,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/563-1
+00:01:38.144 --> 00:01:40.371
+<v David Lawton>we can sort of ignore that at the moment.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/565-0
+00:01:43.131 --> 00:01:43.571
+<v Rob Forshier II>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/575-0
+00:01:44.211 --> 00:01:47.731
+<v David Lawton>I had Claude generate a discussion topics
+just.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/596-0
+00:01:48.611 --> 00:01:53.210
+<v David Lawton>from the little information we have,
+right? So cloud integration depth is 1.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/596-1
+00:01:53.210 --> 00:01:57.571
+<v David Lawton>Economic structure, that's topic two.
+We can ignore that for the moment.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/602-0
+00:01:58.611 --> 00:02:02.371
+<v David Lawton>Funding, I think that goes into...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/625-0
+00:02:03.451 --> 00:02:06.803
+<v David Lawton>After we decide like what the cloud
+integration depth looks like,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/625-1
+00:02:06.803 --> 00:02:09.342
+<v David Lawton>it's a follow-up conversation,
+and same with AWS,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/625-2
+00:02:09.342 --> 00:02:11.171
+<v David Lawton>it's a follow-up conversation for...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/627-0
+00:02:12.211 --> 00:02:13.811
+<v David Lawton>what their investment looks like.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/636-0
+00:02:16.611 --> 00:02:20.051
+<v David Lawton>So then this methodology, team allocation.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/643-0
+00:02:21.251 --> 00:02:24.131
+<v David Lawton>and what the scope potentially is for us.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/652-0
+00:02:25.491 --> 00:02:29.091
+<v David Lawton>and developing what they've asked for.
+I feel like the scope is pretty clear.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/672-0
+00:02:30.211 --> 00:02:34.188
+<v David Lawton>In the document,
+it seems to be a pretty straightforward</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/657-0
+00:02:31.571 --> 00:02:32.171
+<v Rob Forshier II>Mm-hmm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/672-1
+00:02:34.188 --> 00:02:37.537
+<v David Lawton>mobile application,
+which iOS and Android with,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/672-2
+00:02:37.537 --> 00:02:39.491
+<v David Lawton>I think it was React Native.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/673-0
+00:02:41.331 --> 00:02:41.451
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/681-0
+00:02:41.331 --> 00:02:46.531
+<v David Lawton>As the front end and just AWS services
+sort of ambiguous in the back end.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/685-0
+00:02:50.611 --> 00:02:52.211
+<v Rob Forshier II>So it's a React mobile app, okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/687-0
+00:02:53.411 --> 00:02:53.811
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/688-0
+00:02:56.211 --> 00:02:56.611
+<v David Lawton>Um...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/704-0
+00:02:56.651 --> 00:02:59.655
+<v Rob Forshier II>It's actually pretty small. I mean,
+to be truthful, honest,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/704-1
+00:02:59.655 --> 00:03:02.710
+<v Rob Forshier II>I could just feel like,
+tell Claude to go knock one out real</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/704-2
+00:03:02.710 --> 00:03:03.011
+<v Rob Forshier II>quick.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/721-0
+00:03:05.571 --> 00:03:10.611
+<v David Lawton>Well, that's what I want to try actually.
+So, hold on.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/711-0
+00:03:08.211 --> 00:03:08.691
+<v Rob Forshier II>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/733-0
+00:03:09.771 --> 00:03:12.771
+<v Rob Forshier II>I mean, if I have enough detail,
+that I was almost like half tempted to do</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/725-0
+00:03:12.291 --> 00:03:12.611
+<v David Lawton>Ohh.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/733-1
+00:03:12.771 --> 00:03:15.531
+<v Rob Forshier II>that before I even started,
+just like I could easily knock this out,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/733-2
+00:03:15.531 --> 00:03:15.811
+<v Rob Forshier II>like...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/738-0
+00:03:22.691 --> 00:03:24.211
+<v David Lawton>Share the documents that I have up.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/760-0
+00:03:29.171 --> 00:03:33.309
+<v David Lawton>Okay, so I had I had it created these,
+I had Claude create some summary</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/760-1
+00:03:33.309 --> 00:03:36.413
+<v David Lawton>documents, right?
+So this third one is the engagement</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/760-2
+00:03:36.413 --> 00:03:36.931
+<v David Lawton>approach.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/766-0
+00:03:37.931 --> 00:03:40.811
+<v David Lawton>And if we look down here,
+this is sort of like the...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/779-0
+00:03:44.131 --> 00:03:48.913
+<v David Lawton>their perspective on the phases and how
+they play out. So there's, hold on,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/779-1
+00:03:48.913 --> 00:03:49.731
+<v David Lawton>where was it?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/800-0
+00:03:59.491 --> 00:04:01.953
+<v David Lawton>Yeah, I guess it's this over here.
+So anyway,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/800-1
+00:04:01.953 --> 00:04:05.699
+<v David Lawton>it's like 12 to 14 weeks to go build this
+out. Oh, that's just build.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/800-2
+00:04:05.699 --> 00:04:07.091
+<v David Lawton>Phase 2 is build 14 weeks.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/806-0
+00:04:09.651 --> 00:04:11.411
+<v David Lawton>I think this needs to be iterated on.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/812-0
+00:04:13.251 --> 00:04:17.491
+<v David Lawton>Anyway, a small discovery, like 3...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/831-0
+00:04:18.691 --> 00:04:24.455
+<v David Lawton>ish plus months to build and then a whole
+beta launch where it's going to be like</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/831-1
+00:04:24.455 --> 00:04:27.971
+<v David Lawton>rolled out over another quarter and then
+another.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/842-0
+00:04:29.651 --> 00:04:33.504
+<v David Lawton>Another implementation phase put on top
+of that. Hold on, where was that?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/842-1
+00:04:33.504 --> 00:04:35.171
+<v David Lawton>Here we go, here's the timeline.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/873-0
+00:04:36.931 --> 00:04:41.337
+<v David Lawton>So all the way into the end of the year,
+basically.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/873-1
+00:04:41.337 --> 00:04:45.743
+<v David Lawton>So we need to find out where the MLP
+lands in this,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/873-2
+00:04:45.743 --> 00:04:49.811
+<v David Lawton>but it looks like we have three to four
+months.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/878-0
+00:04:51.331 --> 00:04:53.571
+<v David Lawton>And then there's like,
+there's an add-on after that.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/874-0
+00:04:51.531 --> 00:04:52.011
+<v Rob Forshier II>Mhm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/881-0
+00:04:55.971 --> 00:04:57.971
+<v David Lawton>And Chrome crashed. Awesome.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/882-0
+00:04:59.171 --> 00:04:59.291
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/905-0
+00:05:00.291 --> 00:05:03.935
+<v David Lawton>I didn't stop sharing, it crashed. Yeah.
+Anyway,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/889-0
+00:05:02.371 --> 00:05:03.251
+<v Rob Forshier II>Oh, okay, okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/905-1
+00:05:03.935 --> 00:05:09.811
+<v David Lawton>I gotta figure out what's going on there.
+That has to do with my MCPs somehow.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/900-0
+00:05:10.931 --> 00:05:11.091
+<v Rob Forshier II>Mm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/907-0
+00:05:11.971 --> 00:05:13.411
+<v David Lawton>I'm doing something anyway.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/909-0
+00:05:15.891 --> 00:05:16.371
+<v David Lawton>All right.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/923-0
+00:05:19.091 --> 00:05:21.827
+<v David Lawton>Yeah,
+I feel like this thing could be jammed</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/923-1
+00:05:21.827 --> 00:05:25.051
+<v David Lawton>out pretty quick,
+so I'm kind of comfortable with...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/961-0
+00:05:28.571 --> 00:05:31.254
+<v David Lawton>So Marty's going to want us to be
+aggressive.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/961-1
+00:05:31.254 --> 00:05:36.096
+<v David Lawton>So they laid out the potential timeline.
+He's going to want us to be aggressive in</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/961-2
+00:05:36.096 --> 00:05:40.996
+<v David Lawton>terms of team to show what we can do in a
+short period of time with a minimal team.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/961-3
+00:05:40.996 --> 00:05:43.971
+<v David Lawton>I think that's part of what we need to
+figure out.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/954-0
+00:05:41.891 --> 00:05:42.051
+<v Rob Forshier II>Mm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/958-0
+00:05:45.091 --> 00:05:45.491
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/969-0
+00:05:45.491 --> 00:05:50.691
+<v David Lawton>Given the size and scope of this,
+I feel like it's pretty doable.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/970-0
+00:05:51.811 --> 00:05:52.411
+<v Rob Forshier II>Mhm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/971-0
+00:05:57.531 --> 00:05:58.051
+<v Rob Forshier II>Hello.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/973-0
+00:05:59.651 --> 00:06:00.131
+<v Rob Forshier II>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/987-0
+00:06:05.691 --> 00:06:08.262
+<v Rob Forshier II>Alright,
+so what do you want to go over first?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/987-1
+00:06:08.262 --> 00:06:11.491
+<v Rob Forshier II>Which, while we're doing this,
+I need to go grab my lunch.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/988-0
+00:06:12.731 --> 00:06:13.491
+<v David Lawton>Yeah, go for it.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1002-0
+00:06:14.531 --> 00:06:17.411
+<v Rob Forshier II>But I can chat with my headphones on so I
+can hear you through my house.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1003-0
+00:06:16.611 --> 00:06:20.971
+<v David Lawton>Okay, yeah, sounds good. Yeah, yeah, yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1006-0
+00:06:25.171 --> 00:06:26.771
+<v David Lawton>So I want to go over...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1019-0
+00:06:27.611 --> 00:06:31.397
+<v David Lawton>methodology and just revisit it and just
+make sure we're not missing something</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1019-1
+00:06:31.397 --> 00:06:33.411
+<v David Lawton>stupid or we're just including everything.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1020-0
+00:06:33.971 --> 00:06:34.571
+<v Rob Forshier II>Mm-hmm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1031-0
+00:06:36.051 --> 00:06:41.090
+<v David Lawton>And then I want to talk about,
+or maybe it's not a then, whichever,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1031-1
+00:06:41.090 --> 00:06:43.091
+<v David Lawton>another topic is where all.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1034-0
+00:06:44.611 --> 00:06:46.051
+<v David Lawton>Does Claude show up?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1036-0
+00:06:47.211 --> 00:06:47.811
+<v David Lawton>And...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1084-0
+00:06:50.131 --> 00:06:54.113
+<v David Lawton>I don't want to add features for them for
+the sake of Claude features,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1084-1
+00:06:54.113 --> 00:06:57.703
+<v David Lawton>but I want to have a good business case
+for like use of Claude.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1084-2
+00:06:57.703 --> 00:07:02.190
+<v David Lawton>So I think it's a multifaceted thing.
+It's like, where's Claude in the product?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1084-3
+00:07:02.190 --> 00:07:05.724
+<v David Lawton>And then how is Claude used in the
+development of the product?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1084-4
+00:07:05.724 --> 00:07:09.931
+<v David Lawton>Because there's also like the spend rate
+and everything that goes with it.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1079-0
+00:07:10.691 --> 00:07:11.091
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1088-0
+00:07:10.931 --> 00:07:14.771
+<v David Lawton>And then,
+and then I think it's a story also of...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1106-0
+00:07:16.291 --> 00:07:20.163
+<v David Lawton>Due to that,
+there's like claude adoption at the</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1106-1
+00:07:20.163 --> 00:07:22.851
+<v David Lawton>client over time maybe, right? So.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1102-0
+00:07:22.531 --> 00:07:23.091
+<v Rob Forshier II>Mmh.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1118-0
+00:07:23.811 --> 00:07:28.792
+<v David Lawton>putting in the pieces so that they can
+maintain and manage this for themselves</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1118-1
+00:07:28.792 --> 00:07:31.251
+<v David Lawton>based with Claude. Something like that.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1162-0
+00:07:36.691 --> 00:07:40.495
+<v Rob Forshier II>Okay, I mean,
+from the two seconds I gleaned of the app,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1162-1
+00:07:40.495 --> 00:07:44.634
+<v Rob Forshier II>it like takes a picture of what you're
+scribbling. So I mean,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1162-2
+00:07:44.634 --> 00:07:49.040
+<v Rob Forshier II>obviously we'll need a vision model that
+can take a look at that.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1162-3
+00:07:49.040 --> 00:07:53.779
+<v Rob Forshier II>I wish that would honestly be Claude.
+I mean, other than that, I mean,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1162-4
+00:07:53.779 --> 00:07:57.851
+<v Rob Forshier II>Claude inside this app is pretty light
+outside of its usage.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1164-0
+00:07:58.451 --> 00:07:59.891
+<v Rob Forshier II>Pretty the AI stuff.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1165-0
+00:08:01.011 --> 00:08:01.571
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1172-0
+00:08:01.051 --> 00:08:04.691
+<v Rob Forshier II>But we're gonna be using Client a lot,
+mainly on the development.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1193-0
+00:08:15.331 --> 00:08:17.543
+<v Rob Forshier II>Yeah, I mean,
+there's just a few sections where it's</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1193-1
+00:08:17.543 --> 00:08:21.091
+<v Rob Forshier II>like analyzing and there's requests to an
+LLM. So I mean, that would be Claude, but.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1205-0
+00:08:22.291 --> 00:08:24.298
+<v Rob Forshier II>I mean, outside of that,
+and to your point,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1205-1
+00:08:24.298 --> 00:08:27.491
+<v Rob Forshier II>adding new features to News Claude would
+be about the only other way.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1219-0
+00:08:30.051 --> 00:08:34.611
+<v Rob Forshier II>So I feel like they've already kind of
+detailed the usage of AI in this.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1229-0
+00:08:35.731 --> 00:08:38.658
+<v Rob Forshier II>But then yeah,
+then we're going to use it to do all the</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1229-1
+00:08:38.658 --> 00:08:39.651
+<v Rob Forshier II>development itself.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1236-0
+00:08:40.931 --> 00:08:43.891
+<v Rob Forshier II>as well as do the training and then</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1235-0
+00:08:43.651 --> 00:08:44.131
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1245-0
+00:08:47.971 --> 00:08:50.892
+<v Rob Forshier II>We can leave that behind, so then, yeah,
+or if they want us to also train their</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1245-1
+00:08:50.892 --> 00:08:51.331
+<v Rob Forshier II>people, too.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1253-0
+00:08:56.171 --> 00:08:58.531
+<v David Lawton>I'm looking at this flow diagram;
+it doesn't.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1254-0
+00:09:01.011 --> 00:09:01.411
+<v David Lawton>Oh.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1267-0
+00:09:05.011 --> 00:09:08.242
+<v David Lawton>It doesn't flow quite like I would expect
+on one of the,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1267-1
+00:09:08.242 --> 00:09:10.851
+<v David Lawton>we're probably only getting a snapshot of
+it.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1269-0
+00:09:19.091 --> 00:09:20.131
+<v David Lawton>But they have.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1277-0
+00:09:21.811 --> 00:09:25.971
+<v David Lawton>A description or voice text,
+so there's also audio processing.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1296-0
+00:09:32.771 --> 00:09:35.249
+<v David Lawton>Some gamification.
+So behind the scenes there's some</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1296-1
+00:09:35.249 --> 00:09:38.756
+<v David Lawton>gamification and some tracking and
+there's push notifications and all that</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1296-2
+00:09:38.756 --> 00:09:39.411
+<v David Lawton>kind of stuff.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1305-0
+00:09:43.251 --> 00:09:46.691
+<v Rob Forshier II>The voice that can be done on device
+pretty much.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1321-0
+00:10:00.371 --> 00:10:06.292
+<v David Lawton>The family thing at the bottom right,
+I need to read through the specs. Well,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1321-1
+00:10:06.292 --> 00:10:07.811
+<v David Lawton>let me let me share.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1323-0
+00:10:09.571 --> 00:10:10.531
+<v Rob Forshier II>Yeah, that's what you're saying.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1331-0
+00:10:11.491 --> 00:10:14.691
+<v David Lawton>I don't know what that is.
+It looks like a gallery of...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1358-0
+00:10:15.651 --> 00:10:20.056
+<v David Lawton>stuff that you're sharing or maybe it's
+like you're it's auto-generating some see</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1358-1
+00:10:20.056 --> 00:10:24.462
+<v David Lawton>how it's like there's different things it
+looks like they're selecting things and</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1347-0
+00:10:21.811 --> 00:10:22.371
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1358-2
+00:10:24.462 --> 00:10:26.611
+<v David Lawton>it's putting them together in a diagram.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1372-0
+00:10:28.931 --> 00:10:31.896
+<v David Lawton>You know what I mean?
+Like they picked ice cream cone,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1364-0
+00:10:30.131 --> 00:10:30.611
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1372-1
+00:10:31.896 --> 00:10:33.891
+<v David Lawton>a guy on a ship, like there's some...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1383-0
+00:10:35.891 --> 00:10:39.149
+<v David Lawton>I don't know if those are drawn or
+generated or what is going on there.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1383-1
+00:10:39.149 --> 00:10:40.371
+<v David Lawton>That's sort of interesting.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1394-0
+00:10:47.171 --> 00:10:50.517
+<v Rob Forshier II>I kind of want to throw this whole thing
+at just tell it to build an HTML</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1394-1
+00:10:50.517 --> 00:10:51.331
+<v Rob Forshier II>prototype of this.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1403-0
+00:10:56.531 --> 00:10:59.731
+<v David Lawton>I mean, they would love to see that.
+So yeah, back to back to prototyping.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1415-0
+00:11:02.611 --> 00:11:07.651
+<v David Lawton>This is to me seems a perfect case for
+the prototype is discovery concept.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1416-0
+00:11:08.691 --> 00:11:09.171
+<v Rob Forshier II>Mhm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1449-0
+00:11:08.811 --> 00:11:12.345
+<v David Lawton>Where we prototype something out,
+like show it to them,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1449-1
+00:11:12.345 --> 00:11:16.321
+<v David Lawton>it like is this flow, they react to it.
+They say, I love that,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1449-2
+00:11:16.321 --> 00:11:19.350
+<v David Lawton>don't like the colors or whatever it is,
+right?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1449-3
+00:11:19.350 --> 00:11:23.011
+<v David Lawton>And then we just like turn that into
+requirements and go.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1448-0
+00:11:23.651 --> 00:11:24.211
+<v Rob Forshier II>Yes.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1467-0
+00:11:33.811 --> 00:11:35.940
+<v Rob Forshier II>Because yeah,
+if you can figure out what questions you</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1467-1
+00:11:35.940 --> 00:11:38.765
+<v Rob Forshier II>need for me to answer on your side,
+I can do that. And then if you want,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1467-2
+00:11:38.765 --> 00:11:39.811
+<v Rob Forshier II>I can do the prototype too.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1469-0
+00:11:40.931 --> 00:11:42.371
+<v Rob Forshier II>to kind of divide and conquer more.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1471-0
+00:11:43.571 --> 00:11:44.291
+<v David Lawton>So...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1485-0
+00:11:45.411 --> 00:11:48.860
+<v David Lawton>I don't know that we need to prototype it
+in this moment.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1485-1
+00:11:48.860 --> 00:11:52.131
+<v David Lawton>What we need to do is tell Marty what our
+approach is.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1484-0
+00:11:52.611 --> 00:11:53.011
+<v Rob Forshier II>What?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1494-0
+00:11:53.971 --> 00:11:58.841
+<v David Lawton>So I think what I'm going to do is,
+I don't know, spend an hour,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1494-1
+00:11:58.841 --> 00:11:59.891
+<v David Lawton>get some food.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1495-0
+00:12:01.011 --> 00:12:01.331
+<v David Lawton>Um...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1522-0
+00:12:02.531 --> 00:12:08.235
+<v David Lawton>maybe jam out what I think the team model
+is and duration like here's the people,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1522-1
+00:12:08.235 --> 00:12:12.131
+<v David Lawton>here's the time,
+here's like what discovery looks like.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1522-2
+00:12:12.131 --> 00:12:13.731
+<v David Lawton>I'm just going to like.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1530-0
+00:12:15.291 --> 00:12:19.651
+<v David Lawton>I'm going to see if Claude can generate
+that for us based on our repo.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1561-0
+00:12:21.291 --> 00:12:25.157
+<v David Lawton>And just see what it cranks out. I mean,
+it kind of already did it in one of those</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1543-0
+00:12:25.091 --> 00:12:25.571
+<v Rob Forshier II>Mhm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1561-1
+00:12:25.157 --> 00:12:27.672
+<v David Lawton>docs, right?
+But I want to see what it cranks out and</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1561-2
+00:12:27.672 --> 00:12:30.793
+<v David Lawton>see if we can structure it.
+And then what I want to do is get your</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1561-3
+00:12:30.793 --> 00:12:32.051
+<v David Lawton>feedback on that. And then.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1586-0
+00:12:33.571 --> 00:12:36.771
+<v David Lawton>Rather than work specifically on those
+documents,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1586-1
+00:12:36.771 --> 00:12:41.955
+<v David Lawton>I want to work on our arc IDH fin harness
+to like figure out how to get it right</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1586-2
+00:12:41.955 --> 00:12:43.811
+<v David Lawton>for these type of situations.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1603-0
+00:12:45.171 --> 00:12:47.973
+<v David Lawton>So that on the next one,
+like we come in here and say, oh,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1603-1
+00:12:47.973 --> 00:12:51.251
+<v David Lawton>here's this thing, here's the docs,
+like let's jam it out. And it's.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1611-0
+00:12:52.131 --> 00:12:55.178
+<v David Lawton>It has a better working start,
+or at least we have a mobile one to sort</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1611-1
+00:12:55.178 --> 00:12:55.771
+<v David Lawton>of start with.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1614-0
+00:12:57.571 --> 00:12:58.051
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1616-0
+00:12:57.811 --> 00:12:58.851
+<v David Lawton>That's what I'm thinking.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1621-0
+00:12:59.411 --> 00:13:01.251
+<v Rob Forshier II>Maybe create that as like a slash command.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1685-0
+00:13:03.571 --> 00:13:06.816
+<v Rob Forshier II>In the arc ideation repos specifically
+for what you're looking for,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1685-1
+00:13:06.816 --> 00:13:10.158
+<v Rob Forshier II>or a set of slash commands that do
+exactly what you're talking about,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1685-2
+00:13:10.158 --> 00:13:13.833
+<v Rob Forshier II>and then also remember the advanced tip
+of when you're telling it, you know,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1685-3
+00:13:13.833 --> 00:13:16.984
+<v Rob Forshier II>give it the overall goal,
+and then when you tell it like what you</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1685-4
+00:13:16.984 --> 00:13:19.084
+<v Rob Forshier II>want it to build,
+give like a few examples,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1685-5
+00:13:19.084 --> 00:13:22.664
+<v Rob Forshier II>like if you have a page like list,
+I want this on there and this on there,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1685-6
+00:13:22.664 --> 00:13:23.571
+<v Rob Forshier II>and then be like...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1708-0
+00:13:23.691 --> 00:13:27.369
+<v Rob Forshier II>And then I trust you to fill in the rest
+of that based on what you know about me</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1708-1
+00:13:27.369 --> 00:13:30.865
+<v Rob Forshier II>and what we're talking about here.
+And then it'll improve and add some extra</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1692-0
+00:13:27.451 --> 00:13:27.971
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1708-2
+00:13:30.865 --> 00:13:33.408
+<v Rob Forshier II>stuff, and then we'll have more feedback,
+or, you know,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1708-3
+00:13:33.408 --> 00:13:34.771
+<v Rob Forshier II>have more to give feedback on.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1709-0
+00:13:40.371 --> 00:13:41.331
+<v David Lawton>I.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1714-0
+00:13:42.371 --> 00:13:45.811
+<v David Lawton>Exactly. I created last week.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1726-0
+00:13:49.411 --> 00:13:52.547
+<v David Lawton>Uh, documents for how to,
+for not how to do that,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1726-1
+00:13:52.547 --> 00:13:54.931
+<v David Lawton>documents for like different examples.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1742-0
+00:13:55.811 --> 00:13:59.386
+<v David Lawton>So here's what a mobile example,
+here's a basic web app,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1742-1
+00:13:59.386 --> 00:14:01.331
+<v David Lawton>here's like a scale team thing.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1756-0
+00:14:03.931 --> 00:14:08.771
+<v David Lawton>And I put that all in like a clickable
+HTML because Hemant wanted to show it in.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1786-0
+00:14:09.891 --> 00:14:13.069
+<v David Lawton>India, let me go find that,
+add that into this because I think</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1786-1
+00:14:13.069 --> 00:14:16.499
+<v David Lawton>that'll be super helpful.
+Also have you review that and see if that</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1786-2
+00:14:16.499 --> 00:14:19.929
+<v David Lawton>like makes sense to you too.
+Because I jammed it out super fast for</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1780-0
+00:14:17.651 --> 00:14:17.971
+<v Rob Forshier II>No.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1786-3
+00:14:19.929 --> 00:14:20.131
+<v David Lawton>him.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1785-0
+00:14:20.851 --> 00:14:21.331
+<v Rob Forshier II>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1788-0
+00:14:23.571 --> 00:14:24.051
+<v David Lawton>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1801-0
+00:14:26.251 --> 00:14:31.709
+<v David Lawton>And then, yeah, other ideas from you,
+like qualifying as much as possible, like,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1801-1
+00:14:31.709 --> 00:14:33.731
+<v David Lawton>like let's list the potential.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1837-0
+00:14:35.691 --> 00:14:39.166
+<v David Lawton>places where cloud shows up and what's
+important here.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1837-1
+00:14:39.166 --> 00:14:44.536
+<v David Lawton>So you're already saying like multi-model,
+like image processing. Now we have audio.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1837-2
+00:14:44.536 --> 00:14:48.706
+<v David Lawton>It looks like there's some image
+generation maybe in here, right,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1837-3
+00:14:48.706 --> 00:14:51.171
+<v David Lawton>where there's multiple things going on.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1850-0
+00:14:54.251 --> 00:14:57.681
+<v David Lawton>Wherever else, like I need,
+I need to re-dig through these docs and</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1850-1
+00:14:57.681 --> 00:15:01.011
+<v David Lawton>see what's all in there from a feature
+request standpoint, but...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1856-0
+00:15:03.811 --> 00:15:05.491
+<v David Lawton>Creating a list of like...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1855-0
+00:15:04.211 --> 00:15:04.451
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1857-0
+00:15:05.851 --> 00:15:06.091
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1902-0
+00:15:06.611 --> 00:15:11.661
+<v David Lawton>why Claude would be really good for this.
+So there's probably a slash command</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1902-1
+00:15:11.661 --> 00:15:16.322
+<v David Lawton>that's for funding too. Like,
+we don't know what the funding looks like</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1875-0
+00:15:13.571 --> 00:15:13.971
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1902-2
+00:15:16.322 --> 00:15:19.689
+<v David Lawton>necessarily,
+but we can at least like get on it for</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1902-3
+00:15:19.689 --> 00:15:23.055
+<v David Lawton>like, hey,
+here's all the pieces where Claude is in</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1902-4
+00:15:23.055 --> 00:15:25.451
+<v David Lawton>this product and why it's beneficial.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1900-0
+00:15:24.131 --> 00:15:24.291
+<v Rob Forshier II>Mm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1901-0
+00:15:27.571 --> 00:15:27.691
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1957-0
+00:15:29.331 --> 00:15:33.057
+<v Rob Forshier II>I mean, technically,
+all these models can do the same thing,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1957-1
+00:15:33.057 --> 00:15:36.233
+<v Rob Forshier II>so it's like,
+it's how do we make it clod specific?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1957-2
+00:15:36.233 --> 00:15:39.654
+<v Rob Forshier II>I don't know,
+we're just using the clod models. I mean,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1936-0
+00:15:37.251 --> 00:15:40.451
+<v David Lawton>It doesn't need, I know, I know. Well,
+it doesn't need to be...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1957-3
+00:15:39.654 --> 00:15:44.480
+<v Rob Forshier II>like, I know it's like, how do you like,
+there's no special like sauce that'll</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1957-4
+00:15:44.480 --> 00:15:49.000
+<v Rob Forshier II>make it really different outside of
+Anthropic does train its models to be</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1957-5
+00:15:49.000 --> 00:15:49.611
+<v Rob Forshier II>more like.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2005-0
+00:15:50.051 --> 00:15:53.934
+<v Rob Forshier II>personable versus the, oh,
+I got the door closed from the way,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1966-0
+00:15:53.811 --> 00:15:54.131
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2005-1
+00:15:53.934 --> 00:15:58.495
+<v Rob Forshier II>to be more personable versus like opening
+eyes is like, it's just a tool.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2005-2
+00:15:58.495 --> 00:16:03.303
+<v Rob Forshier II>So as this is more family oriented,
+like since we're, you know, using a more,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2005-3
+00:16:03.303 --> 00:16:08.357
+<v Rob Forshier II>I don't know, better model, yeah, yeah.
+I'm just trying to go up with any kind of</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/1992-0
+00:16:05.331 --> 00:16:05.971
+<v David Lawton>Yeah, yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2005-4
+00:16:08.357 --> 00:16:08.851
+<v Rob Forshier II>play to.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2006-0
+00:16:09.051 --> 00:16:09.571
+<v Rob Forshier II>Cod.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2007-0
+00:16:09.651 --> 00:16:11.011
+<v David Lawton>Well, so.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2017-0
+00:16:14.211 --> 00:16:17.811
+<v David Lawton>I mean, you probably already know this.
+Like, we don't have to compete with...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2029-0
+00:16:19.331 --> 00:16:23.171
+<v David Lawton>Other provider companies like we don't
+need to say why Claude over OpenAI.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2058-0
+00:16:25.611 --> 00:16:31.689
+<v David Lawton>What we do need to do is say,
+these are the services from Claude that</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2058-1
+00:16:31.689 --> 00:16:38.549
+<v David Lawton>we're using and the expected usage, right?
+So this product will cause, or, or,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2058-2
+00:16:38.549 --> 00:16:39.331
+<v David Lawton>you know,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2102-0
+00:16:40.531 --> 00:16:45.416
+<v David Lawton>use this many potential tokens with this
+level of user base, that kind of stuff.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2102-1
+00:16:45.416 --> 00:16:50.483
+<v David Lawton>So it's like map, AWS map funding, right?
+Like when you go fill out the map funding</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2102-2
+00:16:50.483 --> 00:16:54.645
+<v David Lawton>and you get funding from AWS,
+you're not saying like why it's better</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2088-0
+00:16:54.331 --> 00:16:54.931
+<v Rob Forshier II>Mm-hmm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2102-3
+00:16:54.645 --> 00:16:58.505
+<v David Lawton>than GCP. You're just basically like,
+we're using this compute,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2102-4
+00:16:58.505 --> 00:16:59.531
+<v David Lawton>we're using this.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2144-0
+00:16:59.611 --> 00:17:03.010
+<v David Lawton>like, you know, these services,
+these infrastructure services,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2144-1
+00:17:03.010 --> 00:17:06.571
+<v David Lawton>and here's the traffic,
+and then they just sort of get an idea of</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2144-2
+00:17:06.571 --> 00:17:09.593
+<v David Lawton>what the spend is. And then AWS is like,
+oh yeah, okay,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2144-3
+00:17:09.593 --> 00:17:13.855
+<v David Lawton>we'll give you 50K because we know we're
+going to get X back on that if you go</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2144-4
+00:17:13.855 --> 00:17:14.611
+<v David Lawton>build with us.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2191-0
+00:17:15.891 --> 00:17:19.251
+<v Rob Forshier II>So for Claude,
+they had that like UX designer thing.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2191-1
+00:17:19.251 --> 00:17:22.105
+<v Rob Forshier II>Do you have access to that?
+Because I don't.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2191-2
+00:17:22.105 --> 00:17:26.607
+<v Rob Forshier II>I think it's built into Cowork,
+the one where like you can design UIs.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2169-0
+00:17:25.491 --> 00:17:28.251
+<v David Lawton>I did, yeah, it should.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2191-3
+00:17:26.607 --> 00:17:29.461
+<v Rob Forshier II>Because I'm wondering if like their
+screens,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2191-4
+00:17:29.461 --> 00:17:33.899
+<v Rob Forshier II>do they already have designers for them
+outside of what we have here?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2191-5
+00:17:33.899 --> 00:17:34.851
+<v Rob Forshier II>Because I mean.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2197-0
+00:17:35.131 --> 00:17:37.091
+<v Rob Forshier II>We could design them inside of that.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2202-0
+00:17:35.811 --> 00:17:42.691
+<v David Lawton>I don't know, I don't know,
+but that's a great topic, so cowork.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2207-0
+00:17:43.971 --> 00:17:45.971
+<v David Lawton>We updated last week while you were out.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2250-0
+00:17:47.651 --> 00:17:52.931
+<v David Lawton>And co-work looks broken for me.
+I don't know what's going on. Anyway,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2222-0
+00:17:52.211 --> 00:17:53.251
+<v Rob Forshier II>Yeah, it doesn't really, yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2250-1
+00:17:52.931 --> 00:17:57.021
+<v David Lawton>I did have that.
+I tried it for like a day a couple of</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2250-2
+00:17:57.021 --> 00:18:02.451
+<v David Lawton>weeks ago when it first came out and I
+haven't played with it since yet.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2256-0
+00:18:03.251 --> 00:18:05.928
+<v Rob Forshier II>Okay, because yeah, I mean,
+that's something we could use it for,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2258-0
+00:18:04.131 --> 00:18:06.744
+<v David Lawton>But you should, you should have it.
+If you don't have it,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2256-1
+00:18:05.928 --> 00:18:06.131
+<v Rob Forshier II>yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2258-1
+00:18:06.744 --> 00:18:08.051
+<v David Lawton>let's get it for you, like...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2289-0
+00:18:11.571 --> 00:18:14.077
+<v Rob Forshier II>Yeah,
+I think he gave me cowork because this</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2289-1
+00:18:14.077 --> 00:18:18.255
+<v Rob Forshier II>was the guy when I asked for the
+integration with 365 and he was like, no,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2289-2
+00:18:18.255 --> 00:18:21.709
+<v Rob Forshier II>I won't give you that,
+but I will let you have cowork on your</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2289-3
+00:18:21.709 --> 00:18:22.211
+<v Rob Forshier II>computer.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2286-0
+00:18:22.931 --> 00:18:23.571
+<v David Lawton>Oh, man.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2294-0
+00:18:23.971 --> 00:18:26.451
+<v Rob Forshier II>I mean, seriously, who puts that in there?
+Let you.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2293-0
+00:18:26.051 --> 00:18:26.571
+<v David Lawton>It's us.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2300-0
+00:18:27.811 --> 00:18:29.491
+<v Rob Forshier II>Thank you, IT, for letting me.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2302-0
+00:18:32.091 --> 00:18:32.211
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2307-0
+00:18:32.291 --> 00:18:34.051
+<v David Lawton>I don't, I don't see it now.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2324-0
+00:18:34.531 --> 00:18:36.428
+<v Rob Forshier II>Yeah,
+I don't see it like that piece anymore</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2324-1
+00:18:36.428 --> 00:18:38.663
+<v Rob Forshier II>because yeah,
+it used to like you used to be able to</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2324-2
+00:18:38.663 --> 00:18:39.971
+<v Rob Forshier II>like do it for so many times or</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2330-0
+00:18:42.531 --> 00:18:45.171
+<v David Lawton>You should absolutely have access.
+We probably...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2336-0
+00:18:46.771 --> 00:18:48.451
+<v David Lawton>Just need to create a new ticket.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2344-0
+00:18:52.051 --> 00:18:54.931
+<v David Lawton>Uh, I need just,
+I'm looking at the docs to see where...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2349-0
+00:18:57.571 --> 00:18:59.571
+<v David Lawton>Where am I supposed to see Cloud Design?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2354-0
+00:19:16.371 --> 00:19:17.651
+<v Rob Forshier II>Ohh, substitute.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2359-0
+00:19:24.051 --> 00:19:27.091
+<v David Lawton>Okay, so it's just on the web. You go.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2362-0
+00:19:28.211 --> 00:19:28.771
+<v Rob Forshier II>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2372-0
+00:19:28.451 --> 00:19:33.811
+<v David Lawton>Claude, Claude AI dot sorry,
+Claude dot AI slash design.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2385-0
+00:19:45.971 --> 00:19:51.153
+<v David Lawton>So we should absolutely use this and this
+would be great actually for us to learn</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2385-1
+00:19:51.153 --> 00:19:52.291
+<v David Lawton>how to use design.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2390-0
+00:19:53.891 --> 00:19:55.811
+<v Rob Forshier II>Yes, yes.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2389-0
+00:19:56.131 --> 00:19:56.531
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2402-0
+00:19:57.891 --> 00:20:00.504
+<v David Lawton>Our design team is already loving it.
+Like they,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2402-1
+00:20:00.504 --> 00:20:02.371
+<v David Lawton>I'm hearing awesome stuff about it.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2404-0
+00:20:03.051 --> 00:20:03.731
+<v Rob Forshier II>How nice!</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2428-0
+00:20:18.131 --> 00:20:18.531
+<v David Lawton>Yep.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2448-0
+00:20:18.571 --> 00:20:21.634
+<v Rob Forshier II>And then we could take those and then
+generate an HTML prototype,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2448-1
+00:20:21.634 --> 00:20:24.466
+<v Rob Forshier II>which wouldn't be the full React one,
+which is what we want.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2448-2
+00:20:24.466 --> 00:20:27.251
+<v Rob Forshier II>And it would be super fast to do while
+looking really nice.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2449-0
+00:20:31.731 --> 00:20:31.971
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2452-0
+00:20:35.091 --> 00:20:36.371
+<v David Lawton>Okay, cool.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2453-0
+00:20:38.291 --> 00:20:38.931
+<v David Lawton>Um...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2457-0
+00:20:40.091 --> 00:20:41.651
+<v David Lawton>All right, we'll add that into our list.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2461-0
+00:20:43.971 --> 00:20:45.171
+<v David Lawton>Of cloud services.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2467-0
+00:20:47.411 --> 00:20:48.931
+<v David Lawton>Okay, so I'll do a pass.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2477-0
+00:20:51.651 --> 00:20:56.531
+<v David Lawton>Um, I'll do a methodology, team structure,
+pass, I'll float that by you.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2478-0
+00:20:58.131 --> 00:20:58.691
+<v David Lawton>Um...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2488-0
+00:21:02.011 --> 00:21:04.749
+<v David Lawton>Yeah,
+see if you want to maybe brainstorm</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2488-1
+00:21:04.749 --> 00:21:06.771
+<v David Lawton>different ideas for clarifying.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2489-0
+00:21:08.051 --> 00:21:08.531
+<v David Lawton>Um...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2494-0
+00:21:10.371 --> 00:21:12.211
+<v David Lawton>That's a that's a great example.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2515-0
+00:21:14.451 --> 00:21:17.354
+<v David Lawton>I want to be careful,
+like when I ask Claude to do that in my</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2515-1
+00:21:17.354 --> 00:21:19.930
+<v David Lawton>little summary,
+it just started creating features that</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2515-2
+00:21:19.930 --> 00:21:22.131
+<v David Lawton>the user didn't ask for and I don't want
+that.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2514-0
+00:21:22.731 --> 00:21:23.251
+<v Rob Forshier II>Mhm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2516-0
+00:21:23.811 --> 00:21:24.211
+<v David Lawton>Oh.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2529-0
+00:21:26.131 --> 00:21:28.986
+<v David Lawton>And so anyway,
+I'll send you something in like an hour</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2529-1
+00:21:28.986 --> 00:21:31.011
+<v David Lawton>because I'm going to get some food too.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2528-0
+00:21:31.811 --> 00:21:32.211
+<v Rob Forshier II>Go.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2535-0
+00:21:33.811 --> 00:21:35.731
+<v David Lawton>Review that and and.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2546-0
+00:21:36.611 --> 00:21:40.931
+<v David Lawton>Let me know if you think it makes sense
+if we're being too aggressive or...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2548-0
+00:21:42.291 --> 00:21:43.491
+<v David Lawton>Spending too much time.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2549-0
+00:21:44.291 --> 00:21:44.531
+<v Rob Forshier II>In.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2583-0
+00:21:45.011 --> 00:21:48.665
+<v David Lawton>And then we'll go from there.
+Marty wants it right away because he</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2583-1
+00:21:48.665 --> 00:21:52.538
+<v David Lawton>wants to key up a conversation.
+We have another conversation with AWS.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2583-2
+00:21:52.538 --> 00:21:54.938
+<v David Lawton>It's like a three-way partner
+conversation.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2583-3
+00:21:54.938 --> 00:21:58.211
+<v David Lawton>So AWS is a part of this too.
+We might get AWS funding. So.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2616-0
+00:22:00.131 --> 00:22:03.093
+<v David Lawton>I don't know what that channel looks like
+yet.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2616-1
+00:22:03.093 --> 00:22:06.372
+<v David Lawton>I'm assuming it's sort of like a map
+funding thing.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2616-2
+00:22:06.372 --> 00:22:11.163
+<v David Lawton>So this has nothing about bedrock,
+but they're going to probably want us to</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2616-3
+00:22:11.163 --> 00:22:13.999
+<v David Lawton>do that.
+And that changes things for us too.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2616-4
+00:22:13.999 --> 00:22:15.891
+<v David Lawton>If that's the case. We'll see.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2646-0
+00:22:17.011 --> 00:22:20.653
+<v Rob Forshier II>Yeah, I mean,
+I think I kind of pointed this out before</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2646-1
+00:22:20.653 --> 00:22:24.491
+<v Rob Forshier II>where, you know,
+as long as we can show the use of Opus on</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2646-2
+00:22:24.491 --> 00:22:29.954
+<v Rob Forshier II>Bedrock and be like, those tokens were us,
+so that should go towards our 10 million</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2646-3
+00:22:29.954 --> 00:22:31.971
+<v Rob Forshier II>and whatever spend or whatever.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2648-0
+00:22:35.011 --> 00:22:36.291
+<v Rob Forshier II>I think that's how we'd have to do it.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2657-0
+00:22:37.571 --> 00:22:41.811
+<v David Lawton>I think that's so we can do that just
+fine. We can.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2709-0
+00:22:44.611 --> 00:22:49.397
+<v David Lawton>We can use API tokens through Bedrock
+that are claimed for us and we can show</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2709-1
+00:22:49.397 --> 00:22:52.956
+<v David Lawton>that spend. I'm not,
+also I don't know exactly how that's</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2675-0
+00:22:50.891 --> 00:22:51.371
+<v Rob Forshier II>Mmh.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2709-2
+00:22:52.956 --> 00:22:56.884
+<v David Lawton>going to work in this case because we're
+not hosting something,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2709-3
+00:22:56.884 --> 00:22:59.584
+<v David Lawton>it's their product on their
+infrastructure.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2709-4
+00:22:59.584 --> 00:23:02.836
+<v David Lawton>So like those won't be our,
+that won't be our spend,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2709-5
+00:23:02.836 --> 00:23:05.291
+<v David Lawton>it'll be the client spend on that stuff.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2715-0
+00:23:05.651 --> 00:23:11.651
+<v David Lawton>But we should be able to claim it from
+however it's tagged, right?</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2714-0
+00:23:10.371 --> 00:23:10.851
+<v Rob Forshier II>Gregg.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2753-0
+00:23:13.851 --> 00:23:18.564
+<v David Lawton>What I'm more concerned about is I don't
+want to have to develop on Bedrock</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2753-1
+00:23:18.564 --> 00:23:22.471
+<v David Lawton>because you actually lose features in
+Claude when you do that.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2753-2
+00:23:22.471 --> 00:23:26.564
+<v David Lawton>Like it talks to the model,
+but then you're using something else.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2753-3
+00:23:26.564 --> 00:23:29.912
+<v David Lawton>You know what I mean?
+Like you're in Kiro using Opus,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2743-0
+00:23:27.811 --> 00:23:28.331
+<v Rob Forshier II>Mhm.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2753-4
+00:23:29.912 --> 00:23:31.091
+<v David Lawton>that kind of thing.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2754-0
+00:23:33.091 --> 00:23:34.931
+<v Rob Forshier II>You can still use Cloud Code with Bedrock.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2759-0
+00:23:35.971 --> 00:23:37.731
+<v David Lawton>You can, you can, but...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2817-0
+00:23:38.931 --> 00:23:43.647
+<v David Lawton>So far it looks like you actually you
+lose different feature sets that are in</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2817-1
+00:23:43.647 --> 00:23:46.550
+<v David Lawton>Cloud Code. Like it's paired down.
+I need this.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2785-0
+00:23:46.371 --> 00:23:47.411
+<v Rob Forshier II>Okay, I don't.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2817-2
+00:23:46.550 --> 00:23:50.783
+<v David Lawton>This is a call I was on yesterday where
+the team was discussing this.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2817-3
+00:23:50.783 --> 00:23:54.291
+<v David Lawton>I've not actually done it myself like
+that. So I need to.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2830-0
+00:23:53.331 --> 00:23:55.571
+<v Rob Forshier II>I used it on a few projects and didn't
+have any issues.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2830-1
+00:23:55.571 --> 00:23:58.891
+<v Rob Forshier II>That's why I was surprised because I mean
+literally it should just be swapping the</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2830-2
+00:23:58.891 --> 00:24:00.211
+<v Rob Forshier II>back end and doesn't change your.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2827-0
+00:24:00.371 --> 00:24:00.931
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2849-0
+00:24:02.611 --> 00:24:07.375
+<v Rob Forshier II>Although I could see hitting like their
+API tokens with like the caching and</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2849-1
+00:24:07.375 --> 00:24:10.531
+<v Rob Forshier II>stuff like that. So, okay,
+I guess I could see it.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2852-0
+00:24:10.771 --> 00:24:12.451
+<v David Lawton>Maybe? I don't know. I...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2853-0
+00:24:12.291 --> 00:24:12.851
+<v Rob Forshier II>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2863-0
+00:24:14.011 --> 00:24:15.891
+<v Rob Forshier II>I mean,
+and there's probably more stuff on there.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2882-0
+00:24:14.451 --> 00:24:17.865
+<v David Lawton>I actually need to get,
+I need to get a handle on this because</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2882-1
+00:24:17.865 --> 00:24:22.200
+<v David Lawton>we're talking to AWS on Friday and we're
+supposed to give a perspective on this</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2882-2
+00:24:22.200 --> 00:24:22.851
+<v David Lawton>issue, so...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2877-0
+00:24:22.771 --> 00:24:22.851
+<v Rob Forshier II>The.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2890-0
+00:24:24.051 --> 00:24:28.131
+<v David Lawton>I don't want to falsely claim something
+going in there based on that discussion.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2893-0
+00:24:30.131 --> 00:24:30.451
+<v Rob Forshier II>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2919-0
+00:24:31.011 --> 00:24:33.281
+<v David Lawton>I mean,
+they do optimize a bunch of stuff behind</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2919-1
+00:24:33.281 --> 00:24:36.525
+<v David Lawton>the scenes and they have prompt caching
+and everything else going on,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2919-2
+00:24:36.525 --> 00:24:38.611
+<v David Lawton>but I would also assume that's a good
+thing.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2924-0
+00:24:41.251 --> 00:24:44.211
+<v David Lawton>Not all not a loss in functionality.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2967-0
+00:24:45.651 --> 00:24:48.645
+<v Rob Forshier II>Well,
+that's so one of the reasons why</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2967-1
+00:24:48.645 --> 00:24:54.634
+<v Rob Forshier II>Anthropic kicked like all that Clawbot
+stuff off was it was making changes at</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2967-2
+00:24:54.634 --> 00:25:00.392
+<v Rob Forshier II>like the top of like its files and stuff
+as it was sending in the prompts,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2967-3
+00:25:00.392 --> 00:25:03.771
+<v Rob Forshier II>which was then causing it to not be
+cached.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3021-0
+00:25:03.971 --> 00:25:07.867
+<v Rob Forshier II>which was then causing a lot more money
+churn and stuff like that. And so like,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/2965-0
+00:25:04.851 --> 00:25:05.651
+<v David Lawton>Interesting.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3021-1
+00:25:07.867 --> 00:25:11.666
+<v Rob Forshier II>that's where they also kicked it off
+because like it was hitting way too many</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3021-2
+00:25:11.666 --> 00:25:14.491
+<v Rob Forshier II>times like of a no cash hit when it
+should have cash hit.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3021-3
+00:25:14.491 --> 00:25:17.121
+<v Rob Forshier II>And so there was just bad optimizations
+on that side.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3003-0
+00:25:16.211 --> 00:25:17.491
+<v David Lawton>Yeah, yeah, yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3021-4
+00:25:17.121 --> 00:25:19.897
+<v Rob Forshier II>And that was the main reason,
+or one of the big reasons,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3021-5
+00:25:19.897 --> 00:25:22.771
+<v Rob Forshier II>because like that's why they get hit with
+like big usages.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3022-0
+00:25:23.811 --> 00:25:26.291
+<v David Lawton>That totally makes sense, yeah, yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3023-0
+00:25:27.811 --> 00:25:28.211
+<v David Lawton>Um...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3042-0
+00:25:29.291 --> 00:25:32.388
+<v David Lawton>Right,
+because the the caching requires the</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3042-1
+00:25:32.388 --> 00:25:37.739
+<v David Lawton>prompt header to be exactly the same
+every time, like all that stuff, yeah,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3040-0
+00:25:36.931 --> 00:25:37.811
+<v Rob Forshier II>Yep, yep.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3042-2
+00:25:37.739 --> 00:25:38.091
+<v David Lawton>yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3044-0
+00:25:39.851 --> 00:25:40.211
+<v David Lawton>Yeah.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3045-0
+00:25:40.131 --> 00:25:40.531
+<v Rob Forshier II>So...</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3092-0
+00:25:41.411 --> 00:25:44.201
+<v David Lawton>Okay, all right. I'm going to go crawl up,
+do stuff.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3049-0
+00:25:41.731 --> 00:25:41.971
+<v Rob Forshier II>Go.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3092-1
+00:25:44.201 --> 00:25:47.939
+<v David Lawton>I'll ping you in a bit if you have ideas
+or if you have, and you know,</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3092-2
+00:25:47.939 --> 00:25:52.257
+<v David Lawton>I guess read through this because Marty
+wants our collaborative perspective to be</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3092-3
+00:25:52.257 --> 00:25:54.574
+<v David Lawton>in this.
+He doesn't want me to just solo it</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3092-4
+00:25:54.574 --> 00:25:57.891
+<v David Lawton>because he wants to make sure we get it
+right on the first go.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3088-0
+00:25:58.531 --> 00:25:58.851
+<v Rob Forshier II>Okay.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3094-0
+00:25:59.371 --> 00:25:59.731
+<v David Lawton>Yep.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3091-0
+00:26:00.291 --> 00:26:00.771
+<v Rob Forshier II>Cool.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3096-0
+00:26:00.771 --> 00:26:01.971
+<v David Lawton>Cool, alright.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3103-0
+00:26:02.571 --> 00:26:04.131
+<v Rob Forshier II>All right, thank you, David. All right.</v>
+
+213beb1d-5593-46a0-ae13-526478c4344c/3100-0
+00:26:02.971 --> 00:26:03.491
+<v David Lawton>Thank you.</v>

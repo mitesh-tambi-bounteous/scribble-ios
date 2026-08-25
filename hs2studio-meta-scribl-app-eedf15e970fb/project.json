@@ -1,0 +1,7 @@
+{
+  "name": "scribl",
+  "type": "mobile-app-poc",
+  "host": "bitbucket.org",
+  "code_repo": "hs2studio/scribl-app",
+  "brain_repo": "hs2studio/meta-scribl-app"
+}

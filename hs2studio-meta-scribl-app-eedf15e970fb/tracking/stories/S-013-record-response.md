@@ -1,0 +1,38 @@
+---
+id: S-013
+title: Record response (30-sec audio)
+status: next
+owner: unassigned
+stage: B2
+phase: B
+project: scribl
+labels: [nav, response-capture, partial]
+---
+
+# S-013 -- Record response (30-sec audio)
+
+The record-response screen is the second response modality reached from the Draw
+canvas: a short 30-second audio response over the drawing. Web audio capture is
+now wired via real `MediaRecorder`/`getUserMedia`; native (iOS/Android) capture
+is still a stub that throws. Recorded audio is not yet wired into the submit flow.
+
+**Status note** (commit `90409d0`, #13): `src/services/audioRecorder.ts` has a
+working web implementation (`tests/audioRecorder.web.test.ts` covers it), but
+`audioRecorder.native.ts` is a stub throwing "Native audio capture deferred to
+iOS/Android bring-up." Recording/upload integration to submit/backend is
+explicitly out of scope per code comment. Web/device parity therefore not met.
+
+## AC
+
+- [x] The screen provides a mic affordance and a named "Share" button that
+  navigates to Home (S-014).
+- [x] Real audio capture is wired on web via `MediaRecorder`/`getUserMedia` in
+  `src/services/audioRecorder.ts`, tested in `audioRecorder.web.test.ts`.
+- [ ] Native (iOS/Android) audio capture -- OPEN. `audioRecorder.native.ts` is
+  a stub that throws; no expo-av or audio library dependency yet.
+- [ ] Recorded audio is not yet wired into the submit/backend flow -- explicitly
+  out of scope per code comment, OPEN.
+- [ ] Web/device parity AC not met until native capture is implemented.
+- [x] The screen is reachable from the Draw canvas (`app/draw.tsx`) Record
+  action with working navigation.
+- [x] The screen renders on web; on-device behavior blocked by native stub.

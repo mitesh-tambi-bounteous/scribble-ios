@@ -1,0 +1,3 @@
+[submodule "vendor/mobileapp"]
+	path = vendor/mobileapp
+	url = https://bitbucket.org/hs2studio/scribl-app.git

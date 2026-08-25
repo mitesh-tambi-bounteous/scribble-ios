@@ -1,0 +1,32 @@
+---
+id: S-017
+title: Response detail view
+status: next
+owner: unassigned
+stage: B2
+phase: B
+project: scribl
+labels: [nav, wall, reactions, fidelity, upgrade]
+---
+
+# S-017 -- Response detail view
+
+The response detail view is a hero screen showing a single response in full: the
+drawing plus its caption, reaction affordances, and a toggle between the text
+caption and audio playback. It is reached from the Family grid and supersedes
+any thin detail view.
+
+## AC
+
+- [ ] The screen shows a single response: the drawing plus its caption.
+- [ ] Heart and bookmark reaction affordances are present.
+- [ ] A "T"/play toggle switches between the text caption and audio playback.
+- [ ] A named "Share" affordance navigates to the Share screen (S-018).
+- [ ] The screen is reached from the Family grid (S-016).
+- [ ] This screen supersedes/upgrades any thin detail view.
+- [ ] This is a hero screen: the fidelity pass delivers the full-detail design
+  matching the flow.
+- [ ] The screen ships first as a skeleton with working navigation, then the
+  hero fidelity follows in a later pass.
+- [ ] The screen renders and behaves identically on the web export and on an
+  iOS/Android device or simulator from the single Expo/React Native codebase.

@@ -1,0 +1,41 @@
+---
+id: S-021
+title: One-command dev startup + two-server e2e harness
+status: blocked
+owner: unassigned
+stage: B2
+phase: B
+project: scribl
+labels: [infra, ci, devx]
+---
+
+# S-021 -- One-command dev startup + two-server e2e harness
+
+Make launching the app "just work" for a human, and make the test harness
+reproduce the real cold-start so a first-screen failure cannot ship green. The
+app needs two processes (Expo web on :8081 and the backend API on :8787) plus a
+local Postgres; before this, there was no one-command startup and the Playwright
+`webServer` booted only the web app, so a "Failed to fetch" first screen passed
+CI.
+
+Stub for tracking. Implemented (pending review) in rforsh/MobileApp PR #23
+(branch `scribl-devx-userwalk`).
+
+## AC
+
+- [ ] `npm run dev` brings up local Postgres (docker-compose), seeds it
+  (idempotent), and runs API + web together; README documents the one-command
+  dev + first-time setup and that the app requires the API.
+- [ ] Playwright `webServer` boots BOTH servers (API health + web) so a bare
+  `npm run test:e2e` from a clean checkout reproduces the cold-start.
+- [ ] A cold-start smoke spec fails on any console error / pageerror /
+  requestfailed and on a "Failed to fetch" banner; proven to go red when the API
+  base points at a dead port.
+- [ ] A scripted user-walk drives every screen cold with zero console/pageerror.
+- [ ] Changed files grep-clean (no em-dashes / unicode arrows / absolute paths).
+
+## Notes
+
+Extends CI/deps work (S-019). User-walk fixes shipped alongside: raw network
+errors normalized to a human message + retry; splash/home no longer blank on
+error; `getStreak` derived from `/me/stats` (there was no `/streak` route).

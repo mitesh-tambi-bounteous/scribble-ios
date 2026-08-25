@@ -1,0 +1,61 @@
+---
+title: Back-flow -- multi-repo roled model
+date: 2026-07-01
+status: proposed
+target: the methodology engine
+---
+
+# Back-flow: multi-repo roled model
+
+## Problem
+
+Today a brain drives a single code repo. `project.json` carries one
+`code_repo: "rforsh/MobileApp"`. Real engagements span multiple repos at once --
+mobile, backend, ai, db, and infra -- and the single-repo assumption forces all
+of that into one pointer or leaves the other repos untracked by the brain.
+
+## Proposed change
+
+Replace the single `code_repo` string with a `repos` array of roled entries.
+Keep `brain_repo` and `engine` as-is.
+
+Before:
+
+```json
+{
+  "code_repo": "rforsh/MobileApp"
+}
+```
+
+After:
+
+```json
+{
+  "repos": [
+    { "name": "rforsh/MobileApp", "role": "mobile" },
+    { "name": "...", "role": "backend" }
+  ]
+}
+```
+
+Roles are drawn from the set: mobile | backend | ai | db | infra.
+
+## Command changes
+
+- The `/project-*` commands gain a repo/role target argument so that build and
+  verify work targets the right repo's worktrees.
+- Stories and briefs tag their repo: a `repo:` or `role:` field in story
+  frontmatter, so each work item names where its code lives.
+
+## Migration / back-compat
+
+- A single-repo `code_repo` string can be read as a one-element `repos` array,
+  so existing brains keep working without edits. New brains use `repos[]`
+  directly.
+
+## Scope note
+
+This is a proposal for operator review. Do NOT edit the methodology engine in
+this increment. When approved, the change is made in the methodology engine and
+shipped as a back-flow PR upstream; it is the first such PR (see the design
+spec S5/S6).

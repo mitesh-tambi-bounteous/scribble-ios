@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scribl POC — Build-Approach Proposal — Bounteous</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTAiIGZpbGw9IiM2OTNBRjQiLz48L3N2Zz4=">
+<link rel="stylesheet" href="../../../assets/theme/tokens.css">
+<link rel="stylesheet" href="../../../assets/theme/bounteous-theme.css">
+<script src="../../../assets/theme/theme.js" defer></script>
+<!-- Inline style is layout + token-referenced helpers only (no raw hex, no font/motion overrides),
+     mirroring the precedent in templates/brainstorm-output.html.tmpl. -->
+<style>
+.reco{background:var(--acc-bg);border:1px solid var(--acc-bd);border-left:4px solid var(--acc);border-radius:0 var(--rad) var(--rad) 0;padding:18px 22px;margin:18px 0 8px}
+.reco .label{display:block;font-size:var(--t-xs);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
+.reco p{margin:0;font-size:var(--t-lg)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--g0);border:1px solid var(--g2);border-radius:var(--rad);padding:18px 20px}
+.panel h4{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
+.chip{font-size:var(--t-sm);font-weight:600;color:var(--p);background:var(--p-bg);border:1px solid var(--acc-bd);border-radius:100px;padding:4px 12px}
+.tag{font-size:var(--t-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.tag-adopt{color:var(--acc)}
+.tag-avoid{color:var(--g5)}
+.note{font-size:var(--t-sm);color:var(--g5)}
+.kicker{font-size:var(--t-xs);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g4);margin:0 0 4px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title">Scribl POC · <span>Build-Approach Proposal</span></div>
+  <div class="topbar-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle light/dark">
+      <span class="icon-sun">☀</span><span class="icon-moon">☾</span>
+    </button>
+  </div>
+</div>
+
+<div class="app">
+
+  <aside class="lab-sidebar">
+    <div class="lab-nav-brand">
+      <div class="lab-nav-brand-title">Scribl — D2C POC</div>
+      <div class="lab-nav-brand-sub">Build approach · v1</div>
+    </div>
+    <nav class="toc">
+      <div class="toc-label">On this page</div>
+      <ul>
+        <li><a href="#tldr" class="active">TL;DR &amp; recommendation</a></li>
+        <li><a href="#prove">What the POC must prove</a></li>
+        <li><a href="#decision">Decision: Expo-direct vs HTML-first</a></li>
+        <li><a href="#architecture">No-lock-in AWS architecture</a></li>
+        <li><a href="#prod-architecture">Production architecture (D2C)</a></li>
+        <li><a href="#cost">Cost / TCO</a></li>
+        <li><a href="#toolkit">Verified toolkit</a></li>
+        <li><a href="#stack">Locked tech stack</a></li>
+        <li><a href="#milestones">1-week POC plan</a></li>
+        <li><a href="#transition">Transition to fuller build</a></li>
+        <li><a href="#project-dna">Project-DNA (drop-in)</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <header class="hero">
+      <div class="eyebrow">Scribl · Proof of Concept · Decision-grade</div>
+      <h1>Build the POC in Expo (OSS) — one codebase, AWS-hosted.</h1>
+      <p class="subtitle">Recommendation: build the 1-week clickable POC directly in the Expo open-source framework as a single React Native codebase, ship an Expo Web export as the shareable artifact, and validate the native-only risks (finger-on-glass drawing, push) on-device. No throwaway HTML prototype. No Expo-cloud lock-in — build, host, and CI/CD in AWS.</p>
+    </header>
+
+    <div class="content">
+
+      <!-- ───────────────────────── TL;DR ───────────────────────── -->
+      <h2 id="tldr">TL;DR &amp; recommendation</h2>
+
+      <div class="reco">
+        <span class="label">Recommendation</span>
+        <p><strong>Expo-OSS-direct, single codebase.</strong> Build the POC in the Expo open-source framework (React Native); use the <strong>Expo Web</strong> export as the shareable "clickable" link and device dev-builds for the native-only risks. Do <strong>not</strong> build an HTML prototype first — it would be thrown away and, worse, would dodge the two riskiest things to validate. Use Expo's MIT toolkit only; host and run CI/CD ourselves in <strong>AWS</strong>.</p>
+      </div>
+
+      <p>Three forces drive this:</p>
+      <ul>
+        <li><strong>The hard parts are native-only.</strong> Scribl's core is a "drawing canvas on your phone — finger-on-glass," and the retention thesis runs on a push-notification habit loop. Mobile web can't faithfully validate touch-draw latency, and web push (especially iOS) can't test a daily-habit loop. An HTML-first prototype validates the <em>easy</em> parts and gives false confidence on the <em>hard</em> ones.</li>
+        <li><strong>HTML-first is a guaranteed rewrite.</strong> Web React is not React Native — components, navigation, and the canvas would all be rebuilt. Production is RN/Expo and the team is RN-oriented, so a web prototype is pure throwaway.</li>
+        <li><strong>One Expo codebase gives us both audiences.</strong> <code>react-native-skia</code> renders on web via CanvasKit (WASM) and Expo targets web from the same codebase — so a single build yields a shareable Expo Web link (desirability) <em>and</em> device builds (feel + push). No rewrite; the POC seeds the real app.</li>
+      </ul>
+
+      <p class="note">Scope answers locked with Rob: POC goal = both (one codebase → device feel + shareable web); voice mode = deferred/stubbed; backend = minimal real AWS backend.</p>
+
+      <!-- ───────────────────────── PROVE ───────────────────────── -->
+      <h2 id="prove">What the 1-week POC must prove</h2>
+      <p>Grounded in Scribl's own source docs (D2C MLP PRFAQ + MVP Scope + the D2C flow wireframe), not our internal framing. The MVP scope and flow define a tight loop:</p>
+      <ol>
+        <li><strong>Daily prompt</strong> — one universal prompt; you only see others' work after you submit yours (<em>submit-to-unlock</em>).</li>
+        <li><strong>Creative response</strong> — a lightweight <strong>drawing canvas on the phone</strong> (finger-on-glass, color palette, no layers/undo-spirals), plus a short text story; voice is a third mode (deferred for this POC).</li>
+        <li><strong>Social sharing</strong> — up to four private channels (Personal Archive, Family, Friends, Co-Workers) with a standardized set of emoji reactions.</li>
+        <li><strong>Progression</strong> — streaks, stats, badges, milestones; "Your Channel" archive.</li>
+        <li><strong>Push habit loop</strong> — daily reminder, friend activity, momentum re-engagement.</li>
+      </ol>
+      <p>The POC's job is to make <strong>the daily loop feel good</strong> — especially the drawing — and to be a believable, shareable artifact for "would you do this daily?" feedback. The two make-or-break elements are the <strong>finger-on-glass canvas</strong> and the <strong>push-driven return</strong>; both are native-only.</p>
+
+      <!-- ───────────────────────── DECISION ───────────────────────── -->
+      <h2 id="decision">Decision: Expo-OSS-direct vs HTML-first</h2>
+      <p>A Gemini brainstorm and a follow-up AI research report both leaned "Expo directly." We treated those as input to verify, not as the answer. After grounding in Scribl's BRD, the call is clear — but here is the honest comparison.</p>
+
+      <div class="cols">
+        <div class="panel">
+          <p class="kicker tag-adopt">Recommended</p>
+          <h4>Expo-OSS-direct (one codebase)</h4>
+          <ul>
+            <li>Validates the native-only risks (canvas feel, push) — the things actually in doubt.</li>
+            <li>Expo Web export = shareable link for desirability, no TestFlight friction.</li>
+            <li>Zero rewrite — the POC <em>is</em> the seed of the production app.</li>
+            <li>Hand-off lands on an RN-oriented team in their real stack.</li>
+            <li><span class="note">Cost: slightly more setup than a web mock (dev build, Skia); offset by reuse.</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <p class="kicker tag-avoid">Not recommended</p>
+          <h4>HTML / web prototype first</h4>
+          <ul>
+            <li>Marginally faster to first-clickable with AI web tools (v0/Lovable/Figma Make)…</li>
+            <li>…but can't validate finger-on-glass latency or the push habit loop — the risky parts.</li>
+            <li>Guaranteed web→native rewrite (components, nav, canvas) before team hand-off.</li>
+            <li>Desirability feedback on a desktop/web mock can mislead on a phone-first product.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>Risks &amp; honest caveats (recommended path)</h4>
+      <ul>
+        <li><strong>Expo Web won't exercise push, secure storage, or native voice</strong> — those validate on device only. The web link demonstrates flows + drawing; the device build covers the rest.</li>
+        <li><strong>CanvasKit WASM is ~2.9&nbsp;MB gzipped</strong> on web — fine for a demo, noted for later.</li>
+        <li><strong>Voice is stubbed</strong> for the week (its scope is still open in the proposal's ADR-0006).</li>
+        <li><strong>One-week scope must be ruthless</strong> — see the milestone plan; auth and backend are kept minimal.</li>
+      </ul>
+
+      <!-- ───────────────────────── ARCHITECTURE ───────────────────────── -->
+      <h2 id="architecture">No-lock-in architecture: Expo OSS, hosted in AWS</h2>
+      <p>The key distinction the AI reports glossed over: <strong>the Expo framework is MIT-licensed open source; "EAS" is Expo's separate paid cloud.</strong> We adopt the framework and tooling and avoid the cloud — production runs entirely in AWS.</p>
+
+      <div class="cols">
+        <div class="panel">
+          <h4><span class="tag tag-adopt">Layer 1 — adopt</span> OSS / MIT, no lock-in</h4>
+          <ul>
+            <li>Expo framework + Expo Router; <code>react-native-skia</code>; NativeWind; React Native Reusables; Zustand.</li>
+            <li>Expo's official <em>knowledge</em> skills + Callstack agent-skills; Maestro for E2E.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4><span class="tag tag-avoid">Layer 2 — avoid</span> EAS cloud → AWS substitute</h4>
+          <ul>
+            <li>EAS Build → <code>expo prebuild</code> (CNG) + Xcode/Gradle in <strong>AWS CodeBuild / GitHub Actions</strong>.</li>
+            <li>EAS Update → self-hosted <code>expo-open-ota</code> (S3-backed).</li>
+            <li>EAS Submit/Workflows, the remote Expo MCP, and the EAS-specific Expo skills → not used.</li>
+          </ul>
+        </div>
+      </div>
+      <p><code>expo prebuild</code> (Continuous Native Generation) generates the real <code>ios/</code> and <code>android/</code> projects, which build in our own CI; <code>expo export</code> produces static web assets we host on <strong>S3 + CloudFront</strong>. This aligns with the proposal's existing AWS CDK decision. Net: all of Expo's OSS value, zero Expo-cloud dependency.</p>
+
+      <!-- ───────────────────────── PROD ARCHITECTURE ───────────────────────── -->
+      <h2 id="prod-architecture">Production architecture (D2C)</h2>
+      <p>The POC runs a thin slice of this — API Gateway + Lambda + DynamoDB, with the Expo Web export on S3/CloudFront. The full planned D2C target is captured (PNG + a diffable Mermaid representation + prose walkthrough) at <a href="./architecture/README.md"><code>architecture/README.md</code></a>.</p>
+      <p>Request path: end users → <strong>Route 53</strong> → <strong>AWS WAF</strong> → <strong>CloudFront</strong> (all global) → latency-routed to the nearest active region → <strong>Application Load Balancer</strong> → <strong>Amazon EKS</strong> (app services) → <strong>Amazon Bedrock → Claude</strong>; <strong>Amazon Cognito</strong> for auth.</p>
+      <div class="cols">
+        <div class="panel">
+          <h4>Data / state tier</h4>
+          <ul>
+            <li><strong>Aurora Serverless v2</strong> — relational system of record (ADR-0004).</li>
+            <li><strong>DynamoDB</strong> — high-velocity on-demand items.</li>
+            <li><strong>ElastiCache (Redis)</strong> + <strong>Amazon OpenSearch</strong> — always-on cache and search/log baselines.</li>
+            <li><strong>Amazon S3 (media)</strong> — cumulative drawing/voice/text store.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Async, observability &amp; analytics</h4>
+          <ul>
+            <li><strong>Async lane</strong> — daily prompt-gen → EventBridge → SQS → EKS; SNS → Pinpoint drives the push habit loop (ADR-0010).</li>
+            <li><strong>Observability</strong> — CloudWatch, Amazon Managed Prometheus / Grafana, X-Ray.</li>
+            <li><strong>Analytics &amp; ML</strong> — S3 data lake → Glue → Athena + SageMaker, primary region only, gated after Year 1.</li>
+          </ul>
+        </div>
+      </div>
+      <p><strong>Multi-region:</strong> launches in <strong>us-east-2 (Ohio)</strong> (primary; also hosts dev/stage + the data lake), expands prod to <strong>eu-west-2 (London)</strong> (~month 13) and <strong>ap-southeast-1 (Singapore)</strong> (~month 25). Each prod region runs its own EKS + Cognito + Aurora + S3 stack. <span class="note">Diagram source of truth: <a href="./architecture/Scribl_AWS_Architecture_D2C.png">architecture/Scribl_AWS_Architecture_D2C.png</a>.</span></p>
+
+      <!-- ───────────────────────── COST / TCO ───────────────────────── -->
+      <h2 id="cost">Cost / TCO</h2>
+      <p>A 30-month run-rate model (Oct 2026 – Mar 2029) built bottom-up at <strong>us-east-2 list prices, no partner discount</strong>. Workbook (source of truth): <a href="./architecture/Scribl-D2C-AWS-Estimate-v3.xlsx"><code>architecture/Scribl-D2C-AWS-Estimate-v3.xlsx</code></a>; distilled summary at <a href="./architecture/cost-model.md"><code>architecture/cost-model.md</code></a>.</p>
+      <div class="chips">
+        <span class="chip">30-mo TCO ≈ $2.45M</span>
+        <span class="chip">AI App ≈ 68.8% of TCO</span>
+        <span class="chip">Launch (M1) ≈ $9.1k/mo</span>
+        <span class="chip">At scale (M30) ≈ $182.6k/mo</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Pillar ($/mo)</th><th>Year 1 avg</th><th>Year 2 avg</th><th>Yr3 H1 avg</th><th>At scale (M30)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Compute (EKS)</td><td>5,012</td><td>8,046</td><td>10,529</td><td>11,080</td></tr>
+          <tr><td>Security (Cognito, WAF)</td><td>561</td><td>5,924</td><td>9,210</td><td>9,971</td></tr>
+          <tr><td>Networking (ALB, transfer)</td><td>981</td><td>7,563</td><td>12,674</td><td>13,845</td></tr>
+          <tr><td>Database (DynamoDB, Aurora)</td><td>3,712</td><td>5,877</td><td>8,046</td><td>8,553</td></tr>
+          <tr><td>Storage (S3)</td><td>50</td><td>797</td><td>1,984</td><td>2,375</td></tr>
+          <tr><td>AI App (Bedrock + Claude)</td><td>7,118</td><td>72,944</td><td>120,739</td><td>132,340</td></tr>
+          <tr><td>Data Lake / ML research</td><td>0</td><td>2,091</td><td>3,810</td><td>4,470</td></tr>
+          <tr><td><strong>Total run rate</strong></td><td><strong>17,434</strong></td><td><strong>103,243</strong></td><td><strong>166,992</strong></td><td><strong>182,633</strong></td></tr>
+        </tbody>
+      </table>
+      <p><strong>Drivers:</strong> AI inference is ~60% of the 30-month total — drawing vision-read (Sonnet 4.6) ≈78% of AI spend, moderation (Haiku 4.5) ≈22%, daily prompt-gen (Opus 4.8) &lt;0.1%. Scales 8k→5M registered users (DAU ≈25%, MAU ≈45%) and 1→3 AWS regions. <span class="note">All figures sourced from the workbook; see cost-model.md for unit economics.</span></p>
+
+      <!-- ───────────────────────── TOOLKIT ───────────────────────── -->
+      <h2 id="toolkit">Verified toolkit</h2>
+      <p>Both AI reports were AI-generated, so every repo below was <strong>validated live against the GitHub API and license API on 2026-06-22</strong> (stars, last push, license, archived status). All are non-archived and actively maintained. The validation also caught one over-hyped, immature project — see the last row.</p>
+
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Stars</th><th>Last push</th><th>License</th><th>Verdict &amp; note</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>expo/expo</code></td><td>50.2k</td><td>2026-06-22</td><td>MIT</td><td><span class="tag tag-adopt">Adopt</span> Framework + <code>prebuild</code>/CNG. SDK 56 stable 2026-05-21 (RN 0.85 / React 19.2); scaffolds CLAUDE.md/AGENTS.md/.claude.</td></tr>
+          <tr><td><code>shopify/react-native-skia</code></td><td>8.4k</td><td>2026-06-22</td><td>MIT</td><td><span class="tag tag-adopt">Adopt</span> Drawing canvas; same code on web (CanvasKit/WASM) + native.</td></tr>
+          <tr><td><code>nativewind/nativewind</code></td><td>8.0k</td><td>2026-06-19</td><td>MIT</td><td><span class="tag tag-adopt">Adopt</span> v4 stable (Tailwind v3) for the POC.</td></tr>
+          <tr><td><code>founded-labs/react-native-reusables</code></td><td>8.4k</td><td>2026-06-19</td><td>MIT</td><td><span class="tag tag-adopt">Adopt</span> shadcn-for-RN on NativeWind — fast, polished UI.</td></tr>
+          <tr><td><code>pmndrs/zustand</code></td><td>58.4k</td><td>2026-06-22</td><td>MIT</td><td><span class="tag tag-adopt">Adopt</span> ~1KB state, default choice.</td></tr>
+          <tr><td><code>expo/skills</code> (official)</td><td>2.1k</td><td>2026-06-22</td><td>MIT</td><td><span class="tag tag-adopt">Adopt</span> knowledge skills (architecture, native UI, tailwind, module, upgrading). <strong>Skip</strong> the EAS deploy/cicd/update skills + bundled remote MCP. Install: <code>claude plugin install expo@claude-plugins-official</code>.</td></tr>
+          <tr><td><code>callstackincubator/agent-skills</code></td><td>1.5k</td><td>2026-06-02</td><td>MIT</td><td><span class="tag tag-adopt">Adopt</span> RN perf / best-practice skills.</td></tr>
+          <tr><td><code>callstackincubator/skillgym</code></td><td>59</td><td>2026-06-15</td><td>MIT</td><td>Optional — prove skills work across models.</td></tr>
+          <tr><td><code>mobile-dev-inc/maestro</code></td><td>14.5k</td><td>2026-06-22</td><td>Apache-2.0</td><td>Optional — YAML E2E; light-touch in a 1-week POC.</td></tr>
+          <tr><td><code>axelmarciano/expo-open-ota</code></td><td>365</td><td>2026-06-16</td><td>MIT</td><td>Production transition — self-hosted OTA on S3; replaces EAS Update.</td></tr>
+          <tr><td><code>infinitered/ignite</code></td><td>19.9k</td><td>2026-06-07</td><td>MIT*</td><td>Optional mature scaffold (strip EAS if used). *Non-standard LICENSE text — confirm before reuse.</td></tr>
+          <tr><td><code>obytes/react-native-template-obytes</code></td><td>4.2k</td><td>2026-06-02</td><td>MIT</td><td>Optional scaffold, but <strong>EAS-wired CI</strong> (its "10+ workflows" use EAS Build) — keep skeleton, replace CI with AWS.</td></tr>
+          <tr><td><code>software-mansion/radon-ide</code></td><td>1.7k</td><td>2026-06-17</td><td>NOASSERTION</td><td>Optional — strong live-app debugging, but it's a <strong>commercial product</strong> and its MCP is tied to the Radon IDE (VSCode/Cursor), not the Claude Code CLI.</td></tr>
+          <tr><td><code>software-mansion-labs/skills</code></td><td>232</td><td>2026-06-17</td><td>none detected</td><td>Optional RN skills (incl. radon-mcp guidance). No LICENSE file detected — verify before reuse.</td></tr>
+          <tr><td><code>ohah/react-native-mcp</code></td><td><strong>6</strong></td><td><strong>2026-03-21</strong></td><td>none</td><td><span class="tag tag-avoid">Do not depend</span> Hyped by the Gemini brainstorm + report ("48 tools"), but ~6 stars and ~3 months stale. A live example of why AI tool recommendations must be validated.</td></tr>
+          <tr><td><code>senaiverse/…-expo-agent-system</code></td><td>121</td><td>2026-06-06</td><td>MIT</td><td>Optional reference — 7 agents + slash commands.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ───────────────────────── STACK ───────────────────────── -->
+      <h2 id="stack">Locked tech stack</h2>
+      <h4>POC (1 week)</h4>
+      <div class="chips">
+        <span class="chip">Expo SDK 56 (OSS)</span>
+        <span class="chip">Expo Router</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">react-native-skia</span>
+        <span class="chip">NativeWind v4</span>
+        <span class="chip">React Native Reusables</span>
+        <span class="chip">Zustand</span>
+        <span class="chip">AWS CDK · API GW + Lambda + DynamoDB</span>
+        <span class="chip">Expo Web → S3/CloudFront</span>
+      </div>
+      <ul>
+        <li><strong>Scaffold</strong> with <code>create-expo-app@latest --template default@sdk-56</code> (already ships project-DNA), then add Skia / NativeWind / Reusables / Zustand. Do <em>not</em> start from the EAS-wired templates.</li>
+        <li><strong>Minimal real backend</strong> — a thin API Gateway + Lambda (+ DynamoDB) via AWS CDK, seeded with the daily prompt and a few mock channel responses. Auth stubbed unless trivial.</li>
+        <li><strong>Voice</strong> — stubbed (non-functional button).</li>
+        <li><strong>Distribution</strong> — Expo Web export (shareable) + device dev-build (<code>expo run:ios/android</code>) for finger-on-glass + a push smoke test.</li>
+        <li><strong>Dev harness</strong> — Claude Code + Expo OSS knowledge skills + Callstack skills (skip EAS skills + remote Expo MCP); Plan Mode before executing.</li>
+      </ul>
+
+      <!-- ───────────────────────── MILESTONES ───────────────────────── -->
+      <h2 id="milestones">1-week POC plan</h2>
+      <table>
+        <thead><tr><th>Day</th><th>Milestone</th></tr></thead>
+        <tbody>
+          <tr><td><strong>D1</strong></td><td>Scaffold Expo (SDK 56) + Router + Skia + NativeWind + Reusables + Zustand; write CLAUDE.md/AGENTS.md; confirm web + iOS sim + Android all run; thin CDK backend returning today's prompt.</td></tr>
+          <tr><td><strong>D2</strong></td><td>Onboarding/tutorial + "Today's Prompt" screen; navigation skeleton; mock data shape.</td></tr>
+          <tr><td><strong>D3</strong></td><td><strong>Drawing canvas (Skia)</strong> — finger draw, color palette, clear. The make-or-break feel.</td></tr>
+          <tr><td><strong>D4</strong></td><td>Text response (140-char) + stubbed voice button; submit → submit-to-unlock gate.</td></tr>
+          <tr><td><strong>D5</strong></td><td>Channel walls (Family / Personal) with mock responses + emoji reactions; streak / stats.</td></tr>
+          <tr><td><strong>D6</strong></td><td>Push smoke test on device; Expo Web export + deploy shareable link; polish.</td></tr>
+          <tr><td><strong>D7</strong></td><td>Buffer; record device + web walkthrough; capture learnings.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ───────────────────────── TRANSITION ───────────────────────── -->
+      <h2 id="transition">Transition to the fuller build</h2>
+      <p>Because the POC is built in the production framework, the transition is <strong>additive, not a rewrite</strong>. The same codebase grows:</p>
+      <ul>
+        <li><strong>Auth</strong> — swap the stub for Cognito (or chosen IdP).</li>
+        <li><strong>Data</strong> — promote the thin backend to the production data model (Aurora Serverless v2 per the proposal's ADR-0004); enforce <em>submit-to-unlock</em> server-side (ADR-0007).</li>
+        <li><strong>AI</strong> — add the async pipeline (SQS; ADR-0010) for prompt generation, drawing reflection, and moderation, with Claude model tiering (ADR-0011).</li>
+        <li><strong>Analytics</strong> — wire PostHog (ADR-0008).</li>
+        <li><strong>CI/CD</strong> — <code>expo prebuild</code> + native build in AWS CodeBuild / GitHub Actions (not EAS Build); OTA via self-hosted <code>expo-open-ota</code> on S3; web build → S3 + CloudFront.</li>
+        <li><strong>Voice</strong> — resolve the open scope decision, then add on-device speech where in scope.</li>
+      </ul>
+
+      <!-- ───────────────────────── PROJECT-DNA ───────────────────────── -->
+      <h2 id="project-dna">Project-DNA (drop-in)</h2>
+      <p>Drafted and ready to drop into the POC repo when greenlit (also committed alongside this doc at <code>clients/scribl/poc/project-dna/</code>).</p>
+
+      <h4>CLAUDE.md</h4>
+      <pre><code># Scribl D2C POC — Claude project guide
+
+## What this is
+A ~1-week clickable POC of the Scribl daily-creative-practice app, built in the
+**Expo open-source framework** (React Native) as a single codebase that also
+exports to web. This POC seeds the production app — it is NOT a throwaway.
+
+## Golden rules
+- **OSS only, no Expo-cloud lock-in.** Use the Expo MIT framework + libraries.
+  Do NOT use EAS (Build/Update/Submit/Workflows) or the remote Expo MCP.
+  Builds, hosting, and CI/CD live in **AWS**.
+- **Plan Mode before executing** any multi-file change.
+- **Phone-first.** The drawing canvas (finger-on-glass) and the daily loop are
+  the point. Validate feel on a device, not just web.
+
+## Stack (locked)
+- Expo SDK 56 (OSS) · Expo Router · TypeScript
+- @shopify/react-native-skia — drawing canvas (web via CanvasKit + native)
+- NativeWind v4 (Tailwind v3) · React Native Reusables (UI) · Zustand (state)
+- Backend: thin AWS API Gateway + Lambda (+ DynamoDB) via AWS CDK; mock data
+- Voice response: STUBBED for the POC (non-functional button)
+
+## Build / run
+- Dev: `npx expo start` (web) · `npx expo run:ios` / `run:android` (device feel)
+- Web export (shareable): `npx expo export -p web` → host on S3/CloudFront
+- Native: `npx expo prebuild` → build ios/ + android/ in our own CI (no EAS)
+
+## Scope guardrails (1 week)
+- Build the loop: prompt → draw/text → submit-to-unlock → channel wall + reactions → streak.
+- Auth stubbed unless trivial. Push = device smoke test only.
+- Do not add EAS, analytics SDKs, or the production data model yet.
+
+## Data
+Mock/seeded JSON via the thin backend: one daily prompt + a few channel responses.
+</code></pre>
+
+      <h4>AGENTS.md</h4>
+      <pre><code># Scribl D2C POC — agent operating notes
+
+This repo is built with AI agents (Claude Code). Read CLAUDE.md first.
+
+## Recommended skills (OSS only)
+- Expo official **knowledge** skills (architecture, native UI, tailwind setup,
+  expo-module, upgrading). Install: `claude plugin install expo@claude-plugins-official`.
+  Do NOT use the EAS deployment / cicd / update-health skills.
+- Callstack `agent-skills` (RN performance + best practices).
+
+## Do
+- Prefer Expo Router file-based routes and React Native Reusables components.
+- Keep the drawing canvas (Skia) responsive — profile on a real device.
+- Keep state in Zustand; keep data access behind a thin client over the mock API.
+
+## Don't
+- Don't add EAS config, `eas.json`, or the remote Expo MCP.
+- Don't depend on `ohah/react-native-mcp` (immature: ~6 stars, stale).
+- Don't introduce a web→native split — one codebase, web is an export target.
+
+## Verify before "done"
+- App runs on web AND at least one device/simulator.
+- Drawing feels smooth on-device; submit-to-unlock actually gates the feed.
+</code></pre>
+
+      <!-- ───────────────────────── SOURCES ───────────────────────── -->
+      <h2 id="sources">Sources</h2>
+      <p class="note">Validated 2026-06-22. Repo facts via the GitHub API; the rest are primary docs.</p>
+      <ul>
+        <li>Expo Continuous Native Generation (prebuild): <a href="https://docs.expo.dev/workflow/continuous-native-generation/">docs.expo.dev/workflow/continuous-native-generation</a></li>
+        <li>Expo local builds (without EAS): <a href="https://docs.expo.dev/guides/local-app-overview/">docs.expo.dev/guides/local-app-overview</a></li>
+        <li>Expo Skills for AI agents: <a href="https://docs.expo.dev/skills/">docs.expo.dev/skills</a></li>
+        <li>react-native-skia web support (CanvasKit/WASM): <a href="https://shopify.github.io/react-native-skia/docs/getting-started/web/">shopify.github.io/react-native-skia · web</a></li>
+        <li>NativeWind: <a href="https://www.nativewind.dev/">nativewind.dev</a> · React Native Reusables: <a href="https://reactnativereusables.com/">reactnativereusables.com</a></li>
+        <li>Self-hosted OTA: <a href="https://github.com/axelmarciano/expo-open-ota">github.com/axelmarciano/expo-open-ota</a></li>
+        <li>Repos cited in the toolkit table: <a href="https://github.com/expo/expo">expo/expo</a>, <a href="https://github.com/shopify/react-native-skia">shopify/react-native-skia</a>, <a href="https://github.com/expo/skills">expo/skills</a>, <a href="https://github.com/callstackincubator/agent-skills">callstackincubator/agent-skills</a>, <a href="https://github.com/founded-labs/react-native-reusables">founded-labs/react-native-reusables</a>, <a href="https://github.com/pmndrs/zustand">pmndrs/zustand</a>, <a href="https://github.com/mobile-dev-inc/maestro">mobile-dev-inc/maestro</a>, <a href="https://github.com/infinitered/ignite">infinitered/ignite</a>, <a href="https://github.com/obytes/react-native-template-obytes">obytes/react-native-template-obytes</a>, <a href="https://github.com/software-mansion/radon-ide">software-mansion/radon-ide</a>.</li>
+        <li>Scribl source docs (this repo): <code>clients/scribl/Initial source docs/</code> — D2C MLP PRFAQ, MVP Scope, D2C Flow.</li>
+        <li>Planned AWS architecture + cost model (this repo): <a href="./architecture/README.md"><code>architecture/README.md</code></a> (diagram + Mermaid + walkthrough), <a href="./architecture/cost-model.md"><code>architecture/cost-model.md</code></a>, and the source workbook <a href="./architecture/Scribl-D2C-AWS-Estimate-v3.xlsx"><code>Scribl-D2C-AWS-Estimate-v3.xlsx</code></a> / diagram <a href="./architecture/Scribl_AWS_Architecture_D2C.png"><code>Scribl_AWS_Architecture_D2C.png</code></a>.</li>
+      </ul>
+
+    </div><!-- /.content -->
+
+    <footer class="doc-footer">
+      Scribl D2C POC — Build-Approach Proposal · v1 · 2026-06-22 · Bounteous ARC.
+      Prepared for review by Rob Forshier and David Lawton. Research + recommendation only — app scaffolding is gated to a follow-up session.
+    </footer>
+
+  </main><!-- /.main -->
+</div><!-- /.app -->
+
+<script>
+// Scrollspy: highlight the current section in the on-this-page TOC (behavior only).
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('active'); });
+        if(map[e.target.id]) map[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+  document.querySelectorAll('.content h2[id]').forEach(function(h){ obs.observe(h); });
+})();
+</script>
+
+</body>
+</html>

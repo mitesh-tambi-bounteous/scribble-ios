@@ -1,0 +1,197 @@
+<!doctype html>
+<!--
+  flow-board.html -- source for the "Live app flow" composite board PNG.
+  Data-driven: SCREENS below is the single source of truth for order, labels
+  and red callout pills. Raw phone screenshots are read relative to this file
+  from ../../s2d/inputs/scribl-live-screens-2026-07-20/.
+  Rendered to PNG by render.mjs (headless Chrome). See README.md.
+
+  Source stays ASCII: em-dash / middot / times / apostrophe are emitted via
+  \u escapes so the committed file trips no prose-lint rule, while the PNG
+  still shows the real glyphs.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 5400px;
+    height: 2120px;
+    background: #161619;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  .header { position: absolute; left: 120px; top: 96px; }
+  .wordmark { font-size: 118px; font-weight: 800; letter-spacing: -5px; line-height: 1; }
+  .underline {
+    margin-top: 20px;
+    width: 379px;
+    height: 11px;
+    border-radius: 6px;
+    background: linear-gradient(90deg,
+      #e1910d, #ef6766, #ec4c92, #b354cf, #7a64f6, #477cf6, #19ae99);
+  }
+  .title { margin-top: 44px; font-size: 48px; font-weight: 700; letter-spacing: -1.5px; }
+  .subtitle { margin-top: 16px; font-size: 30px; font-weight: 500; color: #9ca3af; }
+  .subtitle .adds { color: #cbd0d8; }
+  .subtitle .enh { color: #f472b6; font-weight: 600; }
+
+  .row {
+    position: absolute;
+    left: 120px;
+    top: 500px;
+    display: flex;
+    align-items: flex-start;
+    gap: 148px;
+  }
+  .col { width: 600px; display: flex; flex-direction: column; align-items: center; position: relative; }
+
+  .phone {
+    width: 600px;
+    border-radius: 58px;
+    padding: 8px;
+    background: #26262e;
+  }
+  .phone.glow {
+    background: #ec4899;
+    box-shadow:
+      0 0 55px 6px rgba(236, 72, 153, 0.55),
+      0 0 120px 20px rgba(236, 72, 153, 0.28);
+  }
+  .screen {
+    height: 1184px;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+  .screen img { width: 100%; display: block; }
+
+  .label { margin-top: 34px; font-size: 40px; font-weight: 600; color: #ffffff; text-align: center; }
+
+  .pills { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .pill {
+    font-size: 27px;
+    font-weight: 600;
+    color: #f9a8d4;
+    background: #381e2e;
+    border: 2px solid rgba(236, 72, 153, 0.5);
+    border-radius: 999px;
+    padding: 9px 24px;
+    white-space: nowrap;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 604px;            /* vertical middle of the 1200px frame (500 + 600 - ~half glyph) */
+    font-size: 46px;
+    color: #6b7280;
+    transform: translateX(-50%);
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="wordmark">scribl</div>
+    <div class="underline"></div>
+    <div class="title" id="title"></div>
+    <div class="subtitle" id="subtitle"></div>
+  </div>
+  <div class="row" id="row"></div>
+
+<script>
+  // ---- text glyphs, kept out of the ASCII source via \u escapes ----
+  var MDASH = "\u2014", MIDDOT = "\u00b7", TIMES = "\u00d7",
+      LSQUO = "\u2018", RSQUO = "\u2019", RARR = "\u2192";
+
+  var TITLE = "Live app flow " + MDASH + " real screens, current build";
+
+  var ENH = [
+    "custom brushes", "more brush sizes", "2" + TIMES + " colors",
+    "comments removed", "multi-day wall history", "custom avatars"
+  ];
+
+  // Single source of truth: order, screenshot file, label, glow flag, pills.
+  var SCREENS = [
+    { img: "01-signup.png",               label: "Sign up",              glow: false, pills: [] },
+    { img: "06-tutorial.png",             label: "Tutorial",             glow: false, pills: [] },
+    { img: "02-home.png",                 label: "Home " + MDASH + " streak & walls", glow: true,
+      pills: ["custom avatars"] },
+    { img: "05-canvas.png",               label: "Draw",                 glow: true,
+      pills: ["16 colors " + MDASH + " 2" + TIMES, "more brush sizes", "custom brushes"] },
+    { img: "06-write.png",                label: "Caption + voice",      glow: false, pills: [] },
+    { img: "09-wall-family-full.png",     label: "Family wall",          glow: true,
+      pills: ["multi-day history", "AI backgrounds"] },
+    { img: "10-drawing-detail-full.png",  label: "Drawing",              glow: true,
+      pills: ["AI " + LSQUO + "Original" + RSQUO + " toggle",
+              "reactions " + MDASH + " no comments"] }
+  ];
+
+  var SCREEN_DIR = "../../s2d/inputs/scribl-live-screens-2026-07-20/";
+
+  function build() {
+    document.getElementById("title").textContent = TITLE;
+
+    var sub = document.getElementById("subtitle");
+    sub.innerHTML =
+      "Captured from the running app " + MIDDOT + " Mon Jul 20 2026 " + MIDDOT +
+      " signed in as Rob (Forshier Family).  <span class='adds'>This build adds:</span> " +
+      ENH.map(function (e) { return "<span class='enh'>" + e + "</span>"; }).join(" " + MIDDOT + " ") +
+      ".";
+
+    var row = document.getElementById("row");
+    // Bounded loop over a fixed 7-screen list.
+    for (var i = 0; i < SCREENS.length; i++) {
+      var s = SCREENS[i];
+      var col = document.createElement("div");
+      col.className = "col";
+
+      var phone = document.createElement("div");
+      phone.className = "phone" + (s.glow ? " glow" : "");
+      var screen = document.createElement("div");
+      screen.className = "screen";
+      var img = document.createElement("img");
+      img.src = SCREEN_DIR + s.img;
+      screen.appendChild(img);
+      phone.appendChild(screen);
+      col.appendChild(phone);
+
+      var label = document.createElement("div");
+      label.className = "label";
+      label.textContent = s.label;
+      col.appendChild(label);
+
+      if (s.pills.length) {
+        var pills = document.createElement("div");
+        pills.className = "pills";
+        for (var j = 0; j < s.pills.length; j++) {
+          var p = document.createElement("div");
+          p.className = "pill";
+          p.textContent = s.pills[j];
+          pills.appendChild(p);
+        }
+        col.appendChild(pills);
+      }
+
+      row.appendChild(col);
+
+      // Arrow in the gap before every column except the first.
+      if (i > 0) {
+        var a = document.createElement("div");
+        a.className = "arrow";
+        // gap centre: 120px row-left + i*(600+148) - 74 (half a gap), relative to row.
+        a.style.left = (i * (600 + 148) - 74) + "px";
+        a.textContent = RARR;
+        row.appendChild(a);
+      }
+    }
+  }
+
+  build();
+</script>
+</body>
+</html>

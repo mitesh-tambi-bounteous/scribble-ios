@@ -1,0 +1,36 @@
+---
+id: S-022
+title: Invite-by-email channel membership
+status: blocked
+owner: unassigned
+stage: B2
+phase: B
+project: scribl
+labels: [channels, membership, feature]
+---
+
+# S-022 -- Invite-by-email channel membership
+
+Let a family (group channel) member invite someone by email so they become a
+member of the channel. Previously the create-wall screen captured an invite
+email but dropped it (no endpoint existed).
+
+Stub for tracking. Implemented (pending review) in rforsh/MobileApp PR #23
+(branch `scribl-devx-userwalk`).
+
+## AC
+
+- [ ] `POST /channels/:id/members` adds a member by email; the caller must
+  already be a member of the channel (403 not_a_member otherwise), enforced
+  server-side from the caller identity.
+- [ ] The invitee is resolved-or-created by email (idempotent) and granted
+  membership; a returning invitee is not duplicated.
+- [ ] The create-wall screen sends the captured invite email after the channel
+  is created; failures surface inline without blocking navigation.
+- [ ] Channel-isolation (S-004) invariants are unaffected: membership is the
+  only thing granted, and reads remain gated server-side.
+
+## Notes
+
+Relates to family walls (S-016). Consumed by family challenges (S-020), whose
+participants are the channel's members.

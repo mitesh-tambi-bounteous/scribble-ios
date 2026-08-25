@@ -1,0 +1,75 @@
+---
+stage: generator upgrade work order (from the scribl review)
+date: 2026-07-27
+---
+
+# Work order: what the Arc.Loom generator should bake into future meta-repos
+
+The generator that minted this repo is explicitly NOT touched in this
+engagement; the upgrade will likely land after the generator moves into
+HarnessBuilder. Every item below was observed in this repo and is framed as
+"what the generator should bake into future meta-repos". Evidence cites this
+repo's files. Companion assessment:
+[reviews/2026-07-27-knowledge-format-assessment.md](2026-07-27-knowledge-format-assessment.md).
+
+## 1. Process defaults
+
+- **Bake definition-of-done and definition-of-ready into the generated
+  handbook, enforced by the story template.** The handbook here has both, but
+  generated stories shipped without an `updated:` field and Done stories in
+  tracking/stories/ accumulated unchecked AC. The story-sync mandate the
+  generator emits (see CLAUDE.md) should make AC-closeout part of moving a
+  story to Done.
+- **Story frontmatter should include `updated:`.** Without it, staleness of a
+  story page is undetectable mechanically.
+- **Board columns should define "pending review" distinctly from "blocked".**
+  tracking/board.md has Now / Next / Blocked / Done; work awaiting human review
+  has no honest home and gets misfiled.
+
+## 2. Knowledge / OKF
+
+- **Mint knowledge bases OKF-conformant at authoring time, or ship an export
+  transform.** Concretely: `type:` on every non-reserved .md (research/ notes
+  here had none), `title:`/`description:` recommended keys, markdown links not
+  wikilinks, log.md newest-first. This repo needed all four fixed by hand.
+- **Ship index drift tooling as npm scripts.** check-index / update-index:
+  .claude/agents/wiki-linter.md and wiki-ingestor.md reference make targets
+  that do not exist in this repo. npm scripts fit the generated toolchain.
+- **Decide the provenance model.** OKF v0.2 per-page trust/provenance
+  frontmatter (generated / verified / sources / status / stale_after) vs the
+  central knowledge/PROVENANCE.md this repo carries. One schema decision, made
+  once, at the generator level.
+- **Make the page-type registry an explicit generator parameter.** This repo
+  silently drops the brain's comparison and notes types; fine, but the trim
+  should be declared so /query and lint expectations stay consistent.
+
+## 3. Pipeline hardening (observed failure modes here)
+
+- **docs-sync syncTree never deletes orphaned destination files.** Hand-edits
+  inside docs/ survived invisibly across syncs. Add prune-or-warn on
+  destination files with no source.
+- **applyRule silently skips missing sources.** A renamed source file silently
+  freezes its rendered page forever. Warn loudly or fail.
+- **normalize-prose replacements must be whitespace-aware and idempotent.**
+  Re-running the transform must be a no-op, including across line wraps.
+- **Generated trees need a marker convention.** Nothing distinguishes
+  generated-vs-hand-maintained subtrees under docs/; the design-history
+  incident happened because a hand-maintained page lived inside a generated
+  tree.
+- **Derive repo-identity fields from git remotes at generation time.**
+  project.json code_repo/brain_repo and the clone URLs in CLAUDE.md and README
+  were typed by hand: this repo shipped with a GitHub URL and a typo for a
+  Bitbucket-hosted repo.
+
+## 4. Reviews / flywheel
+
+- **Wire reviews/ into the doc site by default.** The flywheel is a baked-in
+  habit (CLAUDE.md), but docs-sync renders only s2d/ and tracking/, so reviews
+  are invisible in the rendered wiki.
+- **Emit mechanically checkable prose-lint rules.** The "do not name the
+  legacy consulting firm" rule here is unenforceable as written: it does not
+  say which name to grep for. Every rule the generator emits should come with
+  its check.
+
+Not in scope here: no generator changes were made in this engagement; this
+note is the ready-to-lift work order for when the generator upgrade happens.

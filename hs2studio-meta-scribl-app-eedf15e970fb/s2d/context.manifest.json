@@ -1,0 +1,15 @@
+{
+  "composed": [
+    {
+      "id": "future-architecture-aws",
+      "title": "Future Architecture (AWS)",
+      "intro": "The target AWS architecture for the scribl D2C platform. This page brings together the architecture diagram, the parsed infrastructure cost model, and the distilled research notes so the future-state design and its economics are first-class wiki content.",
+      "image": "s2d/inputs/scribl-aws-architecture-d2c.png",
+      "spreadsheet": "s2d/inputs/scribl-d2c-aws-estimate-v3.xlsx",
+      "spreadsheet_sheet": "Summary",
+      "include": [
+        "knowledge/research/scribl-poc-aws-architecture.md"
+      ]
+    }
+  ]
+}

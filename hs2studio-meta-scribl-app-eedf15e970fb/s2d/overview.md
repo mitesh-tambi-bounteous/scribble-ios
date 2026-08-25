@@ -1,0 +1,45 @@
+---
+title: "scribl -- project overview"
+project: scribl
+updated: 2026-07-27
+---
+
+# scribl -- project overview
+
+**Name:** scribl
+**Type:** mobile-app-poc
+
+## What it is
+
+A consumer D2C daily-creative mobile app POC: a reference-quality proof of an
+AI-assisted SDLC and the target cloud, not a production release. One universal
+AI-generated prompt goes to everyone daily; you respond by drawing, writing, or
+speaking, submit to unlock the shared wall, and react. A single cross-platform
+codebase (Expo / React Native) ships to iOS, Android, and web, backed by a
+cloud-light serverless AWS backend. The POC is a thin slice of the production
+target, not a throwaway.
+
+## Status
+
+In active build. Architecture is locked and the daily loop has shipped and
+merged; the project is now on milestone **M4.5 (screens built)** in phase B2 --
+full screen and navigation buildout per the design flow. See the
+[Roadmap](/roadmap) for milestones and [Status](/status) for where the build
+stands today.
+
+## Engagement contract
+
+The Scribl <> Bounteous Statement of Work "Mobile App Development" is
+executed, effective 2026-08-13. Fixed fee $100,000, 8-week term (2-week Shape
+phase + three 2-week build sprints), 50/50 payment split (signing / end of
+engagement). See the
+[SOW structured extract](/sow-mobile-app-development-extract) for the full
+section-cited breakdown, including open items to confirm at kickoff.
+
+## Links
+
+- [The Story](/story) -- the narrative walk from discovery through delivery.
+- [Input Artifacts](/input-artifacts) -- the verbatim engagement source material.
+- [Full-App Spec](/scribl-full-app-spec) -- the authoritative build contract.
+- [Roadmap](/roadmap) -- phases and milestones.
+- [Status](/status) -- current milestone status.

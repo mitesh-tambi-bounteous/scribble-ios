@@ -1,0 +1,58 @@
+# .dockerignore — lives at the REPO ROOT because the Scribl API image is built
+# with the repo root as the build context:
+#     docker build -f backend/Dockerfile .
+#
+# The Dockerfile only COPYs `backend/` and `packages/` explicitly, so most of
+# the repo is never added regardless — but excluding it here keeps the context
+# small/fast and, critically, prevents host node_modules from clobbering the
+# node_modules we install inside the image.
+
+# Dependencies (all levels — installed fresh inside the image via npm ci)
+node_modules/
+**/node_modules/
+
+# VCS / editor / OS cruft
+.git/
+.gitignore
+.DS_Store
+*.log
+
+# Expo / React Native client app — not part of the backend image
+.expo/
+dist/
+web-build/
+ios/
+android/
+public/canvaskit.wasm
+expo-env.d.ts
+
+# App source dirs unrelated to the API container (belt-and-suspenders; the
+# Dockerfile never COPYs these anyway)
+app/
+components/
+assets/
+lib/
+src/
+screenshots/
+__mocks__/
+e2e/
+tests/
+terraform/
+docs/
+decisions/
+
+# Backend build artifacts / IaC output (not needed at runtime)
+backend/cdk.out/
+backend/dist/
+backend/Dockerfile
+.dockerignore
+
+# Secrets — never bake into an image layer. App Runner injects env at runtime.
+.env
+**/.env
+
+# Test / CI artifacts
+test-results/
+playwright-report/
+blob-report/
+.staging/

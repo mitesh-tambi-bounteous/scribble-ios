@@ -1,0 +1,138 @@
+# Scribl — Client Summary
+
+**Client:** Scribl  
+**CEO:** Matt Kaplan  
+**Status:** Active opportunity — pre-engagement  
+**Last updated:** 2026-06-09  
+
+---
+
+## What Scribl Does
+
+Scribl is a creativity platform with an existing enterprise motion (facilitated workshops and team events). The D2C initiative is a net-new consumer growth engine designed to prove daily habit formation, viral growth mechanics, and monetization at consumer scale — proof points needed for the next fundraise.
+
+Their positioning: **"AI powers everything else. Scribl empowers people."** AI generates the prompt; humans make the art. Scribl is explicitly anti-noise, anti-algorithm, pro-human expression.
+
+---
+
+## The Opportunity — D2C Mobile App (MLP)
+
+Scribl wants to build and launch a Direct-to-Consumer mobile app centered on a **daily creative practice** — inspired by the habit-forming dynamics of Wordle, NYT Games, and BeReal. The target launch is **September 15, 2026** (beta August 2026).
+
+### Core product loops
+
+| Feature | Description |
+| --- | --- |
+| Daily Prompt | One universal prompt delivered to all users simultaneously — powered by Claude |
+| Creative Response | Drawing canvas, short text story, or voice memo (intentionally constrained) |
+| Submit to Unlock | Users see others' responses only after submitting their own — a core design principle |
+| Social Channels | 4 private channels per user: Personal Archive, Family, Friends, Co-Workers |
+| Reactions | Lightweight sentiment emoji reactions (no public feed, no algorithmic discovery) |
+| Streaks and Progression | Badges, milestones, retention loops — same psychological model as Duolingo |
+| Push Notifications | Daily prompt reminder, friend activity, momentum-based re-engagement |
+| Personalized Follow-ups | AI-powered follow-ups based on stories shared (stretch feature) |
+
+### Internal data goals (MVP)
+- Retention and habit formation metrics
+- Prompt engagement (open, completion, time spent)
+- Social and viral growth signals (share rates, K-factor)
+- Early monetization signals (premium intent, AI feature engagement)
+
+---
+
+## Partnership Structure
+
+| Partner | Role |
+| --- | --- |
+| Bounteous | Primary build partner, **on-spec arrangement** — build resources committed in exchange for future economic participation, not T&M billing |
+| Anthropic | AI infrastructure — Claude powers prompt generation, content moderation, and future conversational features |
+| AWS | Cloud infrastructure, scalability, CDK architecture. AWS code coaching is **funded and active** |
+
+The on-spec terms are being finalized as of June 2026. Scope, milestones, and economic participation are defined in a partnership SOW.
+
+---
+
+## Technology Stack (Defined in PRFAQ)
+
+- **Mobile:** iOS (Swift) + Android (Kotlin), React Native shared component layer
+- **Backend:** AWS (compute, storage, database), infrastructure-as-code via AWS CDK
+- **AI:** Anthropic Claude API — prompt generation, content moderation, future conversational features
+- **Real-time:** WebSocket for event mode; async push notification infrastructure for habit loop
+- **Security:** E2E encryption in transit; AES-256 at rest; AWS CloudTrail audit logging
+- **Scale target:** Daily consumer habit traffic plus enterprise event-mode spikes (up to 2,000 concurrent users per event)
+
+---
+
+## Timeline
+
+| Milestone | Target Date |
+| --- | --- |
+| Finalize Bounteous scope and SOW terms | June 2026 |
+| Build sprint in progress; alpha testing | July 2026 |
+| Beta launch (500-1,000 users) | August 2026 |
+| Public launch — iOS and Android | September 15, 2026 |
+| First board data report (30-day retention curves) | October 2026 |
+| Angel investor pitch window | October-December 2026 |
+| Booster Pack marketplace + Champions activation | Q4 2026 |
+| Slack/Teams integration, Exciting Artifact integration | Q1 2027 |
+
+---
+
+## Business Context and Strategic Rationale
+
+**Why Scribl is doing this now:**
+1. Bounteous partnership de-risks the build cost
+2. AWS and Anthropic infrastructure partnerships are in place
+3. The "AI-exhausted" consumer moment is at peak — window to establish daily habit is now
+
+**Scribl's fundraise story:** D2C MLP retention curves (available October 2026) are the primary proof point for the October-December 2026 angel investor pitch window. This is not a distraction from fundraising; it IS the fundraise story.
+
+**Enterprise flywheel:** D2C consumer adoption creates pre-sold enterprise customers at zero sales cost. Active enterprise pilots include EY, CVS/Aetna, and Go Health.
+
+**Investment requirement (Scribl's cash):**
+- $50K: Agentic architecture validation
+- $15-20K: Go-to-market (PR, launch campaign)
+- AWS code coaching: funded separately through AWS partnership
+- Total: approximately $70K for a fully built, publicly launched consumer app
+
+### Key success metrics
+
+| Metric | Target |
+| --- | --- |
+| DAU by end of beta | 1,000 |
+| DAU by 90 days post-launch | 10,000 |
+| Day 7 retention | ≥40% |
+| Prompt completion rate | ≥70% |
+| Social sharing rate | ≥60% of responses |
+| Viral K-factor at 90 days | ≥1.0 |
+| Free-to-paid conversion (30 days) | 5-10% |
+
+---
+
+## Our Engagement Goals
+
+Beyond the standard build partner role, we want to use this project to:
+
+1. **Prove the ARC/AI-SDLC methodology end-to-end** — build this app from requirements through delivery using our AI-augmented development process as a live reference implementation
+2. **Leverage Claude in the product** — Claude is already in the tech stack for prompt generation; we want to deepen that integration to create a compelling case for Anthropic funding and a public reference customer story
+3. **AWS co-funding angle** — AWS code coaching is already funded; there may be additional co-investment opportunity given the consumer scale story
+4. **Make this fundable from Anthropic** — deep Claude integration in the consumer product creates a public reference story for Anthropic's own developer marketing
+
+---
+
+## Source Documents
+
+| File | Description |
+| --- | --- |
+| `Initial source docs/Scribl D2C MVP Scope[78].pdf` | BRD — 6 feature areas, internal data goals |
+| `Initial source docs/Scribl D2C MLP - PRFAQ.docx` | Full PRFAQ — 4 FAQ sections covering consumer, enterprise, partners, and internal stakeholders |
+| `Initial source docs/Scribl D2C Flow.png` | Wireframe flow — sign-up through creative response, share, and channel view |
+
+---
+
+## Next Steps
+
+- [ ] Prepare scope and estimate for full app build using ARC platform and AI-SDLC methodology
+- [ ] Identify Claude integration points beyond prompt generation (personalized follow-ups, AI content moderation, conversational features)
+- [ ] Draft Anthropic funding angle and public reference narrative
+- [ ] Finalize on-spec SOW terms with Scribl

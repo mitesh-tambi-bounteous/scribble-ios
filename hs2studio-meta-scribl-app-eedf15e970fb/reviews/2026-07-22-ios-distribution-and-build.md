@@ -1,0 +1,69 @@
+---
+stage: iOS distribution research + build prep
+date: 2026-07-22
+---
+
+# Review: iOS distribution doc + buildable iOS side
+
+## What went well
+
+- The Android worker's iOS notes in the brief were accurate: the path is
+  symmetric once tooling is present. No rediscovery needed.
+- Parallelizing paid off: submodule init, CocoaPods install, and the doc draft
+  all ran at once, so the toolchain was ready by the time the doc was reviewed.
+- The build prep went further than the brief assumed. The brief expected "no
+  Xcode" as the hard blocker, but Xcode.app was already installed; the real
+  blocker narrowed to the privileged `xcode-select` switch. prebuild and
+  `pod install` (103 pods) both ran clean, so the project is one sudo command
+  away from a Simulator build.
+
+## What took too long / friction
+
+- The doc draft initially recommended EAS Build/Submit as the easy path, which
+  directly violates the app's golden rule (vendor/mobileapp/CLAUDE.md: no EAS,
+  builds in AWS). Caught and corrected on review. The subagent that wrote the
+  doc did not have the submodule CLAUDE.md in context.
+- `docs:build` needs the meta repo's node_modules, which were not installed in a
+  fresh worktree. `docs:sync` only needs node built-ins, so sync succeeded but
+  the first build-verify failed with "vitepress: command not found" until
+  `npm install` ran.
+
+## What to change in the playbook
+
+- When dispatching a subagent to write build/release guidance, pass the code
+  repo's CLAUDE.md golden rules (especially OSS-only / no-EAS) in the prompt.
+  Build-tooling recommendations are exactly where a generic agent drifts.
+- A brief that assumes a blocker ("no Xcode") should still be verified first.
+  The environment had moved on since the note was written.
+- Consider a worktree bootstrap step that runs `npm install` in the meta repo so
+  `docs:build` verification works without a separate install.
+
+## Update: build verified end to end (same day)
+
+After Rob activated Xcode (the sudo commands), the build was driven to a working
+Simulator launch. Two reusable learnings worth keeping in the playbook:
+
+- Xcode 26 ships the iOS SDK but NO bootable simulator runtime. A fresh Xcode has
+  zero simulator devices, so `expo run:ios` fails with "No iOS devices available
+  in Simulator.app" -- which reads like a project error but is a missing-runtime
+  error. Fix: `xcodebuild -downloadPlatform iOS` (about 8.5 GB, no admin). Add
+  this to any iOS build runbook; it is not obvious from the expo error.
+- A stale `DEVELOPER_DIR` env var in the automation shell overrode the
+  system-wide `xcode-select` setting, so tools saw CommandLineTools even after
+  Rob's sudo switch succeeded. Diagnose activation via
+  `readlink /var/db/xcode_select_link` (system truth) vs `echo $DEVELOPER_DIR`
+  (shell override), not `xcode-select -p` alone.
+
+Also: the Android output had no wiki page despite the APK build being done. Added
+docs/android-distribution.md alongside the iOS page so both generated native
+outputs are documented adjacent to each other.
+
+## Inventory
+
+- docs/ios-distribution.md (source s2d/ios-distribution.md): VERIFIED build status.
+- docs/android-distribution.md (source s2d/android-distribution.md): NEW Android
+  APK output/distribution page. Both synced + in the sidebar.
+- vendor/mobileapp: ios/ + android/ generated (gitignored CNG); app.json
+  ios.bundleIdentifier committed on app-repo branch `scribl-ios-bundle-id`
+  (PR open, pin NOT bumped until merge).
+- iOS build proven on iPhone 17 Simulator (iOS 26.5, Xcode 26.6).

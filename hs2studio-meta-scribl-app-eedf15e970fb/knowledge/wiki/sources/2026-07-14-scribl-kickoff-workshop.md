@@ -1,0 +1,233 @@
+---
+type: source
+title: "Scribl x Bounteous Kickoff Workshop -- Retro (2026-07-14)"
+description: Durable retro of the 2026-07-14 kickoff workshop -- timeline re-anchored on AWS re:Invent, eight feature decisions made, North Star direction locked.
+source-type: workshop
+date-ingested: 2026-07-15
+author: Bounteous (Angie Yap, David Lawton, Martin Young, Rob Forshier II, John Kilgore) + Scribl (Matt Kaplan, Jeff Sparr, Eric Rice, Helen Leffers, Abbie Knapton)
+date: 2026-07-14
+source: raw/2026-07-14-scribl-kickoff-workshop-review.md
+transcript: meetings/raw/2026-07-14-workshop.md
+tags: [scribl, workshop, retro, shape-phase, north-star, decisions, re-invent]
+---
+
+# Scribl x Bounteous Kickoff Workshop -- Retro (2026-07-14)
+
+Durable retro of the 2026-07-14 Scribl x Bounteous kickoff workshop. This is a
+deliberate exception to the "transcripts are operational records, not wiki
+knowledge" default: a workshop retro is durable knowledge. The operational
+digest and the action-item seam live at
+[`knowledge/meetings/2026-07-14-workshop.md`](../../meetings/2026-07-14-workshop.md);
+the raw transcript is preserved at
+[`knowledge/meetings/raw/2026-07-14-workshop.md`](../../meetings/raw/2026-07-14-workshop.md).
+
+**Format:** Microsoft Teams, ~3h44m, live LucidSpark board, two live prototype
+demos. Facilitators: Angie Yap (MC), David Lawton (working sessions), Rob
+Forshier II (demos). Executive sponsor: Marty Young.
+
+| Side | People |
+| --- | --- |
+| Scribl | Matt Kaplan (CEO), Jeff Sparr (CRO, co-founder), Eric Rice (CCO / game design), Helen Leffers (Chief of Staff), Abbie Knapton (Customer Experience Lead) |
+| Bounteous | Angie Yap (Alliances, MC), David Lawton (Sr. Principal, AI Methodology & Delivery), Marty Young (EVP Data & AI, sponsor), Rob Forshier II (AI Architect), John Kilgore (Client Service, relationship + MSA lead) |
+
+## How the workshop went
+
+The workshop achieved its goal: the room committed to a path into Phase 0 and
+mapped the launch scope. It also reset one major assumption. The PRFAQ's August 1
+submission and September 15 launch dates came off the table. Matt Kaplan called
+them "very fictitious," and the room re-anchored the whole plan on the **AWS
+re:Invent keynote (~December 5, 2026)** as the aspirational proof point, with
+every other date driven by product readiness once Scribl syncs internally.
+
+Everything else landed cleanly. All eight key feature decisions were made, mostly
+matching the pre-read recommendations. The prototype earned strong buy-in ("I
+would be out pitching this tomorrow with what you showed us today," Matt Kaplan).
+Both founders closed with clear commitment ("We've been waiting 20 years for this.
+Let's go," Jeff Sparr).
+
+The session doubled as a live proof of the Bounteous shape-phase methodology:
+Rob demoed a working Expo prototype (not wireframes) built from Scribl's inputs,
+then a second time grew it live during the session at Marty's request for "a
+little extra wow factor" -- adding draw-your-own avatars, more brushes and colors,
+an archives "yesterday" view, and removing comments on the spot. David also
+demoed the project "brain" (this repo: a VitePress wiki plus a knowledge base the
+delivery team works out of).
+
+## Key learnings and shifts to carry forward
+
+1. **Timeline is now re:Invent-anchored and readiness-driven.** Beta, public
+   launch, and first-submission dates are TBD pending Scribl's internal sync.
+   This relaxes the 9-week compression pressure that drove several pre-read
+   recommendations.
+2. **Claude ambition rose above the conservative baseline.** The room wants Claude
+   visibly central from beta -- both as a user differentiator and as an
+   Anthropic-funding magnet. Ideas: personalized, context-aware prompts (Eric's
+   "what was your favorite ride at Epcot?" example) and a psychology-informed
+   empathy agent (Marty, Eric). The specific Sonnet / Haiku / Opus mapping was
+   never named in the room; it stayed at the "Claude" level.
+3. **The prototype is the production seed.** Rob's Expo app plus the brain repo is
+   the starting point the team finishes, not a throwaway POC.
+4. **Simplicity is the essence, connection is the bet.** "This is not a drawing
+   platform. This is a connection platform" (Matt). The room repeatedly resisted
+   feature complexity (fill bucket, extra brushes) as a threat to the level
+   playing field.
+5. **Fundraising is immediate and continuous.** Matt would pitch "tomorrow."
+   Marty floated a reframe: an MLP built primarily to sharpen the pitch, which may
+   reach public release later.
+6. **Enterprise event mode pulled forward** to be solutioned for re:Invent,
+   reframed as wall capacity for organizations (~100k concurrent submissions).
+   Eric flagged a past game degraded around 50 to 60 participants, so scale is a
+   real risk.
+7. **Mission Cloud is a live third party.** Mission built the AI-enhancement
+   pipeline (PDF delivered the prior Friday). Rob rebuilt it in-app using
+   per-stroke data, removing the OCR step Mission needed. The Bounteous / Mission
+   Cloud vendor boundary stayed open -- an ownership question to resolve. Related
+   ask: flavor AI output with Scribl's own style ("scribbly clouds," not a
+   Renaissance field); Scribl will supply reference art.
+8. **Analytics accessibility is a hard requirement.** Scribl struggles to parse
+   its own data today (Metabase). Eric called it "the bane of my existence."
+   Accessible reporting for Scribl staff must be usable at launch.
+
+### North Star
+
+**Status: direction locked, final wording pending.** The bet is **connection**,
+and **simplicity** must appear in the statement (Jeff: "without that word simple,
+it's missing the essence"). The team left with a mandate to finish the wording
+with Helen. The three finalists the room voted up:
+
+| Type | Statement | Votes |
+| --- | --- | --- |
+| We win when | "We win when users connect with the people in their lives who matter most." | 3 (top) |
+| Billboard | "Draw something simple. Discover something real." | 3 (top) |
+| Product is | "Scribl empowers you to connect authentically with those that matter most across distance, schedules, and generations." | 2 |
+
+Matt favored centering the individual: an empowering personal experience is the
+fuel for adoption and virality.
+
+## Decisions made
+
+All eight decision cards were filled and confirmed verbally. Owner is the person
+who made or ratified the call.
+
+| # | Decision | The call | Owner | Rationale | Vs. pre-read |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Voice memo response | Fast-follow after MLP. Typed story text stays in for both platforms. | Matt | Typing suffices for MLP speed; Android audio storage is heavy; dictation is a nice-to-have. | Matches |
+| 2 | Paywall timing | Post-launch. | Matt | Beta gathers maximum data; run-cost and artifact-cost unknown, so pricing waits. | Matches |
+| 3 | Personalized follow-ups | Post-MLP for real personalization. Scaffold from the start; use generic and event-based pushes in the interim. | Eric, Rob, Marty | Build the plumbing early, activate per user once data accrues. | Matches (seam) |
+| 4 | Age gate / minors (COPPA) | Ship 13+ first for beta and public launch. Under-13 as a separate submission after launch, with in-app "coming soon" for minors. | Marty | Apple minor-protection + COPPA add a month-plus and heavy reporting; deferral protects the re:Invent window. | Matches, with a flag (below) |
+| 5 | Moderation fail policy | Fail-safe: hold submissions if moderation is down. Richer degradation UX post-MLP. | Matt (to Bounteous's lead) | "If we're gonna fail, let's be safe." Outages rare; beta users tolerate rough edges. | Matches |
+| 6 | Claude integration depth | Claude is a beta-visible differentiator: personalized/context-aware prompts, drawing reflection, empathy agent. Exciting Artifact stays a seam. | David, Marty | Meaningful Claude presence delights users and strengthens the Anthropic funding case. | Deviation: more ambitious than baseline |
+| 7 | Partner API "at launch" claim | Post-MLP. Scribl amends the PRFAQ. | Matt | The PRFAQ is a working draft; the API has no build stream today. | Matches intent |
+| 8 | Channel model | A fixed set of predefined, renamable channels for MLP, tagged by wall type (family / friends / coworkers). Unlimited channels behind the paywall. | David, Matt | Predefined keeps measurement consistent; instinct converged near three to four. | Partial: exact number open |
+
+Two further settled items:
+
+- **Claude hosting: confirmed on Amazon Bedrock**, settled outside the workshop
+  and tied to the AWS funding arrangement. The board's AWS architecture diagram
+  already routes Claude through Bedrock. The provider abstraction stays in the
+  design to keep the adapter swappable.
+- **Comments are removed from the product.** The room's aversion to social-media
+  negativity became a product principle; Rob deleted comments live in the pivot
+  demo. Marty logged a future idea: reactions expressed as drawings or emoji
+  rather than text. Eric's Bob Ross "Happy Little Accidents" inspiration -- respond
+  by drawing on top of someone's piece -- reinforced that the whole language of the
+  game should be drawing, not speech.
+
+### Feature placement (where the room put each feature)
+
+- **Beta (proves the habit loop):** core canvas, fill bucket, brush sizes, color
+  palette; typed story text (both platforms); AI background enhancement with an
+  on/off settings toggle; daily prompt + challenges; streaks/milestones/badges;
+  archives/timeline; draw-your-own avatars; fixed channels (number TBD) with
+  wall-type tags; submit-to-unlock; content moderation (fail-safe); meaningful
+  Claude features; compliance gates (13+, UGC report, block/mute, privacy labels);
+  accessible analytics for Scribl staff.
+- **By launch (polish + store readiness):** social sharing (Wordle-style image +
+  a "wrapped" link to a static "coming soon" site); export/printables; custom
+  channel names; organizing reusable custom prompts; notification prefs/quiet
+  hours; store listings; channel-isolation + load tests as a launch gate;
+  AI-consent surface, in-app deletion, AI-content labels, ToS, support contact.
+- **Post-launch:** voice memo + Android dictation; premium paywall; under-13
+  experience (separate submission); partner API; unlimited archives (paywall);
+  theme packs / custom props; unlockables + progression rewards (Eric's vision);
+  sticker store; the Exciting Artifact (shareable family collage, held as a seam);
+  Slack/Teams, SSO, enterprise admin, localization, SOC 2.
+
+Items that moved during the session: voice memo (demo -> post-MLP fast-follow);
+social sharing (beta -> by launch); enterprise event mode / high-capacity walls
+(post-launch -> solution now, plan for re:Invent); comments (demo -> removed);
+notification prefs (unscoped -> by launch).
+
+## Future and open decisions (need Rob's ratification, not just recording)
+
+These surfaced as directional but not settled; several carry a flag:
+
+- **Age gate deferral is reluctant.** All three Scribl leaders named the 8 to 12
+  family sweet spot as the ideal target; they defer under-13 only because Apple
+  and COPPA threaten the re:Invent timeline. **David to research** whether Apple's
+  parental-approval ("ask-to-buy") flow could mitigate the under-13 requirement,
+  and current rejection stringency.
+- **Final North Star wording** (connection locked; fold in "simple"; finish with
+  Helen).
+- **Exact number of fixed channels** (three vs four; whether coworkers is its own).
+- **Pricing model** and what sits in front of vs behind the paywall (blocked on
+  run-cost and artifact-cost).
+- **Free-tier archive cap** and whether it couples to the paywall (David's
+  instinct: independent).
+- **Per-wall capacity limits** and enterprise / re:Invent scale.
+- **Exciting Artifact scope**, and whether any version belongs earlier than a
+  post-launch seam.
+- **All launch dates** (beta, public, first submission), pending Scribl's internal
+  sync.
+- **Bounteous / Mission Cloud vendor boundary** on the AI-enhancement pipeline.
+- **AI-generated daily prompts** (PRFAQ) vs a curated preset list.
+- **Angel pitch cadence** (continuous rather than a single window; Matt pitching
+  immediately).
+
+### Risks raised
+
+| Risk | Impact | Raised by |
+| --- | --- | --- |
+| Apple social + minor-protection review (April 2026 COPPA update) | Month-plus review delay, heavy reporting, higher rejection odds | David |
+| Store rejection eating the launch buffer | Slips public launch past re:Invent | David |
+| Android device fragmentation | Voice/speech may fail on older hand-me-down devices in family beta groups | David |
+| Scribl data / analytics inadequacy | Scribl cannot parse its own usage today | Eric, Abbie |
+| Cost uncertainty (run-cost, artifact-cost) | Blocks the pricing model | Matt |
+| Wall overcrowding / crash at scale | Enterprise and re:Invent scale unproven | Eric |
+| Q4 vacation-season staffing | Sprint velocity risk (Eric reframed October launch as a family-connection opportunity) | David, Eric |
+
+## Next steps
+
+The commercial path the room agreed to: Bounteous synthesizes the readout, then
+delivers a proposal with pricing. John Kilgore starts the MSA now so Scribl legal
+has runway. Bounteous applies for AWS funding on Scribl's behalf and coordinates a
+three-way alignment call; Marty carries the Anthropic funding case. Dates get
+stamped after Scribl's internal sync.
+
+Full owner/timing action-item table lives in the meeting digest
+([`knowledge/meetings/2026-07-14-workshop.md`](../../meetings/2026-07-14-workshop.md),
+"Suggested action items"). Headline items:
+
+- Synthesize the workshop into a readout PDF, then a proposal + pricing (Angie / Bounteous).
+- Kick off the MSA now for Scribl legal to redline (John Kilgore, long-pole).
+- Apply for AWS funding on Scribl's behalf; set up a three-way AWS + Scribl +
+  Bounteous alignment call (Angie); pursue Anthropic funding (Marty).
+- Work backward from re:Invent on stage/submission requirements; Helen lobbies
+  early for a slot (Angie, Marty).
+- Build accessible analytics/reporting for Scribl staff (Bounteous, by launch).
+- Solution wall capacity for re:Invent ~100k concurrent (Bounteous).
+- Amend the PRFAQ; supply Scribl-branded reference art for AI tuning (Scribl).
+
+### Board close-out gaps to chase
+
+The LucidSpark board left several convergent fields open by design; this retro is
+the durable record until they are stamped: the final agreed North Star sentence;
+RACI letters in the Key Stakeholders matrix; owners on the Risks Log; owners and
+dates on the Phase 0 Commit next-action rows.
+
+## Sources
+
+- Raw synthesized review: [`knowledge/raw/2026-07-14-scribl-kickoff-workshop-review.md`](../../raw/2026-07-14-scribl-kickoff-workshop-review.md)
+- Raw transcript: [`knowledge/meetings/raw/2026-07-14-workshop.md`](../../meetings/raw/2026-07-14-workshop.md)
+- Operational digest: [`knowledge/meetings/2026-07-14-workshop.md`](../../meetings/2026-07-14-workshop.md)
+- Live board: "Scribl Arc Workshop, July 14 2026" (LucidSpark)

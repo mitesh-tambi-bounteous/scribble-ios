@@ -1,0 +1,74 @@
+---
+title: "Production sprint backlog"
+project: scribl
+type: planning
+updated: 2026-07-27
+---
+
+# Production sprint backlog
+
+The scribl production build planned as four 2-week sprints (8 weeks), MVP-first
+and iOS-first, resource-loaded by team role: a ground-up rebuild in a brand-new
+Expo repo, with the current Expo app kept as the POC to port from, never extend.
+The epic layer is the RE-01..RE-14 MVP epics in
+[/expo-rebuild-epics](/expo-rebuild-epics), which remains the source-of-truth
+dataset; this page is its sprint-planned view. Points are Fibonacci placeholders
+for team sizing, not commitments. Companion plans:
+[/production-backend-plan](/production-backend-plan) and
+[/future-scale-track](/future-scale-track).
+
+## Team
+
+Four roles, each with a full parallel workstream in every sprint: IOS (iOS
+Engineer, India, full time), BE (Backend Lead, India, full time -- one person
+wearing the architect + AWS/PE + backend hats), QA (QA Engineer, India, full
+time, test-infrastructure workstream from Sprint 1), and PM (Rob, NA, at 50%
+until a Product Manager is staffed; desired NA add is Dan Hill, PM/lead, to
+pair with Rob). Everyone except Rob is in India, so ceremonies sit inside the
+NA/India overlap window.
+
+## Sprint overview -- capacity by role (points)
+
+| Sprint | Theme | Stories | IOS | BE | QA | PM | Total |
+|--------|-------|---------|-----|----|----|----|-------|
+| 1 | Foundation: repo, infra, auth, shell | 13 | 24 | 16 | 8 | 2 | 50 |
+| 2 | The daily loop: prompt, draw, submit | 12 | 16 | 16 | 10 | 2 | 44 |
+| 3 | Walls and social | 12 | 18 | 21 | 8 | 2 | 49 |
+| 4 | Share out, safety, TestFlight | 13 | 18 (+3 stretch) | 11 | 8 | 2 | 39 (+3) |
+
+50 stories, 182 points plus a 3-point stretch (P4-13, first to drop).
+
+## Judgment-call flags (T1-T12)
+
+Every MVP trim against the epic dataset is flagged for team review; nothing was
+cut silently.
+
+- T1: Voice response -> FUTURE (was MVP-gated in dataset, decision #8)
+- T2: Palette = 8 colors, half of the live build's 16
+- T3: Single solid-round brush + 6-size row; the 3 custom brush styles and the fill bucket -> FUTURE
+- T4: Auth = backend-managed email + username + password; no SSO/federation (Cognito user pool recommended)
+- T5: Managed push (SNS/Pinpoint) -> FUTURE; MVP keeps a local daily prompt reminder only
+- T6: Milestone badges 7/30/100 -> FUTURE; MVP keeps streak counter + week view + stats panel
+- T7: Automated (Haiku) pre-publish moderation -> fast-follow FUTURE; MVP ships human-path report/block/takedown/deletion (store-gate risk if targeting public App Store launch)
+- T8: Public wall ("The Wall" mockup screen) -> NOT in MVP (no-public-feed invariant; Open Decision D)
+- T9: AI enhancement, AI prompt generation, challenge mode -> FUTURE (inherited dataset ruling; challenge mode first among future)
+- T10: Android delivery -> FUTURE (iOS-first); web export = dev convenience; single Ink theme, switcher FUTURE
+- T11: Daily prompt = seeded rotating curated set on the same fetch contract AI prompts will use later (inherited)
+- T12: Backend = single region (us-east-2), serverless-first; the EKS/Bedrock multi-region target = scale-up track, not MVP (inherited + flagged divergence)
+
+## Capacity flags (CAP1-CAP4)
+
+- CAP1: Backend Lead is single-threaded across three hats; Sprint 3 is their peak (21 pts); P3-09 is the marked release valve and may slip to Sprint 4
+- CAP2: Points are Fibonacci placeholders; the team calibrates real velocity at Sprint 1 planning
+- CAP3: QA reuses the intelligent-engineering SDLC loop in spirit (test plans up front, evidence-before-done, review gates) and builds the scribl test harness fresh
+- CAP4: Sprint 1 iOS load (24 pts) is the iOS peak; P1-13 is the iOS release valve and may slip to Sprint 2
+
+The full backlog below renders every story card (id, epic chip, role chip,
+points, intent, acceptance sketch, flags), the future track, and the CMPSR
+(Jira) mapping conventions including role labels. It offers two views: "By
+sprint" (default, also the no-JS and print fallback) and "By role", which
+regroups the same cards under IOS / BE / QA / PM with sprint chips on each card.
+
+<iframe src="/assets/backlog/scribl-production-sprint-backlog.html" style="width:100%;height:1200px;border:1px solid var(--vp-c-divider);border-radius:8px;" title="scribl production sprint backlog"></iframe>
+
+[Open the sprint backlog full-window](/assets/backlog/scribl-production-sprint-backlog.html)

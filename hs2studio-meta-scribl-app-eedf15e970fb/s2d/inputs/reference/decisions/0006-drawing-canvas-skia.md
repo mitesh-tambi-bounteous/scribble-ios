@@ -1,0 +1,40 @@
+# ADR 0006: Drawing canvas via React Native Skia; voice transcribed on-device
+
+**Status:** Proposed
+**Date:** 2026-06-10
+**Deciders:** David Lawton, Rob Forshier II
+**Related:** [../architecture-plan.md](../architecture-plan.md) §4
+
+## Context
+
+The creative response supports drawing, text, and voice. The drawing canvas is the highest-risk component: canvas behavior diverges between iOS and Android in ways emulators do not surface, and low-end Android is the worst case. Voice adds an AI-surface and privacy question if audio is sent to the cloud.
+
+## Decision
+
+We will implement the drawing canvas with **React Native Skia** (GPU-accelerated, consistent cross-platform, exports to image), and transcribe **voice memos on-device** (`SFSpeechRecognizer` / Android `SpeechRecognizer`), sending only the transcript to moderation. Because Skia avoids per-platform native canvas code, and on-device transcription keeps the Claude surface small, lowers latency, and is a privacy win.
+
+## Alternatives considered
+
+### Option A: Native canvas modules per platform
+- Pros: maximum control and performance.
+- Cons: two native implementations; needs platform specialists.
+- Why not chosen: kept as the fallback if Skia misses the responsiveness bar (triggers a second mobile engineer).
+
+### Option B: Cloud speech-to-text (Claude or a transcription API)
+- Pros: potentially higher accuracy.
+- Cons: sends audio off-device; adds latency, cost, and privacy/consent scope.
+- Why not chosen: on-device meets the need and keeps the AI surface lean.
+
+## Consequences
+
+### Positive
+- One canvas codebase; small AI surface; audio stays on-device unless shared.
+
+### Negative
+- Skia is a heavyweight native dependency; bridging quirks possible.
+
+### Risks to monitor
+- Skia responsiveness on low-end Android (real-device testing from week 6). Trigger: native-canvas fallback + second mobile engineer.
+
+## Related
+- [0001](0001-react-native-primary.md), [0011](0011-model-tiering.md)

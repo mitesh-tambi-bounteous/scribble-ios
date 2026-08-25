@@ -1,0 +1,35 @@
+# cheatsheet.yaml — standard arc-help manifest template.
+# MobileApp / https://github.com/rforsh/MobileApp substituted at build time; regen_date is an explicit
+# input (never wall-clock) so renders stay deterministic.
+kind: cheatsheet
+title: "MobileApp Harness"
+brand: bounteous
+self_contained: false
+theme_toggle: true
+regen_date: "2026-07-07"
+
+tabs:
+  - id: quickref
+    label: "Quick ref"
+    source: modules/quickref.md
+  - id: plan-mode
+    label: "Plan mode"
+    source: modules/sdlc/plan-mode.md
+  - id: brainstorm
+    label: "Brainstorm"
+    source: modules/sdlc/brainstorm.md
+  - id: setup
+    label: "Setup & Config"
+    source: modules/setup.md
+  - id: concepts
+    label: "Concepts"
+    source: modules/concepts.md
+  - id: terminal
+    label: "Terminal"
+    source: modules/terminal.md
+
+substitutions:
+  project_name: "MobileApp"
+  repo_url: "https://github.com/rforsh/MobileApp"
+
+includes: {}

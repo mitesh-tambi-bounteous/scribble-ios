@@ -1,0 +1,41 @@
+# ADR 0009: Provider-abstraction layer for Claude (Direct API default)
+
+**Status:** Proposed
+**Date:** 2026-06-10
+**Deciders:** David Lawton, Rob Forshier II (input from the AWS conversation, 2026-06-13)
+**Related:** [../architecture-plan.md](../architecture-plan.md) §7, [../technical-implementation-plan.md](../technical-implementation-plan.md) §9.7, [../discussion-topics.md](../discussion-topics.md)
+
+## Context
+
+How Claude is hosted (Direct Anthropic API vs AWS Bedrock vs Claude Platform on AWS) is unresolved and tied to the AWS co-funding conversation. AWS may want Claude on Bedrock as a condition of co-funding. The concern raised internally is feature/caching parity; Bedrock serves the same Messages API shape, but prompt caching can break if tooling mutates prompt headers. We cannot let this decision block the build.
+
+## Decision
+
+We will route all Claude access through **one internal provider-abstraction layer** (`generate`, `moderate`, `describe_image`) with adapters for Direct Anthropic API, AWS Bedrock, and Claude Platform on AWS, selectable by configuration. The recommended **default is the Direct Anthropic API**. Because the abstraction turns an unresolved, externally-driven hosting decision into a config switch, protecting the September 15 date regardless of how AWS co-funding lands.
+
+## Alternatives considered
+
+### Option A: Commit to Direct Anthropic API now
+- Pros: simplest; cleanest caching; cleanest Anthropic reference story.
+- Cons: AWS co-funding may require in-AWS billing later, forcing a change.
+- Why not chosen as sole path: the abstraction keeps Direct as default while preserving optionality at near-zero cost.
+
+### Option B: Commit to Bedrock now
+- Pros: strongest AWS alignment; in-VPC data path.
+- Cons: caching nuance; weaker Anthropic-reference framing; decision not yet made.
+- Why not chosen as sole path: premature before the AWS conversation.
+
+## Consequences
+
+### Positive
+- Hosting becomes a config decision, not a rewrite.
+- One home for model selection, caching, and token-cost logging.
+
+### Negative
+- A thin layer of indirection over the SDK.
+
+### Risks to monitor
+- Adapter request-shape divergence breaking Bedrock prompt caching. Keep request shapes clean; verify cache-read tokens on each adapter.
+
+## Related
+- [0003](0003-ai-pipeline-separate-service.md), [0011](0011-model-tiering.md)

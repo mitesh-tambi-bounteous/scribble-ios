@@ -1,0 +1,14 @@
+# Team Process
+
+How work flows on scribl. Starter conventions, adjust as the team settles.
+
+- Board: work lives on the tracking board in `tracking/board.md`, moving across
+  Now -> Next -> Blocked -> Done. Keep it current, it should reflect reality.
+- Work items: each card links to its story under `tracking/stories/`.
+- Pull requests: open a PR per work item, keep it small, link the story. At
+  least one reviewer approves before merge (see Definition of Done).
+- Cadence: short standup to sync on Now and surface Blocked items.
+- Decisions: architecture and process decisions are recorded as ADRs under
+  `s2d/decisions/`. Decide once, write it down, link it from the work item.
+
+Grow this: capture the real cadence, roles, and review norms as they emerge.

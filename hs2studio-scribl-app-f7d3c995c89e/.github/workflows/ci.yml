@@ -1,0 +1,53 @@
+name: CI
+
+# Build gate for the Scribl POC: typecheck, lint, tests, and a real web build
+# must all pass. The `expo export` step is what turns a broken build into a
+# failing pipeline ("add build to the pipeline so we can tell when we broke it").
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: typecheck · lint · test · web build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install app dependencies
+        run: npm ci
+
+      # tests/channel-isolation.test.ts (and the app typecheck) import the
+      # backend Lambda handlers, so the backend workspace deps must be present.
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: backend
+
+      # Fetch canvaskit.wasm into public/ so the web build and any Skia code
+      # path resolves. The wasm stays gitignored; CI regenerates it each run.
+      - name: Set up Skia web (canvaskit.wasm)
+        run: npx setup-skia-web public
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      # Jest's own file-watching dependency (fsevents/haste-map internals)
+      # can leave a background thread running after all tests pass, which
+      # hangs the process indefinitely without --forceExit. --ci disables
+      # snapshot auto-write in CI.
+      - name: Test
+        run: npm run test:ci
+
+      # The build gate: a build-time error here fails the pipeline.
+      - name: Web build (expo export)
+        run: npx expo export -p web

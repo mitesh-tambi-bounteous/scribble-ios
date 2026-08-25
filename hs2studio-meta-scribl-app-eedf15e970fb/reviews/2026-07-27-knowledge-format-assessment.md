@@ -1,0 +1,82 @@
+---
+stage: knowledge-format assessment (brain vault + OKF conformance)
+date: 2026-07-27
+---
+
+# Review: does knowledge/ follow the brain vault format and Google's OKF?
+
+Bottom line up front: yes, nearly. The scribl `knowledge/` wiki is a
+near-conformant port of the brain repo's vault conventions, and in two places
+(markdown links instead of wikilinks, " -- " separators instead of em-dash) it
+is actually closer to Google's Open Knowledge Format (OKF) than the brain
+itself. After the cheap fixes below plus a thin export step (frontmatter
+normalization and a bundle boundary), this knowledge base is shareable as an
+OKF bundle. The remaining gaps are structural and belong to the generator, not
+this repo.
+
+Scope reviewed: `knowledge/` (wiki/, research/, raw/, meetings/, articles/,
+PROVENANCE.md, README.md), the format contract in `.claude/agents/wiki-*.md`
+and `.claude/commands/ingest*.md`, compared against the brain repo's wiki
+schema and ADRs and the live OKF spec (okf/SPEC.md in
+GoogleCloudPlatform/knowledge-catalog).
+
+## Side-by-side
+
+| Dimension | scribl knowledge/ | brain vault | OKF | Verdict |
+|---|---|---|---|---|
+| Layout | raw/, research/, wiki/, articles/, meetings/; PROVENANCE.md, README.md | Same core dirs plus libraries/, examples/, more wiki subtypes | Layout-agnostic; path is identity | Match both (deliberate adaptation: adds meetings/, drops unused dirs) |
+| Frontmatter | wiki/ pages: `type` + per-type fields; meetings: `type: meeting` + fields; research/ and raw/ had HTML comments only, no YAML | Same wiki schema; brain ADR requires `type:` on all new docs incl. research/ | Only `type` required; `title`, `description`, `resource`, `tags` recommended; v0.2 adds trust/provenance keys | Wiki pages match both. research/ notes and missing title/description were gaps -- now fixed (see below) |
+| Page types | 6 types: tool, repo, pattern, concept, source, assessment (+ meeting outside wiki); sections match brain exactly | 8 types: those 6 plus comparison, notes | Free strings, no registry; consumers tolerate unknown types | Match brain (explicit subset) and OKF |
+| Index | Central wiki/index.md, per-type sections, markdown relative links + " -- " descriptions; no drift tooling | Central index with wikilinks + em-dash descriptions; make check-index/update-index | index.md reserved, optional, no frontmatter, `* [Title](url) - description` bullets | Closer to OKF than brain (markdown links). Gap vs brain: no drift automation. " -- " vs " - " is cosmetic |
+| Linking | Zero wikilinks anywhere; index uses markdown links; page bodies used backticked plain paths | Wikilinks everywhere (Obsidian); OKF markdown links deferred to an export transform | Plain markdown links, bundle-relative preferred; broken links tolerated | Diverges from brain in OKF's favor. Backticked non-links and stale agent-def wording were gaps -- now fixed |
+| Provenance / log | wiki/log.md append-only entries; central PROVENANCE.md audit table; raw snapshots carry source/date HTML comments | Same log entry format, newest first; no PROVENANCE.md; freshness via ingested_sha | log.md reserved: date-grouped, newest first; v0.2 puts provenance per-page in frontmatter | Entry format matched; ordering (oldest-first) diverged from both -- now fixed. PROVENANCE.md is a useful scribl-only extra |
+| Naming | Kebab-case slugs; raw/ date-prefixed | Same | No rules beyond path-is-identity | Match both |
+
+## Cheap fixes
+
+All six were mechanical and low-risk; a parallel agent applied them alongside
+this review.
+
+| # | Fix | Status |
+|---|---|---|
+| 1 | Flip knowledge/wiki/log.md to newest-first (and the header line + step 8 of .claude/agents/wiki-ingestor.md) | applied in this review |
+| 2 | Add YAML frontmatter (`type: research` + title/description/tags) to the research/ notes -- the single OKF conformance blocker | applied in this review |
+| 3 | Add `title:` and `description:` keys to existing wiki and meetings frontmatter | applied in this review |
+| 4 | Reconcile agent defs with reality: declare markdown links the convention; reword the wikilink assumptions in wiki-linter, wiki-querier, wiki-refresher | applied in this review |
+| 5 | Turn backticked path references into real markdown links (kickoff source page, meeting digests) | applied in this review |
+| 6 | Document in knowledge/README.md that raw/ snapshots sit outside the OKF bundle boundary | applied in this review |
+
+Non-fixes: the " -- " index separator stays (repo brand rule bans em-dash; OKF
+consumers must tolerate it). Per-directory index.md files are OKF-optional.
+
+## Structural gaps: deferred to generator upgrade
+
+These are authoring-time defects of the Arc.Loom generator, not of this repo,
+and are written up as a work order in
+[reviews/2026-07-27-generator-upgrade-note.md](2026-07-27-generator-upgrade-note.md):
+
+1. No OKF export/bundle path (or mint OKF-conformant at authoring time).
+2. No index drift tooling; agent defs reference make targets that do not exist.
+3. OKF v0.2 trust/provenance frontmatter vs central PROVENANCE.md is an
+   unresolved schema decision.
+4. The page-type trim (comparison/notes dropped from brain's set) should be an
+   explicit generator parameter.
+
+## Confidence notes on OKF
+
+- OKF is real and verifiable: high confidence. The brain has first-party notes
+  (concept, source, repo, and assessment pages plus an accepted adoption ADR),
+  and web search confirmed the Google Cloud announcement (2026-06-12) and the
+  authoritative spec at okf/SPEC.md in GoogleCloudPlatform/knowledge-catalog.
+- Core requirements, confirmed against the spec: `type` is the only required
+  frontmatter field; recommended title/description/resource/tags; plain
+  markdown links, bundle-relative preferred; conformance = parseable
+  frontmatter with non-empty `type` on every non-reserved .md; consumers
+  tolerate unknown types, unknown keys, and broken links.
+- Version drift caveat: the brain's OKF pages and its adoption ADR describe
+  v0.1; the live spec is v0.2, which adds trust/provenance/lifecycle key
+  families and attested-computation contracts. The brain pages are slightly
+  stale; re-check the spec before enforcing details in a linter.
+- Reserved-file details (index.md and log.md exact bullet formats): medium-high
+  confidence, from a summarized fetch of SPEC.md agreeing with the brain's
+  v0.1 notes. Verify exact punctuation before mechanizing.

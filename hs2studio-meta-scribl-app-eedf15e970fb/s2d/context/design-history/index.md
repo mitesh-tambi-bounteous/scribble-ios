@@ -1,0 +1,17 @@
+# Design History
+
+_This design-history subtree is hand-maintained source inside the otherwise generated `s2d/context/` tree; context-ingest overwrites its own pages in place and never deletes or writes under `design-history/`._
+
+Scribl's design has moved from an original hand-off wireframe to a fuller,
+staged design export of the core screens, and now to the live running build.
+
+1. [Original Wireframes from Scribl](./original-wireframes) -- the original
+   user-flow wireframe supplied by Scribl that set the early direction.
+2. [Latest Designs](./latest-designs) -- a newer design export covering the
+   core screens (Home, Log in, Create account, Family/Public wall, Prompt of
+   the day, Draw/Studio, Your streak, Your walls).
+3. [Post-Workshop App Flow (Live Build)](./post-workshop-app-flow) -- real
+   screens from the running app captured after the discovery workshop, showing
+   the enhancements implemented live during the session.
+
+Read them in that order to see how the design has evolved.

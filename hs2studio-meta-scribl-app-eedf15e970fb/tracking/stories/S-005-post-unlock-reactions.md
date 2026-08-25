@@ -1,0 +1,29 @@
+---
+id: S-005
+title: Post-unlock reactions
+status: done
+owner: unassigned
+stage: B2
+phase: B
+project: scribl
+labels: [daily-loop]
+---
+
+# S-005 -- Post-unlock reactions
+
+After unlocking the wall (S-003), the user can react to other responses.
+Reactions are only available post-unlock.
+
+**Shipped** in commit `58d8ab5` (#9): `app/wall.tsx` renders reaction emoji
+buttons (`REACTION_EMOJIS`) gated behind `locked === false` via `useWallStore.react()`.
+Wall and store tests cover the flow; note that gating is not covered by a
+dedicated invariant test the way S-003/004 are.
+
+## AC
+
+- [x] Reaction controls are not available/active before submit-to-unlock.
+- [x] After unlock, the user can add a reaction to another user's response on the
+  channel wall.
+- [x] A reaction persists through the thin data client and is reflected on the
+  response when the wall reloads.
+- [x] Reactions render consistently on web and on device.

@@ -1,0 +1,40 @@
+# Scribl — Architecture Decision Records
+
+Decisions backing [../architecture-plan.md](../architecture-plan.md) and [../technical-implementation-plan.md](../technical-implementation-plan.md). All are **Proposed** and become **Accepted** once David + Rob confirm (and, where noted, Matt Kaplan or the AWS conversation).
+
+| ADR | Decision | Status |
+| --- | --- | --- |
+| [0001](0001-react-native-primary.md) | React Native primary; native modules only where required | Proposed |
+| [0002](0002-serverless-first-backend.md) | Serverless-first backend; Fargate for the AI pipeline | Proposed |
+| [0003](0003-ai-pipeline-separate-service.md) | AI pipeline is a separate service, not inline in Lambdas | Proposed |
+| [0004](0004-dynamodb-single-table.md) | Aurora Serverless v2 (PostgreSQL) as system of record (revised 2026-06-10; DynamoDB is the forward-scale option) | Proposed |
+| [0005](0005-aws-cdk-iac.md) | AWS CDK (TypeScript) for all infrastructure (see 0012) | Proposed |
+| [0006](0006-drawing-canvas-skia.md) | Drawing canvas via React Native Skia; voice on-device | Proposed |
+| [0007](0007-submit-to-unlock-data-layer.md) | Submit-to-unlock enforced at the data/API layer | Proposed |
+| [0008](0008-analytics-separate-pipeline.md) | Analytics on a separate Kinesis to S3 to Athena pipeline | Proposed |
+| [0009](0009-claude-provider-abstraction.md) | Provider-abstraction layer for Claude (Direct API default) | Proposed |
+| [0010](0010-async-ai-pipeline.md) | Drawing interpretation and moderation run async | Proposed |
+| [0011](0011-model-tiering.md) | Model tiering: Opus / Sonnet / Haiku | Proposed |
+| [0012](0012-terraform-iac.md) | Terraform for production IaC (EKS/Bedrock target); supersedes 0005 pending sign-off | Proposed |
+| [0013](0013-challenge-timer-per-viewer-reveal.md) | Challenges open-ended; drawSeconds is a per-drawing timer; reveal is per-viewer submit-to-unlock | Accepted |
+
+## Gating decisions (not yet ADRs — resolve before build lock)
+
+These need a decision before they earn an ADR. See architecture-plan.md §16; consolidated in the team model's Decisions tab.
+
+**Block the build until resolved:**
+
+1. COPPA / minors: are under-13 users in scope? (Can move the launch by months.)
+2. Agentic personalized follow-up: MLP or post-launch? (Lock before week 3.)
+3. Channel model: fixed four vs user-creatable; invite/membership rules; multi-channel share. (Freeze before Stream B in week 4; drives the [0004](0004-dynamodb-single-table.md) schema and the [0007](0007-submit-to-unlock-data-layer.md) check.)
+4. Moderation fail policy: fail-open vs fail-safe per content type (informs [0010](0010-async-ai-pipeline.md)).
+
+**Resolve early; do not block the build:**
+
+5. Claude hosting: Direct vs Bedrock vs Claude Platform on AWS — now a privacy/compliance decision as well as cost (informs whether [0009](0009-claude-provider-abstraction.md)'s default holds).
+6. Operational data store: Aurora Serverless v2 (recommended, [0004](0004-dynamodb-single-table.md) revised) vs DynamoDB — confirm.
+7. Premium tier at launch or post-launch?
+8. Voice in MLP: keep, cut, or iOS-only (recommendation: cut/iOS-only; revisits [0006](0006-drawing-canvas-skia.md)).
+9. MLP scope cuts: event-mode WebSocket out of MLP; product-analytics SDK / PostHog over the bespoke warehouse (revisits [0008](0008-analytics-separate-pipeline.md)); resolve the 2,000-concurrent scale-target inconsistency with Scribl.
+
+**New launch requirements from the 2026-06-10 review** (not decisions, but must be built): third-party-AI data-sharing consent surface (Apple 5.1.2(i)); named moderation-queue owner with a ~24h action SLA (Apple 1.2); channel-isolation tests as a launch gate.

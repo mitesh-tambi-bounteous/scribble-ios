@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>scribl -- Production sprint backlog (MVP, iOS-first, role-loaded)</title>
+<style>
+  :root {
+    --ink: #1c2330;
+    --muted: #55606e;
+    --paper: #f7f6f2;
+    --card: #ffffff;
+    --line: #dcd8cf;
+    --accent: #0e6e5c;      /* MVP green */
+    --accent-soft: #e2f1ec;
+    --future: #4a5468;      /* FUTURE slate */
+    --flag-ink: #6b4a00;    /* FLAG amber */
+    --flag-soft: #ffe9b3;
+    --points-ink: #2b3a55;
+    --points-soft: #e3e9f4;
+    --role-ios: #1e5aa8;    /* IOS blue */
+    --role-be: #6b21a8;     /* BE purple */
+    --role-qa: #9f1239;     /* QA rose */
+    --role-pm: #3f6212;     /* PM olive */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 48px; }
+  header.page h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  header.page .meta { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+  header.page p.premise { margin: 0 0 8px; max-width: 72ch; }
+  h2 { font-size: 19px; margin: 34px 0 10px; border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+  h3 { font-size: 15px; margin: 18px 0 8px; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    padding: 2px 8px; border-radius: 999px; vertical-align: middle; white-space: nowrap;
+  }
+  .badge.mvp    { background: var(--accent); color: #ffffff; }
+  .badge.future { background: var(--future); color: #ffffff; }
+  .badge.flag   { background: var(--flag-soft); color: var(--flag-ink); border: 1px solid #d9b45e; }
+  .badge.pts    { background: var(--points-soft); color: var(--points-ink); }
+  .badge.epic   { background: var(--accent-soft); color: var(--accent); border: 1px solid #bcd9d0; font-weight: 600; letter-spacing: 0.02em; white-space: normal; }
+  .badge.role-ios { background: var(--role-ios); color: #ffffff; }
+  .badge.role-be  { background: var(--role-be);  color: #ffffff; }
+  .badge.role-qa  { background: var(--role-qa);  color: #ffffff; }
+  .badge.role-pm  { background: var(--role-pm);  color: #ffffff; }
+  .badge.sprint { background: #efece4; color: var(--ink); border: 1px solid var(--line); display: none; }
+  #roleview .badge.sprint { display: inline-block; }
+
+  /* Overview strip */
+  .overview { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0 6px; }
+  .overview .cell {
+    flex: 1 1 210px; background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px;
+  }
+  .overview .cell .s { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+  .overview .cell .t { font-weight: 600; margin: 2px 0 4px; }
+  .overview .cell .n { color: var(--muted); font-size: 13px; }
+  .overview .cell .r { font-size: 12.5px; margin-top: 6px; }
+  .overview .cell .r span { margin-right: 4px; }
+
+  /* Tables */
+  table.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--card); border: 1px solid var(--line); }
+  table.tbl th, table.tbl td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.tbl th { background: #efece4; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  table.tbl td.id { font-weight: 700; white-space: nowrap; }
+
+  /* View toggle */
+  .toggle { margin: 14px 0 4px; }
+  .toggle button {
+    font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+    padding: 6px 14px; border: 1px solid var(--line); background: var(--card); color: var(--muted);
+  }
+  .toggle button:first-child { border-radius: 8px 0 0 8px; }
+  .toggle button:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+  .toggle button.on { background: var(--accent); border-color: var(--accent); color: #ffffff; }
+
+  /* Sprint sections */
+  details.sprint { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin: 16px 0; }
+  details.sprint > summary {
+    cursor: pointer; padding: 14px 16px; font-size: 17px; font-weight: 700; list-style: none;
+  }
+  details.sprint > summary::-webkit-details-marker { display: none; }
+  details.sprint > summary::after { content: " [-]"; color: var(--muted); font-weight: 400; font-size: 13px; }
+  details.sprint:not([open]) > summary::after { content: " [+]"; }
+  details.sprint .body { padding: 0 16px 16px; }
+  details.sprint .goal { color: var(--muted); font-size: 14px; margin: -6px 0 12px; }
+
+  /* Role view groups */
+  #roleview .rolegroup { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin: 16px 0; padding: 4px 16px 16px; }
+  #roleview .rolegroup h3 { font-size: 16px; }
+
+  .card {
+    border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    border-radius: 8px; padding: 10px 14px; margin: 8px 0; background: #fffdf8;
+  }
+  .card[data-role="IOS"] { border-left-color: var(--role-ios); }
+  .card[data-role="BE"]  { border-left-color: var(--role-be); }
+  .card[data-role="QA"]  { border-left-color: var(--role-qa); }
+  .card[data-role="PM"]  { border-left-color: var(--role-pm); }
+  .card .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+  .card .id { font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--points-ink); }
+  .card .title { font-weight: 600; }
+  .card .intent { margin: 6px 0 4px; font-size: 14px; }
+  .card ul.ac { margin: 4px 0 2px; padding-left: 2px; list-style: none; font-size: 13.5px; color: var(--muted); }
+  .card ul.ac li { margin: 2px 0; }
+  .card ul.ac li::before { content: "[ ] "; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--accent); }
+
+  ul.plain { padding-left: 20px; }
+  ul.plain li { margin: 4px 0; }
+  .note { color: var(--muted); font-size: 13.5px; }
+  a { color: var(--accent); }
+  footer { margin-top: 36px; border-top: 1px solid var(--line); padding-top: 12px; color: var(--muted); font-size: 13px; }
+
+  body.view-role #sprintview { display: none; }
+  #roleview[hidden] { display: none; }
+  @media print {
+    body { background: #fff; }
+    details.sprint { border: 1px solid #999; }
+    details.sprint > summary::after { content: ""; }
+    .toggle { display: none !important; }
+    #sprintview { display: block !important; }
+    #roleview { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <h1>scribl -- Production sprint backlog</h1>
+  <div class="meta">MVP-first, iOS-first / four 2-week sprints (8 weeks) / role-loaded (rev 2) / 2026-07-27</div>
+  <p class="premise">
+    Ground-up production rebuild of scribl in a brand-new Expo repo. The current
+    Expo app remains the POC: it is ported from, never extended. The epic layer is
+    RE-01..RE-14 from the source-of-truth dataset (tracking/expo-rebuild-epics.md);
+    this page is that dataset's sprint-planned view. Every story is tagged with an
+    owning role; all four roles have parallel work in every sprint. Points are
+    Fibonacci placeholders for team sizing, not commitments.
+  </p>
+  <p><span class="badge mvp">MVP</span> in-sprint scope &nbsp;
+     <span class="badge future">FUTURE</span> post-MVP track &nbsp;
+     <span class="badge flag">FLAG</span> judgment call for team review &nbsp;
+     <span class="badge role-ios">IOS</span>
+     <span class="badge role-be">BE</span>
+     <span class="badge role-qa">QA</span>
+     <span class="badge role-pm">PM</span> owning role</p>
+</header>
+
+<h2>Team and roles (8-week build)</h2>
+<table class="tbl">
+  <tr><th>Role</th><th>Who</th><th>Load</th><th>Notes</th></tr>
+  <tr><td class="id"><span class="badge role-ios">IOS</span></td><td>iOS Engineer (India)</td><td>full time</td><td>Builds the new Expo app repo and all client work</td></tr>
+  <tr><td class="id"><span class="badge role-be">BE</span></td><td>Backend Lead (India)</td><td>full time</td><td>ONE person, three hats: architect + AWS/PE lead + backend developer. Owns architecture, CDK/AWS infra, and backend services</td></tr>
+  <tr><td class="id"><span class="badge role-qa">QA</span></td><td>QA Engineer (India)</td><td>full time</td><td>Owns test infrastructure, per-feature test plans, E2E/device testing on iOS, release gates. Full workstream from Sprint 1</td></tr>
+  <tr><td class="id"><span class="badge role-pm">PM</span></td><td>Rob (NA) at 50%</td><td>half time</td><td>Plays PM until a Product Manager is staffed. Desired NA add: Dan Hill (PM/lead, per Jonathan) to pair with Rob</td></tr>
+</table>
+<p class="note">Working note: everyone except Rob is in India; plan ceremonies inside the
+NA/India overlap window. Cross-role acceptance criteria stay with the story's
+primary owner; the other role assists. Nothing serializes across roles except
+real dependencies (schema before endpoints, endpoints before the screens that
+consume them -- covered inside sprint boundaries).</p>
+
+<h2>Sprint overview at a glance -- capacity by role (points)</h2>
+<div class="overview">
+  <div class="cell">
+    <div class="s">Sprint 1</div><div class="t">Foundation: repo, infra, auth, shell</div>
+    <div class="n">13 stories / 50 pts</div>
+    <div class="r"><span class="badge role-ios">IOS 24</span><span class="badge role-be">BE 16</span><span class="badge role-qa">QA 8</span><span class="badge role-pm">PM 2</span></div>
+  </div>
+  <div class="cell">
+    <div class="s">Sprint 2</div><div class="t">The daily loop: prompt, draw, submit</div>
+    <div class="n">12 stories / 44 pts</div>
+    <div class="r"><span class="badge role-ios">IOS 16</span><span class="badge role-be">BE 16</span><span class="badge role-qa">QA 10</span><span class="badge role-pm">PM 2</span></div>
+  </div>
+  <div class="cell">
+    <div class="s">Sprint 3</div><div class="t">Walls and social</div>
+    <div class="n">12 stories / 49 pts</div>
+    <div class="r"><span class="badge role-ios">IOS 18</span><span class="badge role-be">BE 21</span><span class="badge role-qa">QA 8</span><span class="badge role-pm">PM 2</span></div>
+  </div>
+  <div class="cell">
+    <div class="s">Sprint 4</div><div class="t">Share out, safety, TestFlight</div>
+    <div class="n">13 stories / 39 pts (+3 stretch)</div>
+    <div class="r"><span class="badge role-ios">IOS 18 (+3)</span><span class="badge role-be">BE 11</span><span class="badge role-qa">QA 8</span><span class="badge role-pm">PM 2</span></div>
+  </div>
+</div>
+<p class="note">50 stories, 182 points plus a 3-point stretch (P4-13, first to drop). Every role has a full parallel workstream in every sprint.</p>
+
+<h2>Judgment calls for team review</h2>
+<p class="note">Every MVP trim against the epic dataset is flagged here. Nothing was cut silently; each row is a decision the team should confirm or overturn.</p>
+<table class="tbl">
+  <tr><th>#</th><th>Trim</th><th>Rationale</th><th>Flag</th></tr>
+  <tr><td class="id">T1</td><td>Voice response -&gt; FUTURE (was MVP-gated in dataset, decision #8)</td><td>BRD kept it; TIP recommended cut or iOS-only; brief directs trim-down</td><td><span class="badge flag">JUDGMENT CALL</span></td></tr>
+  <tr><td class="id">T2</td><td>Palette = 8 colors (half of the live build's 16)</td><td>Brief: "~half the color palette". Mockup had 6; workshop went to 16</td><td><span class="badge flag">JUDGMENT CALL</span></td></tr>
+  <tr><td class="id">T3</td><td>Single solid-round ("point") brush + size row (6 sizes). The 3 custom brush styles AND the fill bucket -&gt; FUTURE</td><td>Brief: "brush SIZES + single point brush only". Workshop's first sticky was "fill bucket is awesome" -- expect pushback</td><td><span class="badge flag">JUDGMENT CALL</span></td></tr>
+  <tr><td class="id">T4</td><td>Auth = email + username + password managed by the backend; NO SSO/federation (federation stays RE-F4). Recommend Cognito user pool with email/password only (no rolled-own password storage); own-credential-store noted as alternative</td><td>Brief directive</td><td><span class="badge flag">JUDGMENT CALL (implementation choice)</span></td></tr>
+  <tr><td class="id">T5</td><td>Managed push (SNS/Pinpoint, RE-11) -&gt; FUTURE; MVP keeps a LOCAL daily prompt reminder only</td><td>BRD area 5 was MVP; push infra is heavy for 8 weeks; local reminder preserves the habit loop</td><td><span class="badge flag">JUDGMENT CALL</span></td></tr>
+  <tr><td class="id">T6</td><td>Milestone badges 7/30/100 -&gt; FUTURE; MVP keeps streak counter + week view + stats panel</td><td>Progression was BRD MVP area 4; badges are additive polish</td><td><span class="badge flag">JUDGMENT CALL</span></td></tr>
+  <tr><td class="id">T7</td><td>Automated (Haiku) pre-publish moderation -&gt; fast-follow FUTURE; MVP ships human-path trust and safety: report content, block/mute, takedown queue, account deletion</td><td>Apple 1.2 UGC + 5.1.1(v) still require report/block/delete at App Store review; automated scanning can follow. If the 8-week target is public App Store launch (not TestFlight), pull automated moderation back in</td><td><span class="badge flag">JUDGMENT CALL (store-gate risk)</span></td></tr>
+  <tr><td class="id">T8</td><td>Public wall ("The Wall" mockup screen, "312 strangers") -&gt; NOT in MVP</td><td>Conflicts with the no-public-feed invariant; Open Decision D unresolved</td><td><span class="badge flag">JUDGMENT CALL</span></td></tr>
+  <tr><td class="id">T9</td><td>AI enhancement pipeline, AI prompt generation, challenge mode -&gt; FUTURE</td><td>Already the dataset ruling (RE-F2, RE-F3, RE-F1); challenge mode FIRST among future</td><td><span class="badge flag">inherited</span></td></tr>
+  <tr><td class="id">T10</td><td>Android delivery -&gt; FUTURE (iOS-first); web export = dev convenience, not a release target; single theme (Ink) -- theme switcher FUTURE</td><td>Brief directive + trim-down</td><td><span class="badge flag">JUDGMENT CALL (theme)</span></td></tr>
+  <tr><td class="id">T11</td><td>Daily prompt = seeded rotating curated set (same fetch contract AI prompts will use later)</td><td>RE-03 MVP scope; AI generation is RE-F3</td><td><span class="badge flag">inherited</span></td></tr>
+  <tr><td class="id">T12</td><td>Backend = single region (us-east-2), serverless-first (API Gateway + Lambda, Aurora Serverless v2, S3 + CloudFront). Jonathan's EKS/Bedrock multi-region target = scale-up track, not MVP</td><td>Brief directive; ADR-0002 serverless-first</td><td><span class="badge flag">inherited + flagged divergence</span></td></tr>
+</table>
+
+<h3>Capacity flags (judgment calls for team review)</h3>
+<ul class="plain">
+  <li><span class="badge flag">CAP1</span> Backend Lead is single-threaded across three hats; Sprint 3 is their peak (21 pts). P3-09 (Personal Archive) is the marked release valve -- it can slip to Sprint 4 without breaking the loop.</li>
+  <li><span class="badge flag">CAP2</span> Points are Fibonacci placeholders for relative sizing; the team calibrates real velocity at Sprint 1 planning.</li>
+  <li><span class="badge flag">CAP3</span> QA discipline reuses the intelligent-engineering SDLC loop in spirit: per-feature test plans up front, evidence-before-done verification, review gates before merge. No heavier framework exists to import; QA builds the scribl test harness fresh.</li>
+  <li><span class="badge flag">CAP4</span> Sprint 1 iOS load (24 pts) is the iOS peak -- screens are small but numerous; P1-13 (error normalization) is the iOS release valve and may slip to Sprint 2.</li>
+</ul>
+
+<p class="note">Screens in MVP (match the client mockup, minus the public wall):
+signup, tutorial, splash/start, today's prompt, canvas, caption (text-only),
+home, family wall, response detail, share. Plus settings (spec'd, needed for
+notification toggle + account deletion).</p>
+
+<h2>Sprint plan</h2>
+<div class="toggle" id="viewtoggle" hidden>
+  <button type="button" id="btn-sprint" class="on">By sprint</button>
+  <button type="button" id="btn-role">By role</button>
+</div>
+
+<section id="sprintview">
+
+<details class="sprint" open>
+  <summary>Sprint 1 -- Foundation: repo, infra, auth, shell <span class="badge pts">13 stories / 50 pts</span></summary>
+  <div class="body">
+    <p class="goal">Goal: a production repo on production rails, deployed dev infrastructure and schema as code, real backend-managed accounts, the QA operating model live, and every MVP screen reachable in a navigable shell.</p>
+
+    <div class="card" data-role="IOS" data-sprint="1" data-pts="3">
+      <div class="head"><span class="id">P1-01</span><span class="title">Scaffold the production Expo repo</span><span class="badge epic">RE-01 App shell, navigation and design system</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">A brand-new Expo + TypeScript repo with lint, test harness hooks and CI skeleton so all later work lands on production rails, not POC rails.</p>
+      <ul class="ac">
+        <li>Fresh clone -&gt; one command boots iOS simulator build</li>
+        <li>CI runs typecheck + lint + unit tests on every push</li>
+        <li>POC repo untouched</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="1" data-pts="5">
+      <div class="head"><span class="id">P1-02</span><span class="title">Design system and Ink theme tokens</span><span class="badge epic">RE-01 App shell, navigation and design system</span><span class="badge role-ios">IOS</span><span class="badge pts">5 pts</span><span class="badge flag">FLAG T10</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">Shared tokens (color, type, spacing, dotted-paper surface) matching the client designs so every screen reads as scribl from day one. Single theme (Ink) per T10; theme switcher is future.</p>
+      <ul class="ac">
+        <li>Token module consumed by 2+ screens</li>
+        <li>Ink theme matches mockup hero screens side by side</li>
+        <li>No hardcoded colors in screen code</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="1" data-pts="5">
+      <div class="head"><span class="id">P1-03</span><span class="title">Route graph and navigation shell</span><span class="badge epic">RE-01 App shell, navigation and design system</span><span class="badge role-ios">IOS</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">Every MVP screen exists as a route with the bottom nav wired so the flow is clickable end to end before features land.</p>
+      <ul class="ac">
+        <li>Signup -&gt; tutorial -&gt; splash -&gt; prompt -&gt; canvas -&gt; caption -&gt; home -&gt; family -&gt; detail -&gt; share all reachable</li>
+        <li>Bottom nav on wall surfaces</li>
+        <li>Deep-linkable routes</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="1" data-pts="8">
+      <div class="head"><span class="id">P1-04</span><span class="title">CDK single-region baseline (us-east-2)</span><span class="badge epic">RE-13 Backend and data platform</span><span class="badge role-be">BE</span><span class="badge pts">8 pts</span><span class="badge flag">FLAG T12</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">Dev + prod stacks as CDK TypeScript: API Gateway + Lambda skeleton, Aurora Serverless v2, S3 + CloudFront, Secrets Manager/KMS, so the backend exists as code from sprint 1. Single-region serverless-first per T12.</p>
+      <ul class="ac">
+        <li>cdk deploy stands up dev from scratch</li>
+        <li>Smoke Lambda answers through API Gateway</li>
+        <li>Aurora reachable via RDS Proxy from Lambda</li>
+        <li>No console-clicked resources</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="1" data-pts="5">
+      <div class="head"><span class="id">P1-05</span><span class="title">Auth backend: email + username + password</span><span class="badge epic">RE-02 Accounts and onboarding</span><span class="badge role-be">BE</span><span class="badge pts">5 pts</span><span class="badge flag">FLAG T4</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">Backend-managed sign-up and login (Cognito user pool, email/password only -- no federation) issuing tokens the app stores securely. No SSO/federation per T4.</p>
+      <ul class="ac">
+        <li>Sign-up creates account and signs in</li>
+        <li>Wrong password rejected</li>
+        <li>Sign-out/sign-in round-trips</li>
+        <li>Tokens in iOS secure storage, never AsyncStorage</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="1" data-pts="3">
+      <div class="head"><span class="id">P1-06</span><span class="title">Sign-up and login screens</span><span class="badge epic">RE-02 Accounts and onboarding</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">Design-faithful account creation and login matching the mockup so first launch lands a real account.</p>
+      <ul class="ac">
+        <li>Matches mockup signup screen</li>
+        <li>Validation errors surfaced inline</li>
+        <li>"Already scribbling? Log in" path works</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="1" data-pts="2">
+      <div class="head"><span class="id">P1-07</span><span class="title">Splash / start screen</span><span class="badge epic">RE-02 Accounts and onboarding</span><span class="badge role-ios">IOS</span><span class="badge pts">2 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">The branded dark hero entry with streak chip and greeting for signed-in users.</p>
+      <ul class="ac">
+        <li>Matches mockup</li>
+        <li>Shows current streak</li>
+        <li>Start lands on today's prompt</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="1" data-pts="3">
+      <div class="head"><span class="id">P1-08</span><span class="title">Tutorial / onboarding walkthrough</span><span class="badge epic">RE-02 Accounts and onboarding</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">The 3-card paged walkthrough after sign-up explaining the daily loop.</p>
+      <ul class="ac">
+        <li>3 cards with dots per mockup</li>
+        <li>Next -&gt; Start drawing lands on the prompt</li>
+        <li>Skippable on later launches</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="1" data-pts="3">
+      <div class="head"><span class="id">P1-09</span><span class="title">Relational schema baseline and data-access layer</span><span class="badge epic">RE-13 Backend and data platform</span><span class="badge role-be">BE</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">Users, channels, memberships, prompts, submissions as migrations plus a deliberately thin data-access layer that keeps the DynamoDB option open (ADR-0004).</p>
+      <ul class="ac">
+        <li>Migrations apply clean on fresh Aurora</li>
+        <li>Join-table membership model in place (multi-channel share ready)</li>
+        <li>No raw SQL outside the data-access layer</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="1" data-pts="3">
+      <div class="head"><span class="id">P1-10</span><span class="title">Test strategy and per-feature test-plan template</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">The QA operating model for the build: test pyramid, per-feature test-plan template, and evidence-before-done verification discipline, so every feature lands with a plan from Sprint 1.</p>
+      <ul class="ac">
+        <li>Strategy doc agreed by the team</li>
+        <li>Template applied to 2+ Sprint 1 stories</li>
+        <li>Definition-of-done updated to require a test plan</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="1" data-pts="5">
+      <div class="head"><span class="id">P1-11</span><span class="title">Unit, component and API test harness in CI</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">The test infrastructure itself: RNTL component rig, API integration test rig against a disposable backend, wired as required CI gates.</p>
+      <ul class="ac">
+        <li>Example unit + component + API tests run in CI and block merge on failure</li>
+        <li>Harness documented</li>
+        <li>Runs under 10 minutes</li>
+      </ul>
+    </div>
+    <div class="card" data-role="PM" data-sprint="1" data-pts="2">
+      <div class="head"><span class="id">P1-12</span><span class="title">CMPSR board setup and backlog import</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-pm">PM</span><span class="badge pts">2 pts</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">The Jira board becomes the working board: epics + Sprint 1-2 stories imported per the mapping conventions, ceremonies set inside the NA/India overlap.</p>
+      <ul class="ac">
+        <li>CMPSR epics exist for RE-01..RE-14</li>
+        <li>Sprint 1 stories imported with labels/points</li>
+        <li>Ceremony calendar agreed</li>
+        <li>Keys written back to hub docs</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="1" data-pts="3">
+      <div class="head"><span class="id">P1-13</span><span class="title">Error normalization pattern</span><span class="badge epic">RE-01 App shell, navigation and design system</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge flag">CAP4 release valve</span><span class="badge sprint">Sprint 1</span></div>
+      <p class="intent">Raw network errors always become a human message plus retry so no screen ever strands the user blank. Sprint 1 iOS release valve per CAP4; may slip to Sprint 2.</p>
+      <ul class="ac">
+        <li>Airplane-mode on splash/home shows message + retry, not blank</li>
+        <li>Pattern documented and used by every fetch</li>
+      </ul>
+    </div>
+  </div>
+</details>
+
+<details class="sprint" open>
+  <summary>Sprint 2 -- The daily loop: prompt, draw, submit <span class="badge pts">12 stories / 44 pts</span></summary>
+  <div class="body">
+    <p class="goal">Goal: the core loop works end to end -- one universal daily prompt, the deliberately constrained Skia canvas, durable submission, submit-to-unlock enforced at the data layer, and the device E2E harness proving it.</p>
+
+    <div class="card" data-role="BE" data-sprint="2" data-pts="3">
+      <div class="head"><span class="id">P2-01</span><span class="title">Prompt service with seeded rotating set</span><span class="badge epic">RE-03 Daily prompt</span><span class="badge role-be">BE</span><span class="badge pts">3 pts</span><span class="badge flag">FLAG T11</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">GET /prompt/today serves exactly one universal prompt per day from a curated seed set, the same contract AI prompts will use later.</p>
+      <ul class="ac">
+        <li>Same prompt for all users on a given day</li>
+        <li>Day rollover in a fixed reference timezone</li>
+        <li>No day without a prompt (rotation wraps)</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="2" data-pts="3">
+      <div class="head"><span class="id">P2-02</span><span class="title">Today's prompt screen with submitted state</span><span class="badge epic">RE-03 Daily prompt</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">The prompt hero screen with time-left and streak stat cards that reflects whether you already submitted today.</p>
+      <ul class="ac">
+        <li>Matches mockup</li>
+        <li>Submitted state shown after submit</li>
+        <li>Loading/empty/unavailable states defined, never blank</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="2" data-pts="8">
+      <div class="head"><span class="id">P2-03</span><span class="title">Skia canvas with the MVP toolset</span><span class="badge epic">RE-04 Drawing canvas</span><span class="badge role-ios">IOS</span><span class="badge pts">8 pts</span><span class="badge flag">FLAG T2 + T3</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">Finger-on-glass Skia drawing with 8 colors, one solid round brush, a 6-size row, undo and clear -- the deliberately constrained core.</p>
+      <ul class="ac">
+        <li>Smooth under quick scribble on a mid-tier iPhone</li>
+        <li>Exactly 8 swatches, 1 brush, 6 sizes</li>
+        <li>Selected-swatch ring never clips (POC bug 6)</li>
+        <li>No fill bucket, no brush styles</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="2" data-pts="3">
+      <div class="head"><span class="id">P2-04</span><span class="title">Artwork capture and serialization</span><span class="badge epic">RE-04 Drawing canvas</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">Strokes stored as vectors plus a rendered PNG export so submissions are durable and future playback (RE-F9) stays possible.</p>
+      <ul class="ac">
+        <li>Submit produces vector payload + PNG</li>
+        <li>Re-render of vectors matches drawn image</li>
+        <li>Payload size bounded</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="2" data-pts="5">
+      <div class="head"><span class="id">P2-05</span><span class="title">Media pipeline: S3 + signed delivery</span><span class="badge epic">RE-13 Backend and data platform</span><span class="badge role-be">BE</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">Drawings stored in S3 and served via CloudFront signed URLs scoped to channel membership, with thumbnails -- no media bytes in Postgres.</p>
+      <ul class="ac">
+        <li>Upload via pre-signed URL</li>
+        <li>Unsigned/foreign-channel URL fetch fails</li>
+        <li>Thumbnail generated per submission</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="2" data-pts="3">
+      <div class="head"><span class="id">P2-06</span><span class="title">Submit endpoint contract</span><span class="badge epic">RE-06 Submit-to-unlock invariant</span><span class="badge role-be">BE</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">POST /submit records the submission row and returns the pre-signed media URL in one transactional contract.</p>
+      <ul class="ac">
+        <li>Submit is idempotent per (user, prompt)</li>
+        <li>Double-submit same day rejected</li>
+        <li>Failure leaves no orphan media</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="2" data-pts="5">
+      <div class="head"><span class="id">P2-07</span><span class="title">Submit-to-unlock invariant at the data layer</span><span class="badge epic">RE-06 Submit-to-unlock invariant</span><span class="badge role-be">BE</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">Channel reads return 403 until a submission row exists for (user, prompt) -- enforced transactionally, not in the UI.</p>
+      <ul class="ac">
+        <li>Wall API 403 pre-submit, 200 post-submit</li>
+        <li>Transactional EXISTS check</li>
+        <li>Bypass-attempt tests (direct routing, forged requests) pass in CI</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="2" data-pts="2">
+      <div class="head"><span class="id">P2-08</span><span class="title">Caption: 140-char text with server-side cap</span><span class="badge epic">RE-05 Write and voice responses</span><span class="badge role-ios">IOS</span><span class="badge pts">2 pts</span><span class="badge flag">FLAG T1</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">The short caption screen reachable from the canvas, counter visible, cap enforced server-side (BE assists) not just in the UI. Text-only: voice response is trimmed to future per T1.</p>
+      <ul class="ac">
+        <li>141 chars rejected by API</li>
+        <li>Counter matches remaining</li>
+        <li>Share -&gt; Home per mockup</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="2" data-pts="3">
+      <div class="head"><span class="id">P2-09</span><span class="title">iPhone device-matrix canvas hardening</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">The canvas verified across a real iPhone spread (oldest supported -&gt; current) so smoothness is evidence, not hope.</p>
+      <ul class="ac">
+        <li>Documented matrix run on 3+ iPhone models/OS versions</li>
+        <li>Frame-drop threshold defined and met</li>
+        <li>Issues filed as stories</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="2" data-pts="2">
+      <div class="head"><span class="id">P2-10</span><span class="title">CI invariant gates for the loop</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">2 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">Submit-to-unlock and prompt-contract tests wired as required CI gates so the invariants cannot regress silently.</p>
+      <ul class="ac">
+        <li>CI fails on invariant break</li>
+        <li>Gates required for merge</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="2" data-pts="5">
+      <div class="head"><span class="id">P2-11</span><span class="title">iOS E2E harness and first flows</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">Device-level E2E infrastructure (Maestro or Detox) running on iOS simulator in CI, proven with the auth and prompt flows.</p>
+      <ul class="ac">
+        <li>E2E suite runs headless in CI</li>
+        <li>Signup -&gt; login and prompt-fetch flows green</li>
+        <li>Flake rate tracked</li>
+        <li>Harness documented for per-feature reuse</li>
+      </ul>
+    </div>
+    <div class="card" data-role="PM" data-sprint="2" data-pts="2">
+      <div class="head"><span class="id">P2-12</span><span class="title">Backlog grooming and open-decision runs</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-pm">PM</span><span class="badge pts">2 pts</span><span class="badge sprint">Sprint 2</span></div>
+      <p class="intent">Sprint 3 stories refined and the open decisions that gate them (channel model #3, reactions C) driven to answers with the client.</p>
+      <ul class="ac">
+        <li>Sprint 3 stories groomed to definition-of-ready</li>
+        <li>Decisions #3 and C logged with outcomes</li>
+        <li>CMPSR reflects reality</li>
+      </ul>
+    </div>
+  </div>
+</details>
+
+<details class="sprint" open>
+  <summary>Sprint 3 -- Walls and social <span class="badge pts">12 stories / 49 pts</span></summary>
+  <div class="body">
+    <p class="goal">Goal: the social layer -- four fixed private channels with server-side isolation, invite-by-email, the home and wall surfaces, post-unlock reactions, a timezone-correct streak, and the privacy-gate regression suite. Backend Lead's peak sprint (CAP1).</p>
+
+    <div class="card" data-role="BE" data-sprint="3" data-pts="5">
+      <div class="head"><span class="id">P3-01</span><span class="title">Channel model: four fixed private channels</span><span class="badge epic">RE-07 Channels, walls and membership</span><span class="badge role-be">BE</span><span class="badge pts">5 pts</span><span class="badge flag">FLAG T8</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">Personal Archive, Family, Friends, Co-Workers as invitation-only private channels with membership -- the fixed-4 MVP model (Open Decision #3 noted). No public wall per T8.</p>
+      <ul class="ac">
+        <li>Exactly 4 channels per user</li>
+        <li>All private, invitation-only</li>
+        <li>Membership persisted relationally (join table ready for multi-channel share later)</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="3" data-pts="5">
+      <div class="head"><span class="id">P3-02</span><span class="title">Server-side channel isolation</span><span class="badge epic">RE-07 Channels, walls and membership</span><span class="badge role-be">BE</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">A response in channel A is never visible from channel B, enforced by membership authz per channel id; isolation failure is a privacy breach, not a bug.</p>
+      <ul class="ac">
+        <li>Cross-channel read attempts 403</li>
+        <li>Per-channel switching reloads only that channel</li>
+        <li>Authz enforced in the API layer, not the client</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="3" data-pts="5">
+      <div class="head"><span class="id">P3-03</span><span class="title">Invite by email with accept flow</span><span class="badge epic">RE-07 Channels, walls and membership</span><span class="badge role-be">BE</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">Members invite by email via a signed expiring token; the invitee installs, creates an account, and lands in the channel.</p>
+      <ul class="ac">
+        <li>POST /channels/:id/members requires membership</li>
+        <li>Invitee resolved-or-created idempotently</li>
+        <li>Expired/forged tokens rejected</li>
+        <li>Happy path lands invitee in channel</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="3" data-pts="5">
+      <div class="head"><span class="id">P3-04</span><span class="title">Home: walls carousel + your-stats panel</span><span class="badge epic">RE-07 Channels, walls and membership</span><span class="badge role-ios">IOS</span><span class="badge pts">5 pts</span><span class="badge flag">FLAG T6</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">The home screen with the Your Walls carousel (swipe, add-wall affordance) and the stats panel (streak, week view) per the client design. Milestone badges trimmed to future per T6.</p>
+      <ul class="ac">
+        <li>Matches mockup/live home</li>
+        <li>Carousel swipes across walls with active indicator</li>
+        <li>Stats reflect real streak state</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="3" data-pts="5">
+      <div class="head"><span class="id">P3-05</span><span class="title">Family wall grid with multi-day history</span><span class="badge epic">RE-07 Channels, walls and membership</span><span class="badge role-ios">IOS</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">The hero wall: colorful thumbnail grid of today's responses with locked tiles pre-submit and scroll-back through previous days.</p>
+      <ul class="ac">
+        <li>Matches design</li>
+        <li>Locked tiles for non-submitters</li>
+        <li>Previous days reachable</li>
+        <li>Empty state defined</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="3" data-pts="3">
+      <div class="head"><span class="id">P3-06</span><span class="title">Response detail view</span><span class="badge epic">RE-07 Channels, walls and membership</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">Single-response hero screen: drawing, caption, reaction row and share affordance.</p>
+      <ul class="ac">
+        <li>Matches design</li>
+        <li>Caption shown</li>
+        <li>Reactions visible</li>
+        <li>Share affordance opens share screen</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="3" data-pts="5">
+      <div class="head"><span class="id">P3-07</span><span class="title">Post-unlock emoji reactions</span><span class="badge epic">RE-08 Reactions</span><span class="badge role-ios">IOS</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">The fixed sentiment-emoji set as the only social currency -- gated behind unlock, persisted (BE API assists), no comments, no counts-as-leaderboard.</p>
+      <ul class="ac">
+        <li>Reacting impossible pre-unlock</li>
+        <li>Fixed set only</li>
+        <li>Reactions persist and render on wall + detail</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="3" data-pts="3">
+      <div class="head"><span class="id">P3-08</span><span class="title">Timezone-correct streak engine</span><span class="badge epic">RE-09 Streaks, archive and progression</span><span class="badge role-be">BE</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">+1 on a new-day submit in the user's timezone, no double count, reset on miss -- the habit mechanic done right.</p>
+      <ul class="ac">
+        <li>DST and timezone-boundary unit tests pass</li>
+        <li>Display matches engine state everywhere it appears</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="3" data-pts="3">
+      <div class="head"><span class="id">P3-09</span><span class="title">Personal Archive auto-save</span><span class="badge epic">RE-09 Streaks, archive and progression</span><span class="badge role-be">BE</span><span class="badge pts">3 pts</span><span class="badge flag">CAP1 release valve -- may slip to Sprint 4</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">Every submission lands in the user's own archive channel automatically -- your history without lifting a finger.</p>
+      <ul class="ac">
+        <li>Archive shows all own submissions</li>
+        <li>Other channels unaffected</li>
+        <li>Archive is private to the user</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="3" data-pts="5">
+      <div class="head"><span class="id">P3-10</span><span class="title">Privacy-gate regression suite</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">The launch-blocking security suites as QA-owned infrastructure: channel isolation, submit-to-unlock bypass, reaction gating -- the same class of gate the POC proved.</p>
+      <ul class="ac">
+        <li>Dedicated suites for all three invariants required in CI</li>
+        <li>Forged-request and direct-routing attacks covered</li>
+        <li>Suite failure blocks release builds</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="3" data-pts="3">
+      <div class="head"><span class="id">P3-11</span><span class="title">Daily-loop E2E on device</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">The full loop as one E2E: signup -&gt; prompt -&gt; draw -&gt; submit -&gt; wall unlock -&gt; react, on iOS simulator in CI.</p>
+      <ul class="ac">
+        <li>Loop E2E green in CI</li>
+        <li>Runs on every merge to main</li>
+        <li>Failures triaged within the sprint</li>
+      </ul>
+    </div>
+    <div class="card" data-role="PM" data-sprint="3" data-pts="2">
+      <div class="head"><span class="id">P3-12</span><span class="title">Sprint 4 grooming + TestFlight beta plan</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-pm">PM</span><span class="badge pts">2 pts</span><span class="badge sprint">Sprint 3</span></div>
+      <p class="intent">Sprint 4 groomed, the TestFlight beta program designed (testers, feedback channel, release notes discipline) and the store-readiness checklist started.</p>
+      <ul class="ac">
+        <li>Sprint 4 stories definition-of-ready</li>
+        <li>Beta tester list + feedback channel agreed</li>
+        <li>Store-readiness checklist (UGC, deletion, privacy labels) drafted</li>
+      </ul>
+    </div>
+  </div>
+</details>
+
+<details class="sprint" open>
+  <summary>Sprint 4 -- Share out, safety, TestFlight <span class="badge pts">13 stories / 39 pts (+3 stretch)</span></summary>
+  <div class="body">
+    <p class="goal">Goal: share a creation out of the app, meet the App Store trust-and-safety bar (report, block, takedown, account deletion), make the beta measurable and operable, and put a signed, regression-tested build in testers' hands via TestFlight.</p>
+
+    <div class="card" data-role="IOS" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-01</span><span class="title">Share screen with rendered share card</span><span class="badge epic">RE-10 Sharing basics</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">The terminal share surface: drawing + caption + prompt rendered as a branded card, per the existing share screen design.</p>
+      <ul class="ac">
+        <li>Matches mockup share screen</li>
+        <li>Card renders art + caption + prompt line</li>
+        <li>Done returns Home</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-02</span><span class="title">iOS native share sheet + save</span><span class="badge epic">RE-10 Sharing basics</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">Share the card out to social/messaging via the iOS share sheet, plus save-to-photos -- the growth lever the workshop moved to by-launch.</p>
+      <ul class="ac">
+        <li>Share sheet opens with the card</li>
+        <li>Lands intact in Messages/Instagram targets</li>
+        <li>Save-to-photos works with permission handling</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-03</span><span class="title">Local daily prompt reminder</span><span class="badge epic">RE-11 Notifications habit loop</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge flag">FLAG T5</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">A local, timezone-aware daily notification for the prompt so the habit loop exists without managed push infra (managed push = future, T5).</p>
+      <ul class="ac">
+        <li>Fires once daily at a set local time</li>
+        <li>Deep-links to the prompt screen</li>
+        <li>Respects the settings toggle</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-04</span><span class="title">Settings: notifications + account</span><span class="badge epic">RE-01 App shell, navigation and design system</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">The settings screen housing the notification on/off toggle and account actions (sign out, delete account entry point).</p>
+      <ul class="ac">
+        <li>Toggle persists and is honored</li>
+        <li>Sign-out round-trips</li>
+        <li>Delete-account entry present</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="4" data-pts="5">
+      <div class="head"><span class="id">P4-05</span><span class="title">Report, block and takedown queue</span><span class="badge epic">RE-12 Trust, safety and compliance</span><span class="badge role-be">BE</span><span class="badge pts">5 pts</span><span class="badge flag">FLAG T7</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">Any member can report content and block/mute another member, feeding a takedown queue with a named owner and ~24h action SLA -- the Apple 1.2 UGC bar. Human-path only; automated moderation is fast-follow future per T7.</p>
+      <ul class="ac">
+        <li>Report + block reachable from detail view</li>
+        <li>Blocked user's content hidden</li>
+        <li>Queue lists reports with actioned state</li>
+        <li>SLA owner documented</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-06</span><span class="title">Account deletion</span><span class="badge epic">RE-12 Trust, safety and compliance</span><span class="badge role-be">BE</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">In-app account deletion removing the account and creative history -- Apple 5.1.1(v) store gate.</p>
+      <ul class="ac">
+        <li>Delete removes account + content within defined window</li>
+        <li>User signed out</li>
+        <li>Deleted email can re-register cleanly</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-07</span><span class="title">PostHog analytics baseline</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">A small typed event taxonomy (activation, prompt funnel, submit, share) fired from the client so the beta is measurable from day one.</p>
+      <ul class="ac">
+        <li>Events versioned in a shared package</li>
+        <li>Core funnel visible in PostHog</li>
+        <li>No PII in event payloads</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="4" data-pts="5">
+      <div class="head"><span class="id">P4-08</span><span class="title">Release gate: invariant suites + cold-start E2E</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">5 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">The launch-blocking test wall assembled as the release gate: privacy suites plus a scripted cold-start user walk with zero console errors.</p>
+      <ul class="ac">
+        <li>All invariant suites required in CI</li>
+        <li>Cold-start E2E passes from clean install</li>
+        <li>Failures block release builds</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-09</span><span class="title">iOS release engineering</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">Own-CI signing, build numbering, versioning and crash reporting (no EAS) so every build is reproducible and observable.</p>
+      <ul class="ac">
+        <li>CI produces a signed .ipa</li>
+        <li>Crash reports flow from TestFlight builds</li>
+        <li>Version/build stamped and traceable to a commit</li>
+      </ul>
+    </div>
+    <div class="card" data-role="QA" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-10</span><span class="title">TestFlight beta cycle + release regression</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-qa">QA</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">The beta actually tested: TestFlight builds verified install-to-first-drawing on clean devices, feedback triaged, release regression checklist run per build.</p>
+      <ul class="ac">
+        <li>External TestFlight build verified installable</li>
+        <li>Regression checklist executed and archived per build</li>
+        <li>Beta feedback triaged into CMPSR</li>
+      </ul>
+    </div>
+    <div class="card" data-role="BE" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-11</span><span class="title">Production observability baseline</span><span class="badge epic">RE-13 Backend and data platform</span><span class="badge role-be">BE</span><span class="badge pts">3 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">CloudWatch dashboards, alarms and structured logging across the API so the beta is operable, not just shipped.</p>
+      <ul class="ac">
+        <li>Dashboard covers API errors/latency/Aurora</li>
+        <li>Alarm paths tested</li>
+        <li>Logs structured and queryable</li>
+      </ul>
+    </div>
+    <div class="card" data-role="PM" data-sprint="4" data-pts="2">
+      <div class="head"><span class="id">P4-12</span><span class="title">Beta readout + post-MVP triage</span><span class="badge epic">RE-14 Quality, analytics and release</span><span class="badge role-pm">PM</span><span class="badge pts">2 pts</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">Beta metrics and feedback read out, the future track (RE-F1..F9 + trims T1-T10) triaged into CMPSR as labeled future epics, staffing handoff framed (Dan Hill pairing).</p>
+      <ul class="ac">
+        <li>Readout doc with funnel metrics</li>
+        <li>Future epics created in CMPSR with "future" label</li>
+        <li>Next-phase recommendation recorded</li>
+      </ul>
+    </div>
+    <div class="card" data-role="IOS" data-sprint="4" data-pts="3">
+      <div class="head"><span class="id">P4-13</span><span class="title">Canvas polish + safe-area/haptics pass</span><span class="badge epic">RE-04 Drawing canvas</span><span class="badge role-ios">IOS</span><span class="badge pts">3 pts</span><span class="badge flag">STRETCH -- first to drop</span><span class="badge sprint">Sprint 4</span></div>
+      <p class="intent">Per-platform iOS polish: safe-area/notch, haptic feedback on key actions, keyboard behavior on caption.</p>
+      <ul class="ac">
+        <li>No notch clipping on current devices</li>
+        <li>Haptics on submit/react</li>
+        <li>Keyboard never covers the caption input</li>
+      </ul>
+    </div>
+  </div>
+</details>
+
+</section>
+
+<section id="roleview" hidden></section>
+
+<h2>Future track (NOT MVP)</h2>
+<p class="note">Explicitly not in the MVP sprints. Challenge mode is FIRST in line post-MVP.</p>
+<ul class="plain">
+  <li><span class="badge future">RE-F1</span> Challenge mode -- FIRST post-MVP: blind draw-offs, ratings, brackets, themed packs; AI prompts and judges, never draws</li>
+  <li><span class="badge future">RE-F2</span> AI enhancement pipeline -- proven in the POC; port, don't reinvent; drawing bytes never reach an image model</li>
+  <li><span class="badge future">RE-F3</span> AI prompt generation with editorial gate -- Opus candidates behind human approval; same fetch contract as the seed set</li>
+  <li><span class="badge future">RE-F4</span> Federated identity -- Apple / Google / Cognito sign-in with email/password fallback</li>
+  <li><span class="badge future">RE-F5</span> Premium tier -- archive tiering, export tools, paywall and entitlements</li>
+  <li><span class="badge future">RE-F6</span> Community and aggregate stats -- worldwide participation, opt-in highlights, champions</li>
+  <li><span class="badge future">RE-F7</span> Advanced platform -- event mode, analytics warehouse, multi-region architecture, AI cost controls</li>
+  <li><span class="badge future">RE-F8</span> Enterprise and partner -- SSO/admin portal, org channels, partner API, booster packs</li>
+  <li><span class="badge future">RE-F9</span> Stroke-vector differentiators -- drawing playback and animation from stored stroke vectors</li>
+</ul>
+<h3>Trims pushed to future (from the judgment-call table)</h3>
+<ul class="plain">
+  <li><span class="badge flag">T1</span> Voice response (capture, playback, STT)</li>
+  <li><span class="badge flag">T2</span> The other 8 colors of the 16-color palette</li>
+  <li><span class="badge flag">T3</span> The 3 custom brush styles and the fill bucket</li>
+  <li><span class="badge flag">T5</span> Managed push (SNS/Pinpoint) and channel-activity notifications</li>
+  <li><span class="badge flag">T6</span> Milestone badges 7 / 30 / 100</li>
+  <li><span class="badge flag">T7</span> Automated (Haiku) pre-publish moderation -- fast-follow</li>
+  <li><span class="badge flag">T8</span> Public wall ("The Wall" screen) -- pending Open Decision D</li>
+  <li><span class="badge flag">T10</span> Android delivery and the theme switcher</li>
+</ul>
+
+<h2>CMPSR (Jira) mapping</h2>
+<ul class="plain">
+  <li>Board: project CMPSR, board 13809 (backlog view): <a href="https://bounteous.jira.com/jira/software/projects/CMPSR/boards/13809/backlog">bounteous.jira.com CMPSR backlog</a>. Issues do not exist yet; this backlog is the import source.</li>
+  <li>Each RE-xx MVP epic -&gt; one CMPSR Epic named "RE-xx &lt;epic name&gt;". Future epics (RE-F1..F9) -&gt; CMPSR Epics labeled "future", created at triage time, not before.</li>
+  <li>Each story P&lt;s&gt;-&lt;nn&gt; -&gt; one CMPSR Story under its epic; summary = story title; description = intent + acceptance sketch; labels: sprint-1..sprint-4, mvp, and a role label role-ios / role-backend / role-qa / role-pm; story points = the Fibonacci placeholder; assignee = the owning role's person.</li>
+  <li>Once keys exist, record them back in the story tables (dataset + this plan) as CMPSR-nnn so hub docs and Jira never drift.</li>
+</ul>
+
+<footer>
+  Source of truth for the epic layer: tracking/expo-rebuild-epics.md (this page is its sprint-planned view).
+  Companion pages: <a href="/production-backend-plan">/production-backend-plan</a> and
+  <a href="/future-scale-track">/future-scale-track</a>.
+</footer>
+
+</div>
+<script>
+(function () {
+  "use strict";
+  var ROLES = [
+    { tag: "IOS", cls: "role-ios", name: "iOS Engineer (India, full time)" },
+    { tag: "BE",  cls: "role-be",  name: "Backend Lead (India, full time, three hats)" },
+    { tag: "QA",  cls: "role-qa",  name: "QA Engineer (India, full time)" },
+    { tag: "PM",  cls: "role-pm",  name: "Rob at 50% (NA), until a PM is staffed" }
+  ];
+  var MAX_CARDS = 200; /* bound the loop; 50 expected */
+  var toggle = document.getElementById("viewtoggle");
+  var sprintView = document.getElementById("sprintview");
+  var roleView = document.getElementById("roleview");
+  var btnSprint = document.getElementById("btn-sprint");
+  var btnRole = document.getElementById("btn-role");
+  if (!toggle || !sprintView || !roleView || !btnSprint || !btnRole) { return; }
+
+  function buildRoleView() {
+    if (roleView.getAttribute("data-built") === "1") { return; }
+    var r, i, cards, group, head, badge, pts, count, note;
+    for (r = 0; r < ROLES.length; r += 1) {
+      cards = sprintView.querySelectorAll('.card[data-role="' + ROLES[r].tag + '"]');
+      group = document.createElement("div");
+      group.className = "rolegroup";
+      head = document.createElement("h3");
+      badge = document.createElement("span");
+      badge.className = "badge " + ROLES[r].cls;
+      badge.appendChild(document.createTextNode(ROLES[r].tag));
+      head.appendChild(badge);
+      pts = 0;
+      count = 0;
+      for (i = 0; i < cards.length && i < MAX_CARDS; i += 1) {
+        pts += parseInt(cards[i].getAttribute("data-pts"), 10) || 0;
+        count += 1;
+        group.appendChild(cards[i].cloneNode(true));
+      }
+      note = ROLES[r].tag === "IOS" ? " (incl. 3-pt stretch P4-13)" : "";
+      head.appendChild(document.createTextNode(" " + ROLES[r].name + " -- " + count + " stories / " + pts + " pts" + note));
+      group.insertBefore(head, group.firstChild);
+      roleView.appendChild(group);
+    }
+    roleView.setAttribute("data-built", "1");
+  }
+
+  function setView(mode) {
+    if (mode === "role") {
+      buildRoleView();
+      document.body.className = "view-role";
+      roleView.removeAttribute("hidden");
+      btnRole.className = "on";
+      btnSprint.className = "";
+    } else {
+      document.body.className = "";
+      roleView.setAttribute("hidden", "hidden");
+      btnSprint.className = "on";
+      btnRole.className = "";
+    }
+  }
+
+  btnSprint.addEventListener("click", function () { setView("sprint"); });
+  btnRole.addEventListener("click", function () { setView("role"); });
+  toggle.removeAttribute("hidden");
+}());
+</script>
+</body>
+</html>

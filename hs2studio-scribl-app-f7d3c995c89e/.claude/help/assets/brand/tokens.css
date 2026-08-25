@@ -1,0 +1,60 @@
+/* Bounteous brand kit — design tokens, vendored for the arc-help cheat-sheet skill.
+ * Canonical palette per docs/superpowers/specs/2026-07-07-generic-cheatsheet-deck-skill-design.md
+ * §10. Do not hand-edit palette values without reconciling against the 2026 BrandGuide V3.
+ */
+
+:root {
+  /* Canonical palette */
+  --midnight: #0B111C;
+  --indigo: #33139F;
+  --deep-violet: #693AF4;
+  --purple-rain: #853EFF;
+  --lilac: #B488FF;
+  --electric: #34B4FF;
+  --amber: #E07235;
+  --green: #2EAA56;
+  --paper: #FAFAFC;
+
+  /* Gradient */
+  --gradient-primary: linear-gradient(90deg, #34B4FF 0%, #853EFF 100%);
+
+  /* Typeface */
+  --font-sans: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Dark-mode surface roles (default theme) */
+  --bg: var(--midnight);
+  --bg-2: #121A28;
+  --bg-3: #0F1623;
+  --border: #1C2637;
+  --code-bg: #0E1626;
+  --text: var(--paper);
+  --text-dim: #C9CDD8;
+  --muted: #8C93A7;
+}
+
+/* Light-mode surface roles */
+[data-theme="light"] {
+  --bg: var(--paper);
+  --bg-2: #F1F1F6;
+  --bg-3: #E9E9F2;
+  --border: #DADAE6;
+  --code-bg: #EEEEF6;
+  --text: var(--midnight);
+  --text-dim: #33394A;
+  --muted: #63698A;
+}
+
+/* First-paint default for system dark preference, before theme.js sets data-theme */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: var(--paper);
+    --bg-2: #F1F1F6;
+    --bg-3: #E9E9F2;
+    --border: #DADAE6;
+    --code-bg: #EEEEF6;
+    --text: var(--midnight);
+    --text-dim: #33394A;
+    --muted: #63698A;
+  }
+}

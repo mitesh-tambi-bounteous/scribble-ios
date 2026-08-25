@@ -1,0 +1,28 @@
+---
+id: S-019
+title: CI Node 22 and safe dependency bumps
+status: now
+owner: unassigned
+stage: B2
+phase: B
+project: scribl
+labels: [infra, ci]
+---
+
+# S-019 -- CI Node 22 and safe dependency bumps
+
+This is infra work, not a screen, and it is folded into the first build worker.
+It bumps CI to Node 22 to clear the engine warning and applies the safe direct
+dependency updates while explicitly deferring the risky transitive ones. It
+carries no nav or fidelity acceptance criteria.
+
+## AC
+
+- [ ] CI Node is bumped to 22 so the EBADENGINE warning is gone.
+- [ ] Safely-bumpable direct dependencies are updated.
+- [ ] The transitive jest/jsdom deprecations (glob@7, inflight, abab,
+  domexception, whatwg-encoding) are explicitly DEFERRED as tooling-dragged, low
+  value, and high risk, and the deferral is logged with reasons.
+- [ ] The app still builds and the existing daily-loop tests pass on web and on
+  device after the bump.
+- [ ] This story is infra, not a screen: it carries no nav or fidelity items.

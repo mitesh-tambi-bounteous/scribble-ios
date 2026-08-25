@@ -1,0 +1,72 @@
+# Input artifacts
+
+The verbatim engagement source material that scribl started from, preserved
+under `s2d/inputs/` and rendered here as browsable pages. This is the curated
+hub: the originals as the client and the team produced them, before any build
+work. For the narrative that ties them together, see [The Story](/story).
+
+## Product and requirements
+
+- [MVP scope / BRD](/context/documents/scribl-d2c-mvp-scope) -- the business
+  requirements and the D2C MVP scope.
+- [D2C MLP PRFAQ](/context/documents/scribl-d2c-mlp-prfaq) -- the press-release /
+  FAQ framing of the product vision.
+
+## Design
+
+- [D2C user-flow wireframe](/context/media/scribl-d2c-flow) -- the end-to-end
+  flow. Original image: [scribl-d2c-flow.png](/assets/context/scribl-d2c-flow.png).
+- [Original UI mockup](/assets/context/scribl-d2c-ui-mockup.html) -- the early
+  design direction, as a self-contained HTML bundle.
+- [Latest designs](/context/design-history/latest-designs) -- the current design
+  direction across the hero screens. Original bundle:
+  [scribl-latest-designs.html](/assets/context/scribl-latest-designs.html).
+
+## Architecture and cost
+
+- [AWS architecture diagram](/context/media/scribl-aws-architecture-d2c) -- the
+  production target topology. Original image:
+  [scribl-aws-architecture-d2c.png](/assets/context/scribl-aws-architecture-d2c.png).
+- [Cost model](/context/pages/reference/poc/architecture/cost-model) -- the cost
+  narrative for the architecture.
+- [AWS cost estimate workbook](/context/data/scribl-d2c-aws-estimate-v3) -- the
+  detailed line-item estimate.
+- [Mission Cloud POC handover](/context/documents/scribl-poc-handover-v2) -- the
+  vendor's AI artifact-generation proof-of-concept handover (Mission Cloud
+  Services, June 2026), the research basis for the enhancement pipeline.
+
+### AI-enhancement pipelines
+
+- [Mission Cloud enhancement pipeline](/context/pages/reference/poc/architecture/mission-cloud-enhancement-pipeline)
+  -- the vendor's proposed 6-stage Bedrock pipeline, extracted from the handover.
+- [Our enhancement pipeline](/context/pages/reference/poc/architecture/our-enhancement-pipeline)
+  -- what we actually shipped on MobileApp, as a comparison to the vendor's.
+
+## Engagement context
+
+- [Client summary](/context/pages/reference/client-summary) -- who the client is
+  and what they asked for.
+- [Engagement approach](/context/pages/reference/engagement-approach) -- how the
+  work was framed and run.
+- [Team model](/context/pages/reference/scribl-team-model) -- the delivery team
+  shape.
+- [Discussion topics](/context/pages/reference/discussion-topics) -- the open
+  questions carried into the engagement.
+
+## Engagement contract
+
+- Executed SOW: Mobile App Development -- the signed Statement of Work
+  (effective 2026-08-13, Docusign Envelope ID
+  9A10DEA4-2C98-8275-8320-AFEE81F05ABA), preserved verbatim as
+  `s2d/inputs/scribl-bounteous-sow-mobile-app-development.pdf` (binary, not
+  rendered on the doc site).
+- [SOW structured extract](/sow-mobile-app-development-extract) -- a
+  section-cited breakdown of term, fees, deliverables, obligations, and open
+  items to confirm at kickoff.
+
+## Decisions
+
+- [Decision record index](/context/pages/reference/decisions/README) -- the ADRs
+  ratifying the load-bearing technical choices (React Native primary, serverless
+  backend, DynamoDB single-table, Claude provider abstraction, model tiering, and
+  the rest).

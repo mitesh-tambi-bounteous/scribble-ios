@@ -1,0 +1,44 @@
+# ADR 0005: AWS CDK (TypeScript) for all infrastructure
+
+**Status:** Proposed
+**Superseded by:** [ADR-0012](0012-terraform-iac.md) (Terraform IaC) — pending David +
+Jonathan sign-off; this ADR remains in effect for the POC slice until 0012 is Accepted.
+**Date:** 2026-06-10
+**Deciders:** David Lawton, Rob Forshier II, DevOps/AWS
+**Related:** [../architecture-plan.md](../architecture-plan.md) §13
+
+## Context
+
+The PRFAQ names AWS CDK as the infrastructure target, and AWS code coaching is funded and active. The team is small; the monorepo is TypeScript-first. A consumer-scale CDK build is also a potential AWS reference-architecture asset.
+
+## Decision
+
+We will define all infrastructure as **AWS CDK in TypeScript**, organized by stack (networking, data, api, ai, events, analytics, observability) across dev/staging/prod stages. Because it matches the stated stack, shares a language with the API and shared packages, and positions the patterns for AWS to feature as a reference architecture.
+
+## Alternatives considered
+
+### Option A: Terraform
+- Pros: cloud-agnostic; large ecosystem.
+- Cons: departs from the stated CDK target and the funded coaching; second language/tooling.
+- Why not chosen: no reason to deviate from CDK here.
+
+### Option B: Serverless Framework / SAM
+- Pros: fast for Lambda-centric apps.
+- Cons: weaker fit for the broader estate (WebSocket, analytics, AI service); less reference value.
+- Why not chosen: CDK covers the whole estate in one tool.
+
+## Consequences
+
+### Positive
+- One language across app and infra; coaching directly applicable.
+- Reference-architecture potential with AWS.
+
+### Negative
+- CDK construct sprawl if not disciplined; mitigated by the per-stack structure.
+
+### Risks to monitor
+- Stage drift between dev/staging/prod; enforce via pipeline-driven deploys.
+
+## Related
+- [0002](0002-serverless-first-backend.md)
+- [0012](0012-terraform-iac.md) (pending — supersedes this ADR once accepted)

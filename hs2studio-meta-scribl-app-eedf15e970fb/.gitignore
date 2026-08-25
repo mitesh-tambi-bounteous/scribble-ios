@@ -1,0 +1,8 @@
+# Node
+node_modules/
+
+# VitePress build artifacts
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+.claude/settings.local.json
+.claude/hopx-context-surface.json
